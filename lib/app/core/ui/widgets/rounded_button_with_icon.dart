@@ -4,11 +4,11 @@ import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dar
 class RoundedButtonWithIcon extends StatelessWidget {
   final GestureTapCallback onTap;
   final double widht;
-  Color color;
-  IconData icon;
-  String label;
+  final Color color;
+  final IconData icon;
+  final String label;
 
-  RoundedButtonWithIcon({
+  const RoundedButtonWithIcon({
     super.key,
     required this.onTap,
     required this.widht,

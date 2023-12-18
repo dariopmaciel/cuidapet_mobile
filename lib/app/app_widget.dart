@@ -10,8 +10,8 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // serve para iniciar o app
-    Modular.setInitialRoute('/auth');
-    //OBSERVAÇÃO alterado da DOCUMENTAÇÃO para que funcione
+    Modular.setInitialRoute('/auth/');
+    //OBSERVAÇÃO alterado da DOCUMENTAÇÃO para que funcione pois o mesmo não fiunciona facilmente com 'Modular'
     Modular.setObservers([Asuka.asukaHeroController]);
 
     return ScreenUtilInit(
@@ -24,9 +24,12 @@ class AppWidget extends StatelessWidget {
         // Alterado para que funcione
         // navigatorObservers: [Asuka.asukaHeroController],
         debugShowCheckedModeBanner: false,
-        builder: (context, child) {
-          return Asuka.builder(context, child);
-        },
+        // builder: 
+        // (context, child) {
+        //   return Asuka.builder(context, child);
+        // },
+        // substituido por:
+        builder: Asuka.builder,
         theme: UiConfig.theme,
         routeInformationParser: Modular.routeInformationParser,
         routerDelegate: Modular.routerDelegate,

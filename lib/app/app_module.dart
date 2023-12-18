@@ -15,7 +15,7 @@ class AppModule extends Module {
 
   @override
   void routes(r) {
-    r.module('/auth', module: AuthModule());
+    r.module('/auth/', module: AuthModule());
     r.module('/home', module: HomeModule());
     r.module('/register', module: RegisterModule());
   }
