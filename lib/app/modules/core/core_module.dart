@@ -5,12 +5,14 @@ class CoreModule extends Module {
   @override
   void binds(i) {
     i.addLazySingleton(AuthStore.new);
+    // i.addInstance(AuthStore());
+    
   }
 
 @override
   void exportedBinds(Injector i) {
-    AuthStore();
     super.exportedBinds(i);
+    AuthStore();
   }
 
   // @override

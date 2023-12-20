@@ -1,4 +1,5 @@
 import 'package:cuidapet_mobile/app/modules/auth/auth_module.dart';
+// import 'package:cuidapet_mobile/app/modules/auth/home/auth_home_page.dart';
 import 'package:cuidapet_mobile/app/modules/auth/register/register_module.dart';
 
 import 'package:cuidapet_mobile/app/modules/core/core_module.dart';

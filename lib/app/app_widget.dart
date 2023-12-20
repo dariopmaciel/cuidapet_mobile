@@ -10,9 +10,9 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // serve para iniciar o app
-    //*
+    //
     Modular.setInitialRoute('/auth/');
-    //*
+    //
     //OBSERVAÇÃO alterado da DOCUMENTAÇÃO para que funcione pois o mesmo não fiunciona facilmente com 'Modular'
     Modular.setObservers([Asuka.asukaHeroController]);
 

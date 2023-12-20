@@ -9,8 +9,10 @@ import 'package:mobx/mobx.dart';
 class AuthHomePage extends StatefulWidget {
   final AuthStore _authStore;
 
-  const AuthHomePage({super.key, required AuthStore authStore})
-      : _authStore = authStore;
+  const AuthHomePage({
+    super.key,
+    required AuthStore authStore,
+  }) : _authStore = authStore;
 
   @override
   State<AuthHomePage> createState() => _AuthHomePageState();
@@ -32,7 +34,7 @@ class _AuthHomePageState extends State<AuthHomePage> {
       },
     );
     //se não tiver nada ele irá carregar como vazio
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       widget._authStore.loaderUserLogged();
     });
   }

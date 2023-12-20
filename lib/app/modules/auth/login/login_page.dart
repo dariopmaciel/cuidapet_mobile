@@ -1,4 +1,4 @@
-
+import 'package:cuidapet_mobile/app/core/helpers/eviroments.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/icons/cuidapet_icons.dart';
@@ -13,7 +13,7 @@ part 'widgets/login_form.dart';
 part 'widgets/login_register_buttons.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
   // final _testeEC = TextEditingController();
   // final formKey = GlobalKey<FormState>();
 
@@ -22,13 +22,14 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               SizedBox(
                 height: 50.h,
               ),
               const Logo(),
+              Text(Enviroments.param('base_url') ?? ""),
               SizedBox(height: 20.h),
               const _LoginForm(),
               const _LoginRegisterButtons(),

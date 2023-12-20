@@ -4,16 +4,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class AuthModule extends Module {
   @override
-  void binds(i) {}
-
-  @override
   void routes(r) {
-    r.child(
-      Modular.initialRoute,
-      child: (context) => AuthHomePage(
-        authStore: Modular.get(),
-      ),
-    );
+    // r.child(Modular.initialRoute, child: (_) => AuthHomePage(authStore: Modular.get()));
+    r.child(Modular.initialRoute, child: (_) => AuthHomePage(authStore: Modular.get()));
     r.module('/login/', module: LoginModule());
   }
 }
