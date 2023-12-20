@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
                 height: 50.h,
               ),
               const Logo(),
-              Text(Enviroments.param('base_url') ?? ""),
+              Text(Enviroments.param('base_url') ?? "VAZIO"),
               SizedBox(height: 20.h),
               const _LoginForm(),
               const _LoginRegisterButtons(),
