@@ -1,5 +1,6 @@
 import 'package:cuidapet_mobile/app/modules/auth/auth_module.dart';
 import 'package:cuidapet_mobile/app/modules/auth/register/register_module.dart';
+
 import 'package:cuidapet_mobile/app/modules/core/core_module.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,8 +17,8 @@ class AppModule extends Module {
   @override
   void routes(r) {
     r.module('/auth/', module: AuthModule());
-    r.module('/home', module: HomeModule());
-    r.module('/register', module: RegisterModule());
+    r.module('/home/', module: HomeModule());
+    r.module('/register/', module: RegisterModule());
   }
 
   //EXEMPLO JÁ APLICADO
@@ -41,7 +42,7 @@ class AppModule extends Module {
 
   //   super.routes(r);
   // }
-  
+
   // void binds(i) {
   //   i.addLazySingleton(AuthStore.new);
   // }

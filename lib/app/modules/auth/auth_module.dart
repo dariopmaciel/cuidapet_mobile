@@ -14,6 +14,6 @@ class AuthModule extends Module {
         authStore: Modular.get(),
       ),
     );
-    r.module('/login', module: LoginModule());
+    r.module('/login/', module: LoginModule());
   }
 }
