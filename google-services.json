@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "546767054205",
+    "project_id": "cuidapet-dariopmaciel",
+    "storage_bucket": "cuidapet-dariopmaciel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546767054205:android:251bb0c13a2dd53fa0d814",
+        "android_client_info": {
+          "package_name": "br.com.academiadoflutter.cuidapet_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9na2qBD93AbjNR-yqqCgmCD_znD17UAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

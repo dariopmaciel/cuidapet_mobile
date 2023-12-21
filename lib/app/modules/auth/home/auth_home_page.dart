@@ -11,8 +11,9 @@ class AuthHomePage extends StatefulWidget {
 
   const AuthHomePage({
     Key? key,
-     required AuthStore authStore,
-  }) : _authStore = authStore, super(key:key);
+    required AuthStore authStore,
+  })  : _authStore = authStore,
+        super(key: key);
 
   @override
   State<AuthHomePage> createState() => _AuthHomePageState();
