@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 Future<void> main() async {
-  ApplicationConfig().configureApp();
+  await ApplicationConfig().configureApp();
 
   runApp(
     ModularApp(

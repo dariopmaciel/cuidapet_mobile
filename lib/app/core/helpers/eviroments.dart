@@ -16,8 +16,9 @@ class Enviroments {
     }
   }
 
+//controle dos modos RELEASE E MODO DEBUG
   static Future<void> loadEnvs() async {
-    // modo DEBUG
+    // se for produção - modo DEBUG
     if (kReleaseMode) {
       // NÃO modo DEBUG
       // if (!kReleaseMode) {
@@ -26,13 +27,12 @@ class Enviroments {
         RemoteConfigSettings(
           fetchTimeout:
               const Duration(minutes: 1), //busca de cache de 1 min em 1 min
-          minimumFetchInterval: const Duration(hours: 1), //cache 10s
+          minimumFetchInterval: const Duration(hours: 1), //cache 1h
         ),
       );
-      //* FUNDAMENTAL BUSCAR DADOS
+      //* FUNDAMENTAL: Este item abaixo BUSCA OS DADOS
       await remoteConfig.fetchAndActivate();
     } else {
-      //modo PRODUÇÃO
       await dotenv.load(fileName: ".env");
     }
   }
