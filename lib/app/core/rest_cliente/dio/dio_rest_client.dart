@@ -5,7 +5,7 @@ import 'package:cuidapet_mobile/app/core/rest_cliente/rest_client_exception.dart
 import 'package:cuidapet_mobile/app/core/rest_cliente/rest_client_response.dart';
 import 'package:dio/dio.dart';
 
-class DioResClient implements RestClient {
+class DioRestClient implements RestClient {
   late final Dio _dio;
 
   final _defaultOptions = BaseOptions(
@@ -26,7 +26,7 @@ class DioResClient implements RestClient {
     ),
   );
 
-  DioResClient({
+  DioRestClient({
     BaseOptions? baseOptions,
   }) {
     _dio = Dio(baseOptions ?? _defaultOptions);

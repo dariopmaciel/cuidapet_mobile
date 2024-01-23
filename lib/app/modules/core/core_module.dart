@@ -1,3 +1,5 @@
+import 'package:cuidapet_mobile/app/core/rest_cliente/dio/dio_rest_client.dart';
+import 'package:cuidapet_mobile/app/core/rest_cliente/rest_client.dart';
 import 'package:cuidapet_mobile/app/modules/core/auth/auth_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -6,13 +8,14 @@ class CoreModule extends Module {
   void binds(i) {
     i.addLazySingleton(AuthStore.new);
     // i.addInstance(AuthStore());
-    
+    i.addLazySingleton<RestClient>(DioRestClient.new);
   }
 
-@override
+  @override
   void exportedBinds(Injector i) {
     super.exportedBinds(i);
     AuthStore();
+    DioRestClient();
   }
 
   // @override
