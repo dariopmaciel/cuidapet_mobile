@@ -17,14 +17,23 @@ part 'widgets/login_register_buttons.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
+
+  /*------------------------ Teste de Escrita e Leitura
+  LoginPage({super.key}) {
+    // Modular.get<LocalStorage>().write<String>('Teste1', "TEstes");
+    Modular.get<LocalStorage>().write<int>('Teste2', 123456789);
+    Future.delayed(const Duration(seconds: 2), () async {
+      print(await Modular.get<LocalStorage>().read<int>('Teste2'));
+    });
+  }*/
+
   //------------------------ Teste de Escrita e Leitura
-  // LoginPage({super.key}) {
-  //   // Modular.get<LocalStorage>().write<String>('Teste1', "TEstes");
-  //   Modular.get<LocalStorage>().write<int>('Teste2', 123456789);
-  //   Future.delayed(const Duration(seconds: 2), () async {
-  //     print(await Modular.get<LocalStorage>().read<int>('Teste2'));
-  //   });
-  // }
+  /*LoginPage({Key? key}) : super(key: key) {
+    Modular.get<LocalSecureStorage>().write('teste3', 'Testeee');
+    Future.delayed(const Duration(seconds: 2), () async {
+      print(await Modular.get<LocalSecureStorage>().read('teste3'));
+    });
+  }*/
 
   @override
   Widget build(BuildContext context) {
