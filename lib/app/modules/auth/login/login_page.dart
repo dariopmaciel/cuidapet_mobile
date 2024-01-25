@@ -1,5 +1,4 @@
 import 'package:cuidapet_mobile/app/core/helpers/eviroments.dart';
-import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 
 import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
@@ -8,21 +7,29 @@ import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_default_button.dart
 import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_textform_field.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/rounded_button_with_icon.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/logo.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../core/local_storage/local_storage.dart';
 
 part 'widgets/login_form.dart';
 part 'widgets/login_register_buttons.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-  // final _testeEC = TextEditingController();
-  // final formKey = GlobalKey<FormState>();
+  //------------------------ Teste de Escrita e Leitura
+  // LoginPage({super.key}) {
+  //   // Modular.get<LocalStorage>().write<String>('Teste1', "TEstes");
+  //   Modular.get<LocalStorage>().write<int>('Teste2', 123456789);
+  //   Future.delayed(const Duration(seconds: 2), () async {
+  //     print(await Modular.get<LocalStorage>().read<int>('Teste2'));
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    var log = Modular.get<AppLogger>();
+    // Teste criação de tipos diferentes de LOG
+    // var log = Modular.get<AppLogger>();
     // -----------------------------------------------------
     // log.append("Mensagem 1");
     // log.append("Mensagem 2");
@@ -36,7 +43,8 @@ class LoginPage extends StatelessWidget {
     // -----------------------------------------------------
     // log.warnning('Warnning', 'warnning', StackTrace.current);
     // -----------------------------------------------------
-    log.info('Info', "Info", StackTrace.current);
+    // log.info('Info', "Info", StackTrace.current);
+    // -----------------------------------------------------
 
     return Scaffold(
       body: SingleChildScrollView(
