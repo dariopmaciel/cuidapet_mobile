@@ -1,0 +1,3 @@
+class UserExitsExceptions implements Exception {
+
+}

@@ -7,12 +7,7 @@ class RegisterModule extends Module {
   @override
   void binds(Injector i) {
     // i.addLazySingleton(RegisterController.new);
-    i.addLazySingleton(
-      () => RegisterController(
-        userService: i(),
-        log: i(),
-      ),
-    );
+    i.addLazySingleton(() => RegisterController(userService: i(), log: i()));
   }
 
   @override
