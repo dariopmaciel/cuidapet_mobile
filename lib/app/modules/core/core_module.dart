@@ -7,7 +7,7 @@ import 'package:cuidapet_mobile/app/core/rest_cliente/dio/dio_rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_cliente/rest_client.dart';
 import 'package:cuidapet_mobile/app/modules/core/auth/auth_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class CoreModule extends Module {
   @override

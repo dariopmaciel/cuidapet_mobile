@@ -2,7 +2,7 @@
 part of '../login_page.dart';
 
 class _LoginRegisterButtons extends StatelessWidget {
-  const _LoginRegisterButtons({super.key});
+  const _LoginRegisterButtons();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _LoginRegisterButtons extends StatelessWidget {
               //TESTE
               // ScaffoldMessenger.of(context)
               //     .showSnackBar(const SnackBar(content: Text('Btn Cadastro')));
-              Navigator.pushNamed(context, '/register');
+              Navigator.pushNamed(context, '/register/');
             },
             widht: .42.sw,
             color: context.primaryColorDark,

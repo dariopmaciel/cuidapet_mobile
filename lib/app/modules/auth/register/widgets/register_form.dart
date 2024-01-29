@@ -1,15 +1,16 @@
 part of '../register_page.dart';
 
 class _RegisterForm extends StatefulWidget {
-  const _RegisterForm({super.key});
+  const _RegisterForm();
 
   @override
   State<_RegisterForm> createState() => _RegisterFormState();
 }
 
-
+//! DESCONTINUADO -> ModularState
+//class _RegisterFormState extends ModularState<_RegisterForm, RegisterController> {
 class _RegisterFormState extends State<_RegisterForm> {
-// class _RegisterFormState extends ModularState<_RegisterForm, RegisterController> {
+  final controller = Modular.get<RegisterController>();
   final _formKey = GlobalKey<FormState>();
   final _loginEC = TextEditingController();
   final _passwordEC = TextEditingController();
@@ -60,9 +61,10 @@ class _RegisterFormState extends State<_RegisterForm> {
           CuidapetDefaultButton(
               label: 'Cadastrar',
               onPressed: () {
-                final _formaValid = _formKey.currentState?.validate() ?? false;
-                if (_formaValid) {
-                  
+                final formaValid = _formKey.currentState?.validate() ?? false;
+                if (formaValid) {
+                  controller.register(
+                      email: _loginEC.text, password: _passwordEC.text);
                 }
               }),
         ]),
