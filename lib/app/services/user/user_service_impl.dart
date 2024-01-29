@@ -1,20 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:cuidapet_mobile/app/core/exceptions/failue.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_exits_exceptions.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'user_service.dart';
 
 class UserServiceImpl implements UserService {
-  final UserRepository _userRepository;
   final AppLogger _log;
-
-  UserServiceImpl._({
+  final UserRepository _userRepository;
+  
+  UserServiceImpl({
     required AppLogger log,
     required UserRepository userRepository,
-  })  : _log = log,
-        _userRepository = userRepository;
+  }) : _log=log, _userRepository =userRepository;
+
+ 
 
   @override
   Future<void> register(String email, String password) async {

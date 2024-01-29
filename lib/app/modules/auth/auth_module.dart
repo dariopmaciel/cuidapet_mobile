@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cuidapet_mobile/app/modules/auth/home/auth_home_page.dart';
 import 'package:cuidapet_mobile/app/modules/auth/login/login_module.dart';
 import 'package:cuidapet_mobile/app/modules/auth/register/register_module.dart';
@@ -10,10 +12,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 class AuthModule extends Module {
   @override
   void binds(i) {
-    i.addLazySingleton<UserRepository>(UserRepositoryImpl.new);
-    // i.addLazySingleton<UserRepository>((I) => UserRepositoryImpl());
-    i.addLazySingleton<UserService>(UserServiceImpl.new);
-    // i.addLazySingleton<UserService>((i) => UserServiceImpl());
+    // i.addLazySingleton<UserRepository>(UserRepositoryImpl.new);
+    i.addLazySingleton<UserRepository>(
+        (i) => UserRepositoryImpl(log: i(), restClient: i()));
+    i.addLazySingleton<UserService>(
+        (i) => UserServiceImpl(log: i(), userRepository: i()));
   }
 
   @override
