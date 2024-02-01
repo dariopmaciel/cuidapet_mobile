@@ -10,13 +10,11 @@ import 'user_service.dart';
 class UserServiceImpl implements UserService {
   final AppLogger _log;
   final UserRepository _userRepository;
-  
-  UserServiceImpl({
-    required AppLogger log,
-    required UserRepository userRepository,
-  }) : _log=log, _userRepository =userRepository;
 
- 
+  UserServiceImpl(
+      {required AppLogger log, required UserRepository userRepository})
+      : _log = log,
+        _userRepository = userRepository;
 
   @override
   Future<void> register(String email, String password) async {
@@ -31,7 +29,7 @@ class UserServiceImpl implements UserService {
           .createUserWithEmailAndPassword(email: email, password: password);
       await userRegisterCredential.user?.sendEmailVerification();
     } on FirebaseException catch (e, s) {
-      _log.error("Erro ao criar Usuário no Firebase", e, s);
+      _log.error("Erro ao criar usuário no Firebase", e, s);
       throw Failue(message: 'Erro ao criar usuário');
     }
   }
