@@ -30,7 +30,7 @@ class _LoginFormState extends State<_LoginForm> {
             label: "Login",
             controller: _loginEC,
             validator: Validatorless.multiple([
-              Validatorless.required("*Login Obrigatório"),
+              Validatorless.required("*Login Obrigatório!"),
               Validatorless.email("*E-mail Obrigatório!")
             ]),
           ),
@@ -39,6 +39,10 @@ class _LoginFormState extends State<_LoginForm> {
             label: "Senha",
             obscureText: true,
             controller: _passwordEC,
+            validator: Validatorless.multiple([
+              Validatorless.required("*Senha Obrigatória!"),
+              Validatorless.min(6, "*Mínimo 6 caracteres!"),
+            ]),
           ),
           const SizedBox(height: 20),
           CuidapetDefaultButton(
