@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:cuidapet_mobile/app/core/helpers/eviroments.dart';
 
 import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
@@ -9,6 +11,7 @@ import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_textform_field.dart
 import 'package:cuidapet_mobile/app/core/ui/widgets/rounded_button_with_icon.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/logo.dart';
 import 'package:flutter/material.dart';
+import 'package:validatorless/validatorless.dart';
 
 
 
