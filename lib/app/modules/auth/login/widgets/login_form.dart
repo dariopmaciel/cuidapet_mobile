@@ -47,6 +47,10 @@ class _LoginFormState extends State<_LoginForm> {
           const SizedBox(height: 20),
           CuidapetDefaultButton(
             onPressed: () {
+              final formValid = _formKey.currentState?.validate()?? false;
+              if (formValid) {
+                //
+              }
               //* ----> TESTE LOADER
               // Loader.show();
               // Future.delayed(const Duration(seconds: 2), () => Loader.hide(),);
