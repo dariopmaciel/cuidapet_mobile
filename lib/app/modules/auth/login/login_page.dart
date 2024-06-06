@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               SizedBox(height: 80.h),
-              Text(Environments.param('base_url') ?? ""),
+              // Text(Environments.param('base_url') ?? ""),
               Center(
                 child: Image.asset(
                   'assets/images/logo.png',
