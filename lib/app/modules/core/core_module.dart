@@ -1,3 +1,5 @@
+import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
+import 'package:cuidapet_mobile/app/core/local_storage/shared_preferences/shared_preferences_local_storage_impl.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/logger/logger_app_logger_impl.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/dio/dio_rest_cliente.dart';
@@ -12,6 +14,7 @@ class CoreModule extends Module {
     i.addLazySingleton(AuthStore.new);
     i.addLazySingleton<RestClient>(DioRestCliente.new);
     i.addLazySingleton<AppLogger>(LoggerAppLoggerImpl.new);
+    i.addLazySingleton<LocalStorage>(SharedPreferencesLocalStorageImpl.new);
     
     // super.binds(i);
   }
@@ -22,5 +25,6 @@ class CoreModule extends Module {
     AuthStore();
     DioRestCliente();
     LoggerAppLoggerImpl();
+    SharedPreferencesLocalStorageImpl();
   }
 }

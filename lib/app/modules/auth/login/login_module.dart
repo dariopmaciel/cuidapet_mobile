@@ -6,9 +6,9 @@ class LoginModule extends Module{
 
   @override
   void routes(RouteManager r) {
-    
-    super.routes(r);
+    //  r.child(Modular.initialRoute, child: (_) =>  LoginPage());
     r.child(Modular.initialRoute, child: (_) =>  LoginPage());
+
   }
   
 }
