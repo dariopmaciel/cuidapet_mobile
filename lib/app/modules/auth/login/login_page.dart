@@ -4,6 +4,7 @@ import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/icons/cuidapet_icons.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_default_button.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_textform_field.dart';
+import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/rounded_button_with_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';

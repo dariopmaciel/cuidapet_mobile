@@ -20,7 +20,18 @@ class _LoginFormState extends State<_LoginForm> {
           obscureText: true,
         ),
         const SizedBox(height: 20),
-        CuidapetDefaultButton(onPressed: () {}, label: 'Entrar'),
+        CuidapetDefaultButton(
+          label: 'Entrar',
+          onPressed: () {
+            Loader.show();
+            Future.delayed(
+              const Duration(seconds: 2),
+              Loader.hide,
+              //ou assim
+              // () => Loader.hide(),
+            );
+          },
+        ),
       ],
     ));
   }
