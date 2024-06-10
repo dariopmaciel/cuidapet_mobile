@@ -18,4 +18,4 @@ void main() async {
 
 
 //PROXIMA AULA:
-//-->Encapsulametno - Encapsulando Shared Preferences
+//-->Encapsulando Flutter Secure Storage

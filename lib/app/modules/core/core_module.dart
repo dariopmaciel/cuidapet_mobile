@@ -1,4 +1,5 @@
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
+import 'package:cuidapet_mobile/app/core/local_storage/local_storage/flutter_secure_storage_local_storage_impl.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/shared_preferences/shared_preferences_local_storage_impl.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/logger/logger_app_logger_impl.dart';
@@ -15,6 +16,7 @@ class CoreModule extends Module {
     i.addLazySingleton<RestClient>(DioRestCliente.new);
     i.addLazySingleton<AppLogger>(LoggerAppLoggerImpl.new);
     i.addLazySingleton<LocalStorage>(SharedPreferencesLocalStorageImpl.new);
+    i.addLazySingleton<LocalSecureStorage>(FlutterSecureStorageLocalStorageImpl.new);
     
     // super.binds(i);
   }
@@ -26,5 +28,6 @@ class CoreModule extends Module {
     DioRestCliente();
     LoggerAppLoggerImpl();
     SharedPreferencesLocalStorageImpl();
+    FlutterSecureStorageLocalStorageImpl();
   }
 }
