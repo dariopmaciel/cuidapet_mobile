@@ -18,4 +18,4 @@ void main() async {
 
 
 //PROXIMA AULA:
-//-->Encapsulametno - Encapsulando logs da aplicação
+//-->Encapsulametno - Encapsulando Shared Preferences
