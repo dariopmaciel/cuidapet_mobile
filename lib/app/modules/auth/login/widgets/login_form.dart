@@ -15,21 +15,16 @@ class _LoginFormState extends State<_LoginForm> {
       children: [
         CuidapetTextFormField(label: 'Login'),
         const SizedBox(height: 20),
-        CuidapetTextFormField(
-          label: 'Senha',
-          obscureText: true,
-        ),
+        CuidapetTextFormField(label: 'Senha', obscureText: true),
         const SizedBox(height: 20),
         CuidapetDefaultButton(
           label: 'Entrar',
           onPressed: () {
+            // Messages.alert("MENSAGEM ERRADA!!!!");
             Loader.show();
-            Future.delayed(
-              const Duration(seconds: 2),
-              Loader.hide,
-              //ou assim
-              // () => Loader.hide(),
-            );
+            // () => Loader.hide(),
+            //ou assim
+            Future.delayed(const Duration(seconds: 2), Loader.hide);
           },
         ),
       ],

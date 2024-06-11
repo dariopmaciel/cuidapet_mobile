@@ -18,4 +18,4 @@ void main() async {
 
 
 //PROXIMA AULA:
-//-->Encapsulando Flutter Secure Storage
+//-->Implementando tela de cadastro por e-mail e senha
