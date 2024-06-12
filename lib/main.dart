@@ -18,4 +18,4 @@ void main() async {
 
 
 //PROXIMA AULA:
-//-->Implementando tela de cadastro por e-mail e senha
+//-->Implementando tela de cadastro por e-mail e senhadir
