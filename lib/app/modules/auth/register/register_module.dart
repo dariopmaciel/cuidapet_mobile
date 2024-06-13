@@ -6,8 +6,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 class RegisterModule extends Module {
   @override
   void binds(Injector i) {
-    // i.addLazySingleton(RegisterController.new);
-    i.addLazySingleton(
+    // i.addLazySingleton<UserService>(RegisterController.new);
+    i.addLazySingleton<UserService>(
       () => RegisterController(
         userService: i(),
         log: i(),

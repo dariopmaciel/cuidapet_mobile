@@ -68,8 +68,8 @@ class _RegisterFormState extends State<_RegisterForm> {
                 // TextInputAction.done;
                 final formValid = _formKey.currentState?.validate() ?? false;
                 if (formValid) {
-                  // controller.register(
-                  //     email: _loginEC.text, password: _passwordEC.text);
+                  controller.register(
+                      email: _loginEC.text, password: _passwordEC.text);
                 }
               },
             ),

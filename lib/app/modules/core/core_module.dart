@@ -20,6 +20,8 @@ class CoreModule extends Module {
     i.addLazySingleton<LocalStorage>(SharedPreferencesLocalStorageImpl.new);
     i.addLazySingleton<LocalSecureStorage>(FlutterSecureStorageLocalStorageImpl.new);
     
+
+    
     
 
     

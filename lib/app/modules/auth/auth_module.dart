@@ -1,5 +1,7 @@
+import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/modules/auth/home/auth_home_page.dart';
 import 'package:cuidapet_mobile/app/modules/auth/login/login_module.dart';
+import 'package:cuidapet_mobile/app/modules/auth/register/register_controller.dart';
 import 'package:cuidapet_mobile/app/modules/auth/register/register_module.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository_impl.dart';
@@ -8,21 +10,14 @@ import 'package:cuidapet_mobile/app/services/user/user_service_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AuthModule extends Module {
-@override
-  void binds(i) {
-    // i.addLazySingleton<UserRepository>(UserRepositoryImpl.new);
-    i.addLazySingleton<UserRepository>(
-        () => UserRepositoryImpl());
-    i.addLazySingleton<UserService>(
-        () => UserServiceImpl());
-  }
-
-  // @override
-  // void binds(Injector i) {
-  //   i.addLazySingleton<UserRepository>(UserRepositoryImpl.new);
-  //   i.addLazySingleton<UserService>(UserServiceImpl.new);
+  @override
+  void binds(Injector i) {
+    i.addLazySingleton<UserRepository>(UserRepositoryImpl.new);
+    i.addLazySingleton<UserService>(UserServiceImpl.new);
     
-  // }
+        
+    
+  }
 
   @override
   void routes(RouteManager r) {
