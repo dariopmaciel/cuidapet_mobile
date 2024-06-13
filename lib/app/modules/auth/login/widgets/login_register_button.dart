@@ -16,21 +16,22 @@ class _LoginRegisterButton extends StatelessWidget {
       children: [
         RoundedButtonWithIcon(
             onTap: () {
-              // Messages.info("INFORMAÇÃO!!");
+              Messages.info("Facebook!!");
             },
             width: .42.sw,
             color: const Color(0xFF4267B3),
             label: 'Facebook',
             icon: CuidapetIcons.facebook),
         RoundedButtonWithIcon(
-            onTap: () {},
+            onTap: () {
+              Messages.info("Google!!");
+            },
             width: .42.sw,
             color: const Color(0xFFe15031),
             label: 'Google',
             icon: CuidapetIcons.google),
         RoundedButtonWithIcon(
             onTap: () {
-              
               Navigator.pushNamed(context, '/auth/register');
             },
             width: .42.sw,

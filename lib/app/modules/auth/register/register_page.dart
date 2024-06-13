@@ -5,7 +5,9 @@ import 'package:cuidapet_mobile/app/modules/auth/register/register_controller.da
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:validatorless/validatorless.dart';
+
 part 'widgets/register_form.dart';
+
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

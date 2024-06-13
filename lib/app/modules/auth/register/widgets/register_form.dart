@@ -14,6 +14,7 @@ class _RegisterFormState extends State<_RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   final _loginEC = TextEditingController();
   final _passwordEC = TextEditingController();
+      
 
   @override
   void dispose() {
@@ -64,11 +65,11 @@ class _RegisterFormState extends State<_RegisterForm> {
             CuidapetDefaultButton(
               label: "Cadastrar",
               onPressed: () {
-                // TextInputAction.done;
+                
                 final formValid = _formKey.currentState?.validate() ?? false;
                 if (formValid) {
-                  controller.register(
-                      email: _loginEC.text, password: _passwordEC.text);
+                  // controller.register(
+                  //     email: _loginEC.text, password: _passwordEC.text);
                 }
               },
             ),

@@ -19,8 +19,7 @@ abstract class _RegisterControllerBase with Store {
   })  : _userService = userService,
         _log = log;
 
-  Future<void> register(
-      {required String email, required String password}) async {
+  Future<void> register({required String email, required String password}) async {
     Loader.show();
     await Future.delayed(const Duration(seconds: 2));
     Loader.hide();
