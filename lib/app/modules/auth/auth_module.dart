@@ -13,16 +13,17 @@ class AuthModule extends Module {
   void binds(Injector i) {
     // i.addLazySingleton<UserRepository>(UserRepositoryImpl.new);
     // i.addLazySingleton<UserService>(UserServiceImpl.new);
-    i.addLazySingleton<UserRepository>((i) => UserRepositoryImpl());
-    i.addLazySingleton<UserService>((i) => UserServiceImpl());
+    //
+    i.addLazySingleton<UserRepository>(() => UserRepositoryImpl());
+    i.addLazySingleton<UserService>(() => UserServiceImpl());
     // TESTE
     // i.addLazySingleton<UserRepository>((i) => UserRepositoryImpl(
-    //       restClient: i(),
     //       log: i(), //CoreModule
+    //       restClient: i(),
     //     ));
     // i.addLazySingleton<UserService>((i) => UserServiceImpl(
-    //       userRepository: i(), //AuthModule
     //       log: i(), //CoreModule
+    //       userRepository: i(), //AuthModule
     //     ));
   }
 
