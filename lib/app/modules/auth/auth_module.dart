@@ -10,19 +10,24 @@ import 'package:flutter_modular/flutter_modular.dart';
 class AuthModule extends Module {
   @override
   void binds(i) {
-    i.addLazySingleton<UserRepository>(() => UserRepositoryImpl());
-    i.addLazySingleton<UserService>(() => UserServiceImpl());
+    i.addLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(
+          // log: i(),
+          // restClient: i(),
+          ),
+    );
+    i.addLazySingleton<UserService>(
+      () => UserServiceImpl(
+          // log: i(),
+          // userRepository: i(),
+          ),
+    );
   }
 
   @override
   void routes(RouteManager r) {
-    // super.routes(r);
-    r.child(
-      Modular.initialRoute,
-      child: (_) => AuthHomePage(
-        authStore: Modular.get(),
-      ),
-    );
+    r.child(Modular.initialRoute,
+        child: (_) => AuthHomePage(authStore: Modular.get()));
     r.module('/login/', module: LoginModule());
     r.module('/register/', module: RegisterModule());
   }

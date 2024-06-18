@@ -10,7 +10,7 @@ class _RegisterForm extends StatefulWidget {
 ///! DESCONTINUADO -> ModularState
 //!class _RegisterFormState extends ModularState<_RegisterForm, RegisterController> {
 class _RegisterFormState extends State<_RegisterForm> {
-  final controller = Modular.get<RegisterController>();
+  // final controller = Modular.get<RegisterController>();
   final _formKey = GlobalKey<FormState>();
   final _loginEC = TextEditingController();
   final _passwordEC = TextEditingController();
@@ -66,10 +66,8 @@ class _RegisterFormState extends State<_RegisterForm> {
               onPressed: () {
                 final formValid = _formKey.currentState?.validate() ?? false;
                 if (formValid) {
-                  controller.register(
-                    email: _loginEC.text,
-                    password: _passwordEC.text,
-                  );
+                  // controller.register(
+                  //     email: _loginEC.text, password: _passwordEC.text);
                 }
               },
             ),

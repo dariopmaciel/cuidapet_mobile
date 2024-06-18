@@ -1,7 +1,8 @@
+import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:mobx/mobx.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/services/user/user_service.dart';
-import '../../../core/ui/widgets/loader.dart';
+
 part 'register_controller.g.dart';
 
 class RegisterController = _RegisterControllerBase with _$RegisterController;
