@@ -23,6 +23,7 @@ class CoreModule extends Module {
 
   @override
   void exportedBinds(Injector i) {
+    super.exportedBinds(i);
     AuthStore();
     DioRestCliente();
     LoggerAppLoggerImpl();

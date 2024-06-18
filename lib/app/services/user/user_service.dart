@@ -1,5 +1,1 @@
-abstract interface class UserService {
-
-  
-
-}
+abstract interface class UserService {}
