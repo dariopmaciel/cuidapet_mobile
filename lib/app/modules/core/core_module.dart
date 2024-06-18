@@ -5,10 +5,7 @@ import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/logger/logger_app_logger_impl.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/dio/dio_rest_cliente.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
-import 'package:cuidapet_mobile/app/modules/auth/register/register_controller.dart';
 import 'package:cuidapet_mobile/app/modules/core/auth/auth_store.dart';
-import 'package:cuidapet_mobile/app/services/user/user_service.dart';
-
 import 'package:flutter_modular/flutter_modular.dart';
 
 class CoreModule extends Module {
