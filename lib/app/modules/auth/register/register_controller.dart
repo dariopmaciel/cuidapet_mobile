@@ -1,3 +1,4 @@
+
 import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:mobx/mobx.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';

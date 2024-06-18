@@ -10,10 +10,9 @@ class AuthHomePage extends StatefulWidget {
   final AuthStore _authStore;
 
   const AuthHomePage({
-    Key? key,
+    super.key,
     required AuthStore authStore,
-  })  : _authStore = authStore,
-        super(key: key);
+  })  : _authStore = authStore;
 
   @override
   State<AuthHomePage> createState() => _AuthHomePageState();
@@ -25,9 +24,9 @@ class _AuthHomePageState extends State<AuthHomePage> {
     super.initState();
     reaction<UserModel?>((_) => widget._authStore.userLogged, (userLogged) {
       if (userLogged != null && userLogged.email.isNotEmpty) {
-        Modular.to.navigate('/home');
+        Modular.to.navigate('/home/');
       } else {
-        Modular.to.navigate('/auth/login');
+        Modular.to.navigate('/auth/login/');
       }
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {

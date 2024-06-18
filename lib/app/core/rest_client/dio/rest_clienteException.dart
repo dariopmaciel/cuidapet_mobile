@@ -1,3 +1,4 @@
+
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client_response.dart';
 
 class RestClientException implements Exception {
@@ -13,8 +14,8 @@ class RestClientException implements Exception {
     required this.response,
   });
 
-@override
-String toString() {
+  @override
+  String toString() {
     return 'RestClienteException{message=$message, statusCode=$statusCode, error=$error, response=$response}';
   }
 }
