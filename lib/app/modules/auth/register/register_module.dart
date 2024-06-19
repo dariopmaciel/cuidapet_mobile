@@ -8,9 +8,9 @@ class RegisterModule extends Module {
   void binds(Injector i) {
     i.addLazySingleton(
       //NÃO FUNCIONA :-(
-      () => RegisterController(userService: i(), log: i()),
+      // () => RegisterController(userService: i(), log: i()),
       //FUNCIONA :-)
-      // () => RegisterController(userService: Modular.get(), log: Modular.get()),
+      () => RegisterController(userService: Modular.get(), log: Modular.get()),
     );
   }
 

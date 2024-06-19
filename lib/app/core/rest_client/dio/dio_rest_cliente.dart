@@ -1,6 +1,6 @@
 import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/helpers/environments.dart';
-import 'package:cuidapet_mobile/app/core/rest_client/dio/rest_clienteException.dart';
+import 'package:cuidapet_mobile/app/core/rest_client/rest_clienteException.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client_response.dart';
 import 'package:dio/dio.dart';
@@ -157,18 +157,31 @@ class DioRestCliente implements RestClient {
     );
   }
 
-  Never _throwRestClienteException(DioException dioError) {
-    final response = dioError.response;
+  // Never _throwRestClienteException(DioException dioError) {
+  //   final response = dioError.response;
 
+  //   throw RestClientException(
+  //     error: dioError.error,
+  //     message: response?.statusMessage,
+  //     statusCode: response?.statusCode,
+  //     response: RestClientResponse(
+  //       data: response?.data,
+  //       statusCode: response?.statusCode,
+  //       statusMessage: response?.statusMessage,
+  //     ),
+  //   );
+  // }
+  Never _throwRestClienteException(DioException dioException) {
+    final response = dioException.response;
     throw RestClientException(
-      error: dioError.error,
-      message: response?.statusMessage,
-      statusCode: response?.statusCode,
+      error: dioException.error,
       response: RestClientResponse(
         data: response?.data,
         statusCode: response?.statusCode,
-        statusMessage: response?.statusMessage,
+        message: response?.statusMessage,
       ),
+      message: response?.statusMessage,
+      statusCode: response?.statusCode,
     );
   }
 }

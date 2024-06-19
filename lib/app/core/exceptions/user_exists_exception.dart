@@ -1,1 +1,3 @@
-class UserExistsException implements Exception {}
+class UserExistsException implements Exception {
+  //
+}
