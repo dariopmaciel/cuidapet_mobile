@@ -1,3 +1,5 @@
+
+
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client_response.dart';
 
 class RestClientException implements Exception {

@@ -5,24 +5,23 @@ import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client_response.dart';
 import 'package:dio/dio.dart';
 
-class DioRestCliente implements RestClient {
+class DioRestClient implements RestClient {
   late final Dio _dio;
   final _defaultOption = BaseOptions(
     baseUrl: Environments.param(Constants.ENV_BASE_URL_KEY) ?? '',
-    // connectTimeout: Environments.param(Constants.ENV_REST_CLIENT_CONNET_TIMEOUT_KEY),
     connectTimeout: Duration(
-      microseconds: int.parse(
+      milliseconds: int.parse(
         Environments.param(Constants.ENV_REST_CLIENT_CONNET_TIMEOUT_KEY) ?? '0',
       ),
     ),
     receiveTimeout: Duration(
-      microseconds: int.parse(
+      milliseconds: int.parse(
         Environments.param(Constants.ENV_REST_CLIENT_RECIVE_TIMEOUT_KEY) ?? '0',
       ),
     ),
   );
 
-  DioRestCliente({BaseOptions? baseOptions}) {
+  DioRestClient({BaseOptions? baseOptions}) {
     _dio = Dio(baseOptions ?? _defaultOption);
   }
 
@@ -61,7 +60,7 @@ class DioRestCliente implements RestClient {
       {Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? headers}) async {
     try {
-      final response = await _dio.delete(
+      final response = await _dio.get(
         path,
         queryParameters: queryParameters,
         options: Options(headers: headers),
@@ -73,14 +72,14 @@ class DioRestCliente implements RestClient {
   }
 
   @override
-  Future<RestClientResponse<T>> path<T>(String path,
+  Future<RestClientResponse<T>> patch<T>(String path,
       {data,
       Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? headers}) async {
     try {
-      final response = await _dio.delete(
-        data: data,
+      final response = await _dio.patch(
         path,
+        data: data,
         queryParameters: queryParameters,
         options: Options(headers: headers),
       );
@@ -96,7 +95,7 @@ class DioRestCliente implements RestClient {
       Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? headers}) async {
     try {
-      final response = await _dio.delete(
+      final response = await _dio.post(
         path,
         data: data,
         queryParameters: queryParameters,
@@ -114,7 +113,7 @@ class DioRestCliente implements RestClient {
       Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? headers}) async {
     try {
-      final response = await _dio.delete(
+      final response = await _dio.put(
         path,
         data: data,
         queryParameters: queryParameters,
@@ -133,7 +132,7 @@ class DioRestCliente implements RestClient {
       Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? headers}) async {
     try {
-      final response = await _dio.delete(
+      final response = await _dio.request(
         path,
         data: data,
         queryParameters: queryParameters,
@@ -157,31 +156,18 @@ class DioRestCliente implements RestClient {
     );
   }
 
-  // Never _throwRestClienteException(DioException dioError) {
-  //   final response = dioError.response;
+  Never _throwRestClienteException(DioException dioError) {
+    final response = dioError.response;
 
-  //   throw RestClientException(
-  //     error: dioError.error,
-  //     message: response?.statusMessage,
-  //     statusCode: response?.statusCode,
-  //     response: RestClientResponse(
-  //       data: response?.data,
-  //       statusCode: response?.statusCode,
-  //       statusMessage: response?.statusMessage,
-  //     ),
-  //   );
-  // }
-  Never _throwRestClienteException(DioException dioException) {
-    final response = dioException.response;
     throw RestClientException(
-      error: dioException.error,
+      error: dioError.error,
+      message: response?.statusMessage,
+      statusCode: response?.statusCode,
       response: RestClientResponse(
         data: response?.data,
         statusCode: response?.statusCode,
-        message: response?.statusMessage,
+        statusMessage: response?.statusMessage,
       ),
-      message: response?.statusMessage,
-      statusCode: response?.statusCode,
     );
   }
 }

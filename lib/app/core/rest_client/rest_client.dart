@@ -15,7 +15,6 @@ abstract interface class RestClient {
 
   Future<RestClientResponse<T>> get<T>(
     String path, {
-    // dynamic data,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   });
@@ -34,7 +33,7 @@ abstract interface class RestClient {
     Map<String, dynamic>? headers,
   });
   
-  Future<RestClientResponse<T>> path<T>(
+  Future<RestClientResponse<T>> patch<T>(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,

@@ -38,7 +38,7 @@
 import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
- // corrigido aqui
+// corrigido aqui
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_clienteException.dart';
 
@@ -55,15 +55,18 @@ class UserRepositoryImpl implements UserRepository {
         _log = log;
 
   @override
-  Future<void> register(String email, String password) async {
+  Future<void> register(
+    String email,
+    String password,
+  ) async {
     try {
       await _restClient.unAuth().post('/auth/register', data: {
-        'email': email,  // corrigido aqui
+        'email': email, // corrigido aqui
         'password': password, // corrigido aqui
       });
     } on RestClientException catch (e, s) {
       if (e.statusCode == 400 &&
-          e.response.data['message'].contains('Usuário já cadastrado')) { // corrigido aqui
+          e.response.data['message'].contains('Usuário já cadastrado')) {
         _log.error(e.error, e, s);
         throw UserExistsException();
       }
