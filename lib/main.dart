@@ -18,5 +18,5 @@ void main() async {
 }
 
 
-//PROXIMA AULA:
-//-->Conectando tela de cadastro ao backend e firebase
+//PROXIMO ITEM:
+//-->Implementando tela de login (Ligando os pontos)
