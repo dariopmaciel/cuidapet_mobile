@@ -5,22 +5,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 class LoginModule extends Module {
   @override
   void binds(Injector i) {
-    //--------------ou este---------------------
-    // i.addLazySingleton(LoginController.new);
-    //--------------ou este---------------------
     i.addLazySingleton(
       () => LoginController(
         userService: Modular.get(),
         log: Modular.get(),
       ),
     );
-    //--------------ou este---------------------
-    // i.addLazySingleton(
-    //   () => LoginController(
-    //     userService: i(),
-    //     log: i(),
-    //   ),
-    // );
   }
 
   @override

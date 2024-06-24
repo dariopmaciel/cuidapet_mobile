@@ -16,8 +16,11 @@ abstract class LoginControllerBase with Store {
   })  : _userService = userService,
         _log = log;
 
-  Future<void> login(String email, String password) async {
+  Future<void> login(String login, String password) async {
     Loader.show();
+    //Testes
+    print(login);
+    print(password);
     Future.delayed(const Duration(seconds: 2));
     Loader.hide();
   }
