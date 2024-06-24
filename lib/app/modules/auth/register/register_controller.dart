@@ -26,14 +26,15 @@ abstract class _RegisterControllerBase with Store {
       Loader.show();
       // await Future.delayed(const Duration(seconds: 2));
       await _userService.register(email, password);
+      Messages.info('E-mail de confirmação enviado ao endereço registrado!');
       Loader.hide();
     } on UserExistsException {
       Loader.hide();
-      Messages.alert("Email já utilizado");
+      Messages.alert("Email já utilizado, escolha outro!");
     } catch(e,s){
-      _log.error("Erro ao registrar usuário", e, s);
+      _log.error("Erro ao registrar usuário!", e, s);
       Loader.hide();
-      Messages.alert("Erro ao registrar usuário.");
+      Messages.alert("Erro ao registrar usuário!");
     }
   }
 }

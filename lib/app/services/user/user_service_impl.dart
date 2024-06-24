@@ -19,6 +19,7 @@ class UserServiceImpl implements UserService {
   @override
   Future<void> register(String email, String password) async {
     try {
+      // throw Failure();
       final firebaseAuth = FirebaseAuth.instance;
 
       final userMethod = await firebaseAuth.fetchSignInMethodsForEmail(email);

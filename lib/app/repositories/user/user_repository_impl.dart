@@ -61,8 +61,8 @@ class UserRepositoryImpl implements UserRepository {
   ) async {
     try {
       await _restClient.unAuth().post('/auth/register', data: {
-        'email': email, // corrigido aqui
-        'password': password, // corrigido aqui
+        'email': email, 
+        'password': password, 
       });
     } on RestClientException catch (e, s) {
       if (e.statusCode == 400 &&
