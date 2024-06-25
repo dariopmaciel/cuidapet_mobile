@@ -39,21 +39,38 @@ class UserServiceImpl implements UserService {
 
   @override
   Future<void> login(String email, String password) async {
-    final firebaseAuth = await FirebaseAuth.instance;
-    final loginMethods = await firebaseAuth.fetchSignInMethodsForEmail(email);
+    try {
+      final firebaseAuth = await FirebaseAuth.instance;
+      final loginMethods = await firebaseAuth.fetchSignInMethodsForEmail(email);
 
-    if (loginMethods.isEmpty) {
-      throw UserNotExistsException();
+      if (loginMethods.isEmpty) {
+        throw UserNotExistsException();
+      }
+
+      if (loginMethods.contains('password')) {
+        print("Achou login por password dentro com console do FirebaseAuth");
+        final userCredential = await firebaseAuth.signInWithEmailAndPassword(
+            email: email, password: password);
+
+        final userVerified = userCredential.user?.emailVerified ?? false;
+
+        if (!userVerified) {
+          userCredential.user?.sendEmailVerification();
+          throw Failure(
+              message: "Email não confirmado, Verifique sua caixa de SPAM");
+        }
+        print('Email verificado');
+      } else {
+        throw Failure(
+            message:
+                "Login não pode ser feito por email e password, por favor utilize outro método!");
+      }
+    } on FirebaseAuthException catch (e, s) {
+      _log.error(
+        "Usuário ou senha inválidos Firebaseauth [${e.code}]", e, s,
+      );
+      throw Failure(message: "Usuário ou senha inválidos!!!!");
     }
-
-    if (loginMethods.contains('password')) {
-      print("Achou login por password!");
-    } else {
-      throw Failure(
-          message:
-              "Login não pode ser feito por email e password, por favor utilize outro método!");
-    }
-
-    print(loginMethods);
+    // print(loginMethods);
   }
 }
