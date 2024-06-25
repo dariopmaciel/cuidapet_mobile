@@ -1,6 +1,8 @@
 import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_not_exists_exception.dart';
+import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
+import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
@@ -10,12 +12,16 @@ import './user_service.dart';
 class UserServiceImpl implements UserService {
   final UserRepository _userRepository;
   final AppLogger _log;
+  //instancia para gravar no firebase
+  final LocalStorage _localStorage;
 
   UserServiceImpl({
     required AppLogger log,
     required UserRepository userRepository,
+    required LocalStorage localStorage,
   })  : _log = log,
-        _userRepository = userRepository;
+        _userRepository = userRepository,
+        _localStorage = localStorage;
 
   @override
   Future<void> register(String email, String password) async {
@@ -60,6 +66,12 @@ class UserServiceImpl implements UserService {
               message: "Email não confirmado, Verifique sua caixa de SPAM");
         }
         print('Email verificado');
+        //
+        final accessToken = await _userRepository.login(email, password);
+        await _saveAccessToken(accessToken);
+        final xx = await _localStorage.read<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY);
+        print('Imprimindo o TOKEN: [$xx]');
+        //
       } else {
         throw Failure(
             message:
@@ -67,10 +79,15 @@ class UserServiceImpl implements UserService {
       }
     } on FirebaseAuthException catch (e, s) {
       _log.error(
-        "Usuário ou senha inválidos Firebaseauth [${e.code}]", e, s,
+        "Usuário ou senha inválidos Firebaseauth [${e.code}]",
+        e,
+        s,
       );
       throw Failure(message: "Usuário ou senha inválidos!!!!");
     }
     // print(loginMethods);
   }
+
+  Future<void> _saveAccessToken(String accessToken) => _localStorage
+      .write<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY, accessToken);
 }

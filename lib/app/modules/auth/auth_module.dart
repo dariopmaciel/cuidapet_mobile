@@ -11,12 +11,13 @@ class AuthModule extends Module {
   @override
   void binds(i) {
     i.addLazySingleton<UserRepository>(() => UserRepositoryImpl(
-          restClient: Modular.get(), //Deveria ser i()
-          log: Modular.get(), //Deveria ser i()
+          restClient: Modular.get(), //CoreModule
+          log: Modular.get(), //CoreModule
         ));
     i.addLazySingleton<UserService>(() => UserServiceImpl(
-          userRepository: Modular.get(), //Deveria ser i()
-          log: Modular.get(), //Deveria ser i()
+          userRepository: Modular.get(), //AuthModule
+          log: Modular.get(), //CoreModule
+          localStorage: Modular.get(), //CoreModule
         ));
   }
 
