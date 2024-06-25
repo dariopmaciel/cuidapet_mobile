@@ -19,4 +19,4 @@ void main() async {
 
 
 //PROXIMO ITEM:
-//-->Login e-mail e password (Firebase)
+//-->Login e-mail e password (Backend Login)
