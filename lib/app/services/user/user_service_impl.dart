@@ -3,9 +3,11 @@ import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_not_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
+import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import './user_service.dart';
 
@@ -69,20 +71,19 @@ class UserServiceImpl implements UserService {
         //
         final accessToken = await _userRepository.login(email, password);
         await _saveAccessToken(accessToken);
-        final xx = await _localStorage.read<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY);
-        print('Imprimindo o TOKEN: [$xx]');
-        //
+        //Teste de impressão de Token
+        // final xx = await _localStorage
+        //     .read<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY);
+        // print('Teste de imprimir o TOKEN: [$xx]');
+        //Teste de impressão de inteceptor
+        // Modular.get<RestClient>().auth().get('/auth/');
       } else {
         throw Failure(
             message:
                 "Login não pode ser feito por email e password, por favor utilize outro método!");
       }
     } on FirebaseAuthException catch (e, s) {
-      _log.error(
-        "Usuário ou senha inválidos Firebaseauth [${e.code}]",
-        e,
-        s,
-      );
+      _log.error("Usuário ou senha inválidos Firebaseauth [${e.code}]", e, s);
       throw Failure(message: "Usuário ou senha inválidos!!!!");
     }
     // print(loginMethods);
