@@ -19,4 +19,4 @@ void main() async {
 
 
 //PROXIMO ITEM:
-//-->(Auth DIO Interceptor) adicionando token no header das requisições
+//-->Confirmar login e FirebaseMessage
