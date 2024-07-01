@@ -19,12 +19,12 @@ class UserServiceImpl implements UserService {
   final LocalStorage _localStorage;
   final LocalSecureStorage _localSecureStore;
 
-  UserServiceImpl(
-      {required AppLogger log,
-      required UserRepository userRepository,
-      required LocalStorage localStorage,
-      required LocalSecureStorage localSecureStore})
-      : _log = log,
+  UserServiceImpl({
+    required AppLogger log,
+    required UserRepository userRepository,
+    required LocalStorage localStorage,
+    required LocalSecureStorage localSecureStore,
+  })  : _log = log,
         _userRepository = userRepository,
         _localStorage = localStorage,
         _localSecureStore = localSecureStore;
@@ -82,7 +82,7 @@ class UserServiceImpl implements UserService {
         //Teste de impressão de inteceptor
         // Modular.get<RestClient>().auth().get('/auth/');
         //
-        //Criação d emetodo para multiplos tipos d elogin, redesocial, digital, de origem cadastro
+        //Criação de metodo para multiplos tipos de login do tipo: rede social, digital, cadastro
         await _confirmLogin();
       } else {
         throw Failure(
@@ -103,7 +103,7 @@ class UserServiceImpl implements UserService {
     final confirmLoginModel = await _userRepository.confirmLogin();
     //! processo de escrita é assincrono usar 'await' sempre!
     await _saveAccessToken(confirmLoginModel.accessToken);
-    await _localSecureStore.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY,
-        confirmLoginModel.refreshToken);
+    await _localSecureStore.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY, confirmLoginModel.refreshToken);
+    
   }
 }

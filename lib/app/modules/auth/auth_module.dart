@@ -14,12 +14,14 @@ class AuthModule extends Module {
           restClient: Modular.get(), //CoreModule
           log: Modular.get(), //CoreModule
         ));
-    i.addLazySingleton<UserService>(() => UserServiceImpl(
-          userRepository: Modular.get(), //AuthModule
-          log: Modular.get(), //CoreModule
-          localStorage: Modular.get(), //CoreModule
-          localSecureStore: Modular.get(), //CoreModule
-        ));
+    i.addLazySingleton<UserService>(
+      () => UserServiceImpl(
+        log: Modular.get(), //CoreModule
+        userRepository: Modular.get(), //AuthModule
+        localStorage: Modular.get(), //CoreModule
+        localSecureStore: Modular.get(), //CoreModule
+      ),
+    );
   }
 
   @override
