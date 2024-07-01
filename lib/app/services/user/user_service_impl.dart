@@ -3,6 +3,7 @@ import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_not_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
+// import 'package:cuidapet_mobile/app/models/confirm_login_model.dart';
 // import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,14 +17,17 @@ class UserServiceImpl implements UserService {
   final AppLogger _log;
   //instancia para gravar no firebase
   final LocalStorage _localStorage;
+  final LocalSecureStorage _localSecureStore;
 
-  UserServiceImpl({
-    required AppLogger log,
-    required UserRepository userRepository,
-    required LocalStorage localStorage,
-  })  : _log = log,
+  UserServiceImpl(
+      {required AppLogger log,
+      required UserRepository userRepository,
+      required LocalStorage localStorage,
+      required LocalSecureStorage localSecureStore})
+      : _log = log,
         _userRepository = userRepository,
-        _localStorage = localStorage;
+        _localStorage = localStorage,
+        _localSecureStore = localSecureStore;
 
   @override
   Future<void> register(String email, String password) async {
@@ -77,6 +81,9 @@ class UserServiceImpl implements UserService {
         // print('Teste de imprimir o TOKEN: [$xx]');
         //Teste de impressão de inteceptor
         // Modular.get<RestClient>().auth().get('/auth/');
+        //
+        //Criação d emetodo para multiplos tipos d elogin, redesocial, digital, de origem cadastro
+        await _confirmLogin();
       } else {
         throw Failure(
             message:
@@ -91,4 +98,12 @@ class UserServiceImpl implements UserService {
 
   Future<void> _saveAccessToken(String accessToken) => _localStorage
       .write<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY, accessToken);
+
+  Future<void> _confirmLogin() async {
+    final confirmLoginModel = await _userRepository.confirmLogin();
+    //! processo de escrita é assincrono usar 'await' sempre!
+    await _saveAccessToken(confirmLoginModel.accessToken);
+    await _localSecureStore.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY,
+        confirmLoginModel.refreshToken);
+  }
 }
