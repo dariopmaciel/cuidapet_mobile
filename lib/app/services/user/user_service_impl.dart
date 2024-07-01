@@ -3,11 +3,11 @@ import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_not_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
-import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
+// import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+// import 'package:flutter_modular/flutter_modular.dart';
 
 import './user_service.dart';
 
