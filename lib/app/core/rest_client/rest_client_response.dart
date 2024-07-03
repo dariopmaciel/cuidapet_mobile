@@ -1,12 +1,12 @@
 class RestClientResponse<T> {
   T? data;
   int? statusCode;
-  String? message;
+  String? statusMessage;
 
   RestClientResponse({
     this.data,
     this.statusCode,
-    this.message,
-    String? statusMessage,
+    this.statusMessage,
+    
   });
 }

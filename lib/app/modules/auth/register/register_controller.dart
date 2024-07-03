@@ -13,25 +13,22 @@ abstract class _RegisterControllerBase with Store {
   final UserService _userService;
   final AppLogger _log;
 
-  //Por ser um atributo privado é necessário receber ele, pasra que NGM tenha acesso direto ao USERSERVICE
   _RegisterControllerBase({
     required UserService userService,
     required AppLogger log,
   })  : _userService = userService,
         _log = log;
 
-  Future<void> register(
-      {required String email, required String password}) async {
+  Future<void> register({required String email, required String password}) async {
     try {
       Loader.show();
-      // await Future.delayed(const Duration(seconds: 2));
       await _userService.register(email, password);
       Messages.info('E-mail de confirmação enviado ao endereço registrado!');
       Loader.hide();
     } on UserExistsException {
       Loader.hide();
-      Messages.alert("Email já utilizado, escolha outro!");
-    } catch(e,s){
+      Messages.alert("Email já utilizado, por favor escolha outro!");
+    } catch (e, s) {
       _log.error("Erro ao registrar usuário!", e, s);
       Loader.hide();
       Messages.alert("Erro ao registrar usuário!");

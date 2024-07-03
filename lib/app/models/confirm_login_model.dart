@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+
+
 class ConfirmLoginModel {
   final String accessToken;
   final String refreshToken;
@@ -23,6 +25,7 @@ class ConfirmLoginModel {
       refreshToken: map['refresh_token'] ?? '',
     );
   }
+
 
   String toJson() => json.encode(toMap());
 

@@ -14,12 +14,12 @@ class DioRestClient implements RestClient {
     baseUrl: Environments.param(Constants.ENV_BASE_URL_KEY) ?? '',
     connectTimeout: Duration(
       milliseconds: int.parse(
-        Environments.param(Constants.ENV_REST_CLIENT_CONNET_TIMEOUT_KEY) ?? '0',
+        Environments.param(Constants.ENV_REST_CLIENT_CONNECT_TIMEOUT_KEY) ?? '0',
       ),
     ),
     receiveTimeout: Duration(
       milliseconds: int.parse(
-        Environments.param(Constants.ENV_REST_CLIENT_RECIVE_TIMEOUT_KEY) ?? '0',
+        Environments.param(Constants.ENV_REST_CLIENT_RECEIVE_TIMEOUT_KEY) ?? '0',
       ),
     ),
   );
@@ -114,7 +114,7 @@ class DioRestClient implements RestClient {
       );
       return _dioResponseConverte(response);
     } on DioException catch (e) {
-      _throwRestClienteException(e);
+      _throwRestClienteException(e); //possivel problema
     }
   }
 
@@ -154,7 +154,7 @@ class DioRestClient implements RestClient {
       );
       return _dioResponseConverte(response);
     } on DioException catch (e) {
-      _throwRestClienteException(e);
+      _throwRestClienteException(e); //ERRO AQUI?????
     }
   }
 
@@ -163,13 +163,12 @@ class DioRestClient implements RestClient {
     return RestClientResponse(
       data: response.data,
       statusCode: response.statusCode,
-      message: response.statusMessage,
+      statusMessage: response.statusMessage,
     );
   }
 
   Never _throwRestClienteException(DioException dioError) {
     final response = dioError.response;
-
     throw RestClientException(
       error: dioError.error,
       message: response?.statusMessage,
