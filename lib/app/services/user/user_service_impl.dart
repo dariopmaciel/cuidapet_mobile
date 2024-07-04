@@ -50,15 +50,24 @@ class UserServiceImpl implements UserService {
     if (loginMethods.isEmpty) {
       throw UserNotExistsException();
     }
-
+    
+    // print("Achou o login por password");
     if (loginMethods.contains('password')) {
-      print("Achou o login por password");
+      final UserCredential = await firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      //VERIFICA SE EMAIL FOI CONFIRMADO E CASO NÃO ENVIA NOVO EMAIL
+      final userVerified = UserCredential.user?.emailVerified ?? false;
+      if (!userVerified) {
+        UserCredential.user?.sendEmailVerification();
+        throw Failure(
+            message: "Email não confirmado, verifique sua caixa de SPAM");
+      }
     } else {
       throw Failure(
           message:
-              'Login não pode ser feito por email e password. Por favor utilize outro método.');
+              'Login não pode ser feito por email e password. Utilize outro método.');
     }
-
     print("Verifica se a String é valida $loginMethods");
   }
 }
