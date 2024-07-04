@@ -36,9 +36,10 @@ class AuthInterceptor extends Interceptor {
           ),
         );
       }
-      options.headers["Autorization"] = accessToken;
+      //Autorization
+      options.headers["Authorization"] = accessToken;
     } else {
-      options.headers.remove('Autorization');
+      options.headers.remove('Authorization');
     }
     handler.next(options);
   }

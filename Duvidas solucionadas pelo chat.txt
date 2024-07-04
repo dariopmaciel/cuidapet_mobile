@@ -1,0 +1,9 @@
+http:\\10.0.0.105:8093\auth\register
+
+
+Desculpa a pergunta, mas eu vi oque vc fez mas não sei se entendi....
+No código eu tinha escrito errado "Authorzation".
+Trocou a pasta da API de lugar.
+Na API, no .env vc trocou a porta para 8093
+Dentro da pasta SERVER da API alterou a porta de conexão para 8093, dentro do código
+E no POSTMAN alterou o endereço, para 'http:\\10.0.0.105:8093\auth\register'
