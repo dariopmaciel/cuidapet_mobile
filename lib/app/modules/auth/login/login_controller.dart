@@ -24,7 +24,11 @@ abstract class LoginControllerBase with Store {
     // Loader.show();
     // print(login);
     // print(password);
-    // Future.delayed(const Duration(seconds: 2));
+    // await Future.delayed(const Duration(seconds: 2));
+    // Loader.hide();
+    //Testes------------------------------------
+    // Loader.show();
+    // await _userService.login(login, password);
     // Loader.hide();
     //-----------------------------------------
     try {

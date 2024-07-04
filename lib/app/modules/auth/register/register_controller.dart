@@ -1,3 +1,4 @@
+import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/messages.dart';
@@ -21,6 +22,8 @@ abstract class _RegisterControllerBase with Store {
 
   Future<void> register({required String email, required String password}) async {
     try {
+      //teste de falaha
+      // throw Failure(message: "Teste de falha");
       Loader.show();
       await _userService.register(email, password);
       Messages.info('E-mail de confirmação enviado ao endereço registrado!');

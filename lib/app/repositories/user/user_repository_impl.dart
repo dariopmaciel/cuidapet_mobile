@@ -20,13 +20,10 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<void> register(String email, String password) async {
     try {
-      await _restClient.unAuth().post(
-        '/auth/register',
-        data: {
-          'email': email,
-          'password': password,
-        },
-      );
+      await _restClient.unAuth().post('/auth/register', data: {
+        'email': email,
+        'password': password,
+      });
     } on RestClientException catch (e, s) {
       if (e.statusCode == 400 &&
           e.response.data['message'].contains('Usuário já cadastrado')) {
