@@ -44,30 +44,36 @@ class UserServiceImpl implements UserService {
 
   @override
   Future<void> login(String email, String password) async {
-    final firebaseAuth = FirebaseAuth.instance;
-    final loginMethods = await firebaseAuth.fetchSignInMethodsForEmail(email);
-    print("Verifica se a String é valida $loginMethods");
-    if (loginMethods.isEmpty) {
-      throw UserNotExistsException();
-    }
-
-    print("Achou o login por password");
-    if (loginMethods.contains('password')) {
-      final UserCredential = await firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-
-      //VERIFICA SE EMAIL FOI CONFIRMADO E CASO NÃO ENVIA NOVO EMAIL
-      final userVerified = UserCredential.user?.emailVerified ?? false;
-      if (!userVerified) {
-        UserCredential.user?.sendEmailVerification();
-        throw Failure(
-            message: "Email não confirmado, verifique sua caixa de SPAM");
+    try {
+      final firebaseAuth = FirebaseAuth.instance;
+      final loginMethods = await firebaseAuth.fetchSignInMethodsForEmail(email);
+      print("Verifica se a String é valida $loginMethods");
+      if (loginMethods.isEmpty) {
+        throw UserNotExistsException();
       }
-      print("Email verificado");
-    } else {
-      throw Failure(
-          message:
-              'Login não pode ser feito por email e password. Utilize outro método.');
+
+      print("Achou o login por password");
+      if (loginMethods.contains('password')) {
+        final UserCredential = await firebaseAuth.signInWithEmailAndPassword(
+            email: email, password: password);
+
+        //VERIFICA SE EMAIL FOI CONFIRMADO E CASO NÃO ENVIA NOVO EMAIL
+        final userVerified = UserCredential.user?.emailVerified ?? false;
+        if (!userVerified) {
+          UserCredential.user?.sendEmailVerification();
+          throw Failure(
+              message: "Email não confirmado, verifique sua caixa de SPAM");
+        }
+        print("Email verificado = OK");
+      } else {
+        throw Failure(
+            message:
+                'Login não pode ser feito por email e password. Utilize outro método.');
+      }
+    } on FirebaseAuthException catch (e, s) {
+      // print('Tipo de erro no firebase: $e'); colocar ponto
+      _log.error('Usuário ou senha inválidos FirebaseAuthError[${e.code}]', e, s);
+      throw Failure(message: "Usuário ou senha inválidos!!!");
     }
   }
 }
