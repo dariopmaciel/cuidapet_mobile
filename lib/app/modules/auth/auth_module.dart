@@ -18,7 +18,7 @@ class AuthModule extends Module {
       () => UserServiceImpl(
         log: Modular.get(), //CoreModule
         userRepository: Modular.get(), //AuthModule
-        localStorage: Modular.get(), //CoreModule
+        localStorage: Modular.get(),
         // localSecureStore: Modular.get(), //CoreModule
       ),
     );

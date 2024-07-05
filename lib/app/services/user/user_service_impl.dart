@@ -1,6 +1,7 @@
 import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_not_exists_exception.dart';
+import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
@@ -13,20 +14,24 @@ class UserServiceImpl implements UserService {
   final UserRepository _userRepository;
   final AppLogger _log;
   final LocalStorage _localStorage;
+  // final LocalSecureStorage _localSecureStore;
 
   UserServiceImpl({
     required UserRepository userRepository,
     required AppLogger log,
     required LocalStorage localStorage,
+    // required LocalSecureStorage localSecureStore,
   })  : _userRepository = userRepository,
         _log = log,
         _localStorage = localStorage;
+        // _localSecureStore = localSecureStore;
 
   @override
   Future<void> register(String email, String password) async {
     try {
       //teste de erro
       // throw Failure(message: 'teste de erro');
+      //
       final firebaseAuth = FirebaseAuth.instance;
       final userMethods = await firebaseAuth.fetchSignInMethodsForEmail(email);
       //se não for vazio
@@ -72,11 +77,11 @@ class UserServiceImpl implements UserService {
 
         print("Email verificado = OK");
 
-
-
         final accessToken = await _userRepository.login(email, password);
-
-        
+        await _saveAccessToken(accessToken);
+        final xx = await _localStorage
+            .read<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY);
+        print(xx);
       } else {
         throw Failure(
             message:
@@ -89,4 +94,7 @@ class UserServiceImpl implements UserService {
       throw Failure(message: "Usuário ou senha inválidos!!!");
     }
   }
+
+  Future<void> _saveAccessToken(String accessToken) => _localStorage
+      .write<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY, accessToken);
 }
