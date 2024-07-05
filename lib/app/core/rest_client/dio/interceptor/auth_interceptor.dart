@@ -20,25 +20,27 @@ class AuthInterceptor extends Interceptor {
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     // Executado SEMPRE antes do envio da requisição
-    // super.onRequest(options, handler);
+    //antes de sair do app
     final authRequired =
         options.extra[Constants.REST_CLIENT_AUTH_REQUIRED_KEY] ?? false;
     if (authRequired) {
       final accessToken = await _localStorage
           .read<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY);
-
       if (accessToken == null) {
         return handler.reject(
           DioException(
             requestOptions: options,
             error: "Expire Token",
+            // type: DioErrorType.cancel,
+            //substituido por:
             type: DioExceptionType.cancel,
           ),
         );
       }
-      //Autorization
+      //se authorization for verdadeira add accesstoken
       options.headers["Authorization"] = accessToken;
     } else {
+      //se authorization for falso remove
       options.headers.remove('Authorization');
     }
     handler.next(options);

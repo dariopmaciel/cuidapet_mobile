@@ -81,7 +81,7 @@ class UserServiceImpl implements UserService {
         await _saveAccessToken(accessToken);
         final xx = await _localStorage
             .read<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY);
-        print(xx);
+        print("A CHAVE É: $xx");
       } else {
         throw Failure(
             message:
