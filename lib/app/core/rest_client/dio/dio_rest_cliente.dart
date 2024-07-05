@@ -10,6 +10,7 @@ import 'package:dio/dio.dart';
 
 class DioRestClient implements RestClient {
   late final Dio _dio;
+  
   final _defaultOption = BaseOptions(
     baseUrl: Environments.param(Constants.ENV_BASE_URL_KEY) ?? '',
     connectTimeout: Duration(
