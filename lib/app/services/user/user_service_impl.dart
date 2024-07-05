@@ -5,7 +5,6 @@ import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
-import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -85,7 +84,7 @@ class UserServiceImpl implements UserService {
         // final xx = await _localStorage.read<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY);
         // print("A CHAVE É: $xx");
         //!------------Teste Nõa ta funcinando o teste
-        Modular.get<RestClient>().auth().get('/auth/');
+        Modular.get<RestClient>().auth().get('/auth/confirm');
         //------------Teste
       } else {
         throw Failure(
