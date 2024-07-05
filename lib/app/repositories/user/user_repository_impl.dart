@@ -50,7 +50,14 @@ class UserRepositoryImpl implements UserRepository {
       );
       return result.data['access_token'];
     } on RestClientException catch (e, s) {
+      if (e.statusCode == 403) {
+        //usuario cadastrado com email e senha no firebase, mais não no backend
+        throw Failure(message: 'Usuário inconsistente em contato com o suporte!!!');
+      }
+      //se não for o erro 403
+      //pode ser um erro de servido ou algum outra coisa
       _log.error("Erro ao realizar login", e, s);
+      throw Failure(message: 'Erro ao realizar login, tente novamente mais tarde!');
     }
   }
 
