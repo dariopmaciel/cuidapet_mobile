@@ -37,9 +37,21 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<String> login(String email, String password) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<String> login(String email, String password) async {
+    try {
+      final result = await _restClient.unAuth().post(
+        '/auth/',
+        data: {
+          "login": email,
+          "password": password,
+          "social_login": false,
+          "supplier_user": false,
+        },
+      );
+      return result.data['access_token'];
+    } on RestClientException catch (e, s) {
+      _log.error("Erro ao realizar login", e, s);
+    }
   }
 
   @override
