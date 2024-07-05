@@ -1,0 +1,7 @@
+// PONTOS DE ATENÇÃO
+
+No código eu tinha escrito errado "Authorzation".
+Trocou a pasta da API de lugar para facilitar acesso.
+Dentro da API, no arquivo '.env' trocou a porta para 8080 pra 8093
+Dentro da pasta SERVER da API alterou a porta de conexão para 8093, dentro do código
+E no POSTMAN alterou o endereço, de 'http://10.0.0.105:8093/auth/register' para 'http:\\10.0.0.105:8093\auth\register'.

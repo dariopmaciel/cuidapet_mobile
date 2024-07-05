@@ -47,6 +47,7 @@ class UserServiceImpl implements UserService {
     try {
       final firebaseAuth = FirebaseAuth.instance;
       final loginMethods = await firebaseAuth.fetchSignInMethodsForEmail(email);
+      //se não é vazio
       print("Verifica se a String é valida $loginMethods");
       if (loginMethods.isEmpty) {
         throw UserNotExistsException();
@@ -65,6 +66,8 @@ class UserServiceImpl implements UserService {
               message: "Email não confirmado, verifique sua caixa de SPAM");
         }
         print("Email verificado = OK");
+
+        
       } else {
         throw Failure(
             message:
@@ -72,7 +75,8 @@ class UserServiceImpl implements UserService {
       }
     } on FirebaseAuthException catch (e, s) {
       // print('Tipo de erro no firebase: $e'); colocar ponto
-      _log.error('Usuário ou senha inválidos FirebaseAuthError[${e.code}]', e, s);
+      _log.error(
+          'Usuário ou senha inválidos FirebaseAuthError[${e.code}]', e, s);
       throw Failure(message: "Usuário ou senha inválidos!!!");
     }
   }

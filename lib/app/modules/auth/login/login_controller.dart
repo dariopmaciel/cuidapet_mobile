@@ -33,6 +33,8 @@ abstract class LoginControllerBase with Store {
     //-----------------------------------------
     try {
       Loader.show();
+      // print(login);
+      // print(password);
       await _userService.login(login, password);
       Loader.hide();
     } on Failure catch (e, s) {
