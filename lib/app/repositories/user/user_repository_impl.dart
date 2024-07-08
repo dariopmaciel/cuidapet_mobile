@@ -6,6 +6,7 @@ import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_clienteException.dart';
 import 'package:cuidapet_mobile/app/models/confirm_login_model.dart';
+import 'package:cuidapet_mobile/app/models/user_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import './user_repository.dart';
@@ -78,6 +79,19 @@ class UserRepositoryImpl implements UserRepository {
     } on RestClientException catch (e, s) {
       _log.error("Erro ao confirme o login", e, s);
       throw Failure(message: 'Erro ao confirmar login');
+    }
+  }
+
+  @override
+  Future<UserModel> getUserLogged() async {
+    try {
+      // Caminho FELIZZZZZZZ
+      final result = await _restClient.get('/user/');
+      return UserModel.fromMap(result.data);
+    } on RestClientException catch (e, s) {
+      // Caminho TRISTE
+      _log.error("Erro ao buscar dados do usuário Logado", e, s);
+      throw Failure(message: "Erro ao buscar dados do usuário Logado");
     }
   }
 }

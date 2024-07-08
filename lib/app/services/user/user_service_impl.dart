@@ -5,6 +5,7 @@ import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
+import 'package:cuidapet_mobile/app/models/user_model.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -80,12 +81,13 @@ class UserServiceImpl implements UserService {
 
         final accessToken = await _userRepository.login(email, password);
         await _saveAccessToken(accessToken);
-        //------------Teste
+        //*------------Teste
         // final xx = await _localStorage.read<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY);
         // print("A CHAVE É: $xx");
-        // //!------------Teste Não ta funcinando o teste
+        //*------------Teste funcinando
         // Modular.get<RestClient>().auth().get('/auth/confirm');
         await _confirmLogin();
+        await _getUserData();
       } else {
         throw Failure(
             message:
@@ -107,5 +109,11 @@ class UserServiceImpl implements UserService {
     await _saveAccessToken(confirmLoginModel.accessToken);
     await _localSegureStorage.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY,
         confirmLoginModel.refreshToken);
+  }
+
+  Future<void> _getUserData() async {
+    final UserModel = await _userRepository.getUserLogged();
+    //SEREALIZAÇÃO do usuário para facilitar sua recuperação de perfil
+    await _localStorage.write<String>('key', UserModel.toJson());
   }
 }
