@@ -19,7 +19,7 @@ class AuthModule extends Module {
         log: Modular.get(), //CoreModule
         userRepository: Modular.get(), //AuthModule
         localStorage: Modular.get(),
-        // localSecureStore: Modular.get(), //CoreModule
+        localSecureStorage: Modular.get(),
       ),
     );
   }

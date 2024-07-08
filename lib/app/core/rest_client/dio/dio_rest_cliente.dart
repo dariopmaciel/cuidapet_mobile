@@ -7,7 +7,6 @@ import 'package:cuidapet_mobile/app/core/rest_client/rest_clienteException.dart'
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client_response.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class DioRestClient implements RestClient {
   late final Dio _dio;
@@ -16,15 +15,13 @@ class DioRestClient implements RestClient {
     baseUrl: Environments.param(Constants.ENV_BASE_URL_KEY) ?? '',
     connectTimeout: Duration(
       milliseconds: int.parse(
-        Environments.param(Constants.ENV_REST_CLIENT_CONNECT_TIMEOUT_KEY) ??
-            '0',
-      ),
+          Environments.param(Constants.ENV_REST_CLIENT_CONNECT_TIMEOUT_KEY) ??
+              '0'),
     ),
     receiveTimeout: Duration(
       milliseconds: int.parse(
-        Environments.param(Constants.ENV_REST_CLIENT_RECEIVE_TIMEOUT_KEY) ??
-            '0',
-      ),
+          Environments.param(Constants.ENV_REST_CLIENT_RECEIVE_TIMEOUT_KEY) ??
+              '0'),
     ),
   );
 

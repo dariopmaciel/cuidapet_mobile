@@ -46,15 +46,15 @@ class AuthInterceptor extends Interceptor {
     handler.next(options);
   }
 
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // Executado ANTES de responder para quem nos chamou
-    super.onResponse(response, handler);
-  }
+  // @override
+  // void onResponse(Response response, ResponseInterceptorHandler handler) {
+  //   // Executado ANTES de responder para quem nos chamou
+  //   super.onResponse(response, handler);
+  // }
 
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    // Excutado SEMPRE antes de disparar o erro.
-    super.onError(err, handler);
-  }
+  // @override
+  // void onError(DioException err, ErrorInterceptorHandler handler) {
+  //   // Excutado SEMPRE antes de disparar o erro.
+  //   super.onError(err, handler);
+  // }
 }
