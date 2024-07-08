@@ -112,8 +112,8 @@ class UserServiceImpl implements UserService {
   }
 
   Future<void> _getUserData() async {
-    final UserModel = await _userRepository.getUserLogged();
+    final userModel = await _userRepository.getUserLogged();
     //SEREALIZAÇÃO do usuário para facilitar sua recuperação de perfil
-    await _localStorage.write<String>('key', UserModel.toJson());
+    await _localStorage.write<String>('key', userModel.toJson());
   }
 }
