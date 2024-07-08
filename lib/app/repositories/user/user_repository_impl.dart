@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_clienteException.dart';
 import 'package:cuidapet_mobile/app/models/confirm_login_model.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import './user_repository.dart';
 
@@ -52,18 +55,29 @@ class UserRepositoryImpl implements UserRepository {
     } on RestClientException catch (e, s) {
       if (e.statusCode == 403) {
         //usuario cadastrado com email e senha no firebase, mais não no backend
-        throw Failure(message: 'Usuário inconsistente em contato com o suporte!!!');
+        throw Failure(
+            message: 'Usuário inconsistente em contato com o suporte!!!');
       }
       //se não for o erro 403
       //pode ser um erro de servido ou algum outra coisa
       _log.error("Erro ao realizar login", e, s);
-      throw Failure(message: 'Erro ao realizar login, tente novamente mais tarde!');
+      throw Failure(
+          message: 'Erro ao realizar login, tente novamente mais tarde!');
     }
   }
 
   @override
-  Future<ConfirmLoginModel> confirmLogin() {
-    // TODO: implement confirmLogin
-    throw UnimplementedError();
+  Future<ConfirmLoginModel> confirmLogin() async {
+    try {
+      final deviceToken = await FirebaseMessaging.instance.getToken();
+      final result = await _restClient.auth().patch('/auth/confirm', data: {
+        'ios_token': Platform.isIOS ? deviceToken : null,
+        'android_token': Platform.isAndroid ? deviceToken : null,
+      });
+      return ConfirmLoginModel.fromMap(result.data);
+    } on RestClientException catch (e, s) {
+      _log.error("Erro ao confirme o login", e, s);
+      throw Failure(message: 'Erro ao confirmar login');
+    }
   }
 }

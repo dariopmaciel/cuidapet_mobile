@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-
-
 class ConfirmLoginModel {
   final String accessToken;
   final String refreshToken;

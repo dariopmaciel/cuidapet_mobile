@@ -12,11 +12,13 @@ class CoreModule extends Module {
   @override
   void binds(Injector i) {
     i.addLazySingleton(AuthStore.new);
-    i.addLazySingleton<RestClient>(DioRestClient.new);
     i.addLazySingleton<AppLogger>(LoggerAppLoggerImpl.new);
     i.addLazySingleton<LocalStorage>(SharedPreferencesLocalStorageImpl.new);
     i.addLazySingleton<LocalSecureStorage>(
         FlutterSecureStorageLocalStorageImpl.new);
+    i.addLazySingleton<RestClient>(DioRestClient.new);
+    // i.addLazySingleton<RestClient>(
+    //     () => DioRestClient(localStorage: Modular.get(), log: Modular.get()));
   }
 
   @override

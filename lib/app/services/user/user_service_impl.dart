@@ -83,7 +83,7 @@ class UserServiceImpl implements UserService {
         //------------Teste
         // final xx = await _localStorage.read<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY);
         // print("A CHAVE É: $xx");
-        //!------------Teste Nõa ta funcinando o teste
+        // //!------------Teste Não ta funcinando o teste
         Modular.get<RestClient>().auth().get('/auth/confirm');
         //------------Teste
       } else {

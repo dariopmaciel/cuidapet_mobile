@@ -7,6 +7,7 @@ import 'package:cuidapet_mobile/app/core/rest_client/rest_clienteException.dart'
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client_response.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class DioRestClient implements RestClient {
   late final Dio _dio;
@@ -35,7 +36,8 @@ class DioRestClient implements RestClient {
     _dio = Dio(baseOptions ?? _defaultOption);
     _dio.interceptors.addAll([
       AuthInterceptor(localStorage: localStorage, log: log),
-      LogInterceptor(requestBody: true, responseBody: true),
+      LogInterceptor(
+          requestBody: true, responseBody: true, requestHeader: true),
     ]);
   }
 
@@ -170,7 +172,7 @@ class DioRestClient implements RestClient {
     );
   }
 
-   Never _throwRestClienteException(DioException dioError) {
+  Never _throwRestClienteException(DioException dioError) {
     final response = dioError.response;
     throw RestClientException(
       error: dioError.error,
