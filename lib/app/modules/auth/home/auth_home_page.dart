@@ -23,6 +23,8 @@ class _AuthHomePageState extends State<AuthHomePage> {
   void initState() {
     super.initState();
     
+
+    //*REACTION VE OLHA DENTRO DA AUTHSTORE, VARIAVEL USERLOGGED
     reaction<UserModel?>((_) => widget._authStore.userLogged, (userLogged) {
       if (userLogged != null && userLogged.email.isNotEmpty) {
         Modular.to.navigate('/home/');

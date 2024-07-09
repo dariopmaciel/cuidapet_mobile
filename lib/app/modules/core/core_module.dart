@@ -23,7 +23,7 @@ class CoreModule extends Module {
 
   @override
   void exportedBinds(Injector i) {
-    AuthStore();
+    AuthStore(localStorage: i());
     DioRestClient(localStorage: i(), log: i());
     LoggerAppLoggerImpl();
     SharedPreferencesLocalStorageImpl();
