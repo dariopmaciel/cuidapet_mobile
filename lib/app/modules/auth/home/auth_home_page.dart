@@ -22,6 +22,7 @@ class _AuthHomePageState extends State<AuthHomePage> {
   @override
   void initState() {
     super.initState();
+    
     reaction<UserModel?>((_) => widget._authStore.userLogged, (userLogged) {
       if (userLogged != null && userLogged.email.isNotEmpty) {
         Modular.to.navigate('/home/');
