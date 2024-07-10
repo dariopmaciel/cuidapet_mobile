@@ -6,7 +6,9 @@ import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/models/social_login_type.dart';
+import 'package:cuidapet_mobile/app/models/social_network_model.dart';
 import 'package:cuidapet_mobile/app/models/user_model.dart';
+import 'package:cuidapet_mobile/app/repositories/social/social_repository.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -18,16 +20,19 @@ class UserServiceImpl implements UserService {
   final AppLogger _log;
   final LocalStorage _localStorage;
   final LocalSecureStorage _localSegureStorage;
+  final SocialRepository _socialRepository;
 
-  UserServiceImpl(
-      {required UserRepository userRepository,
-      required AppLogger log,
-      required LocalStorage localStorage,
-      required LocalSecureStorage localSecureStorage})
-      : _userRepository = userRepository,
+  UserServiceImpl({
+    required UserRepository userRepository,
+    required AppLogger log,
+    required LocalStorage localStorage,
+    required LocalSecureStorage localSecureStorage,
+    required SocialRepository socialRepository,
+  })  : _userRepository = userRepository,
         _log = log,
         _localStorage = localStorage,
-        _localSegureStorage = localSecureStorage;
+        _localSegureStorage = localSecureStorage,
+        _socialRepository = socialRepository;
 
   @override
   Future<void> register(String email, String password) async {
@@ -121,13 +126,16 @@ class UserServiceImpl implements UserService {
 
   @override
   Future<void> socialLogin(SocialLoginType socialLoginType) async {
+    final SocialNetworkModel socialModel;
+    final AuthCredential authCredential;
+    final firebaseAuth = FirebaseAuth.instance;
+
     switch (socialLoginType) {
       case SocialLoginType.facebook:
-        // TODO: Handle this case.
         break;
 
       case SocialLoginType.google:
-        // TODO: Handle this case.
+        await _socialRepository.googleLogin();
         break;
     }
   }
