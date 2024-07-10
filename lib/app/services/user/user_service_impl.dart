@@ -5,6 +5,7 @@ import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
+import 'package:cuidapet_mobile/app/models/social_login_type.dart';
 import 'package:cuidapet_mobile/app/models/user_model.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -114,6 +115,20 @@ class UserServiceImpl implements UserService {
   Future<void> _getUserData() async {
     final userModel = await _userRepository.getUserLogged();
     //SEREALIZAÇÃO do usuário para facilitar sua recuperação de perfil
-    await _localStorage.write<String>(Constants.LOCAL_STORAGE_USER_LOGGED_DATA_KEY, userModel.toJson());
+    await _localStorage.write<String>(
+        Constants.LOCAL_STORAGE_USER_LOGGED_DATA_KEY, userModel.toJson());
+  }
+
+  @override
+  Future<void> socialLogin(SocialLoginType socialLoginType) async {
+    switch (socialLoginType) {
+      case SocialLoginType.facebook:
+        // TODO: Handle this case.
+        break;
+
+      case SocialLoginType.google:
+        // TODO: Handle this case.
+        break;
+    }
   }
 }
