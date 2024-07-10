@@ -27,6 +27,22 @@ mixin _$AuthStore on AuthStoreBase, Store {
     });
   }
 
+  late final _$loadUserLoggedAsyncAction =
+      AsyncAction('AuthStoreBase.loadUserLogged', context: context);
+
+  @override
+  Future<void> loadUserLogged() {
+    return _$loadUserLoggedAsyncAction.run(() => super.loadUserLogged());
+  }
+
+  late final _$logoutAsyncAction =
+      AsyncAction('AuthStoreBase.logout', context: context);
+
+  // @override
+  // Future logout() {
+  //   return _$logoutAsyncAction.run(() => super.logout());
+  // }
+
   @override
   String toString() {
     return '''

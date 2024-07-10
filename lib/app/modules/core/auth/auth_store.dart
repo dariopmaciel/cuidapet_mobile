@@ -20,6 +20,7 @@ abstract class AuthStoreBase with Store {
     required LocalStorage localStorage,
   }) : _localStorage = localStorage;
 
+  @action
   Future<void> loadUserLogged() async {
     //usado para extrair os dados internos
     //Usuário LOGADO
@@ -32,12 +33,18 @@ abstract class AuthStoreBase with Store {
       //se não for nulo, usuario logado
       _userLogged = UserModel.empty();
     }
-    FirebaseAuth.instance.authStateChanges().listen((user) async {
+    FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user == null) {
         //usuário deslogado do app
-        await _localStorage.clear();
-        _userLogged = UserModel.empty();
+        logout();
       }
     });
+  }
+
+  @action
+  void logout() async {
+    //usuário deslogado do app
+    await _localStorage.clear();
+    _userLogged = UserModel.empty();
   }
 }

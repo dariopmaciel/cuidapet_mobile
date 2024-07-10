@@ -24,7 +24,7 @@ class CoreModule extends Module {
   @override
   void exportedBinds(Injector i) {
     AuthStore(localStorage: i());
-    DioRestClient(localStorage: i(), log: i());
+    DioRestClient(localStorage: i(), log: i(), authStore: i());
     LoggerAppLoggerImpl();
     SharedPreferencesLocalStorageImpl();
     FlutterSecureStorageLocalStorageImpl();
