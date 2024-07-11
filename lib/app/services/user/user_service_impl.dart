@@ -4,14 +4,11 @@ import 'package:cuidapet_mobile/app/core/exceptions/user_not_exists_exception.da
 import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
-import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/models/social_login_type.dart';
 import 'package:cuidapet_mobile/app/models/social_network_model.dart';
-import 'package:cuidapet_mobile/app/models/user_model.dart';
 import 'package:cuidapet_mobile/app/repositories/social/social_repository.dart';
 import 'package:cuidapet_mobile/app/repositories/user/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 import './user_service.dart';
 
@@ -148,11 +145,24 @@ class UserServiceImpl implements UserService {
             accessToken: socialModel.accessToken, idToken: socialModel.id);
         break;
     }
+    
+    final methodCheck = _getMethodSocialLoginType(socialLoginType);
 
     final loginMethods =
         await firebaseAuth.fetchSignInMethodsForEmail(socialModel.email);
-    if (loginMethods.isNotEmpty && !loginMethods.contains('google.com')) {
-      throw Failure(message: "Esta conta não é um e-mail Google");
+    // if (loginMethods.isNotEmpty && !loginMethods.contains('google.com')) {
+    if (loginMethods.isNotEmpty && !loginMethods.contains(methodCheck)) {
+      throw Failure(message: "Login não poder ser feito por $methodCheck, por favor utilize outro método!");
+    }
+    await firebaseAuth.signInWithCredential(authCredential);
+  }
+
+  String? _getMethodSocialLoginType(SocialLoginType socialLoginType) {
+    switch (socialLoginType) {
+      case SocialLoginType.facebook:
+        return 'facebook.com';
+      case SocialLoginType.google:
+        return 'google.com';
     }
   }
 }

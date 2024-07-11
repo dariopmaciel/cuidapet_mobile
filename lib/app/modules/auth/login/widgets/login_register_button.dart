@@ -1,7 +1,9 @@
 part of '../login_page.dart';
 
 class _LoginRegisterButton extends StatelessWidget {
-  const _LoginRegisterButton({super.key});
+  final controller = Modular.get<LoginController>();
+
+  _LoginRegisterButton({super.key});
 
   IconData? get icon => null;
 
@@ -15,29 +17,34 @@ class _LoginRegisterButton extends StatelessWidget {
       alignment: WrapAlignment.center,
       children: [
         RoundedButtonWithIcon(
-            onTap: () {
-              Messages.info("Facebook!!");
-            },
-            width: .42.sw,
-            color: const Color(0xFF4267B3),
-            label: 'Facebook',
-            icon: CuidapetIcons.facebook),
+          onTap: () {
+            Messages.info("Facebook!!");
+          },
+          width: .42.sw,
+          color: const Color(0xFF4267B3),
+          label: 'Facebook',
+          icon: CuidapetIcons.facebook,
+        ),
         RoundedButtonWithIcon(
-            onTap: () {
-              Messages.info("Google!!");
-            },
-            width: .42.sw,
-            color: const Color(0xFFe15031),
-            label: 'Google',
-            icon: CuidapetIcons.google),
+          onTap: () {
+            Messages.info("Google!!");
+            // controller.socialLogin(SocialLoginType.google);
+            controller.socialLogin(SocialLoginType.google);
+          },
+          width: .42.sw,
+          color: const Color(0xFFe15031),
+          label: 'Google',
+          icon: CuidapetIcons.google,
+        ),
         RoundedButtonWithIcon(
-            onTap: () {
-              Navigator.pushNamed(context, '/auth/register');
-            },
-            width: .42.sw,
-            color: context.primaryDark,
-            label: 'Cadastre-se',
-            icon: CuidapetIcons.mail),
+          onTap: () {
+            Navigator.pushNamed(context, '/auth/register');
+          },
+          width: .42.sw,
+          color: context.primaryDark,
+          label: 'Cadastre-se',
+          icon: CuidapetIcons.mail,
+        ),
       ],
     );
   }

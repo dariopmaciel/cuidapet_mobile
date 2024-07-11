@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 // como boa prática, é executado sempre antes de um TIPO de chamada
 

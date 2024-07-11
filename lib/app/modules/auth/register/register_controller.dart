@@ -1,4 +1,4 @@
-import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
+
 import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/messages.dart';
