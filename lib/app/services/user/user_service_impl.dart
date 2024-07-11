@@ -131,12 +131,28 @@ class UserServiceImpl implements UserService {
     final firebaseAuth = FirebaseAuth.instance;
 
     switch (socialLoginType) {
+      //declarado qualquer coisa para não dar erro no loginMethods abaixo
       case SocialLoginType.facebook:
-        break;
+        throw Failure(message: "Facebook não implementado");
+      // socialModel = SocialNetworkModel(
+      //     id: 'id',
+      //     nome: 'nome',
+      //     email: 'email',
+      //     type: 'type',
+      //     accessToken: 'accessToken');
+      // break;
 
       case SocialLoginType.google:
-        await _socialRepository.googleLogin();
+        socialModel = await _socialRepository.googleLogin();
+        authCredential = GoogleAuthProvider.credential(
+            accessToken: socialModel.accessToken, idToken: socialModel.id);
         break;
+    }
+
+    final loginMethods =
+        await firebaseAuth.fetchSignInMethodsForEmail(socialModel.email);
+    if (loginMethods.isNotEmpty && !loginMethods.contains('google.com')) {
+      throw Failure(message: "Esta conta não é um e-mail Google");
     }
   }
 }
