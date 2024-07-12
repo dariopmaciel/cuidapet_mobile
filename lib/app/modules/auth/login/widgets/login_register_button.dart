@@ -27,8 +27,7 @@ class _LoginRegisterButton extends StatelessWidget {
         ),
         RoundedButtonWithIcon(
           onTap: () {
-            Messages.info("Google!!");
-            // controller.socialLogin(SocialLoginType.google);
+            // Messages.info("Google!!");
             controller.socialLogin(SocialLoginType.google);
           },
           width: .42.sw,

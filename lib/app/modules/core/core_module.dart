@@ -20,6 +20,7 @@ class CoreModule extends Module {
         FlutterSecureStorageLocalStorageImpl.new);
     i.addLazySingleton<RestClient>(DioRestClient.new);
     i.addLazySingleton<SocialRepository>(SocialRepositoryImpl.new);
+    
     //ou este
     // i.addLazySingleton<SocialRepository>(()=>SocialRepositoryImpl());
   }

@@ -33,15 +33,13 @@ abstract class LoginControllerBase with Store {
     // await _userService.login(login, password);
     // Loader.hide();
     //-----------------------------------------
-    //TODO VALENDO
     try {
       Loader.show();
       await _userService.login(login, password);
       Loader.hide();
       Modular.to.navigate('/auth/');
     } on Failure catch (e, s) {
-      // final errorMessage = e.message;
-      final errorMessage = e.message ?? "Erro ao realizar login";
+      final errorMessage = e.message;
       _log.error(errorMessage, e, s);
       Loader.hide();
       Messages.alert(errorMessage);
@@ -58,10 +56,11 @@ abstract class LoginControllerBase with Store {
       Loader.show();
       await _userService.socialLogin(socialLoginTyoe);
       Loader.hide();
+      Modular.to.navigate('/auth/');
     } on Failure catch (e, s) {
       Loader.hide();
-      _log.error("Erro ao efetuar login", e, s);
-      Messages.alert(e.message ?? 'Erro ao realizar login');
+      _log.error("Erro ao realizar login", e, s);
+      Messages.alert(e.message ?? "Erro ao realizar login");
     }
   }
 }

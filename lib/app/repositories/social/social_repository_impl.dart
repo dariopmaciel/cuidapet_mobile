@@ -28,7 +28,7 @@ class SocialRepositoryImpl extends SocialRepository {
     if (googleAuth != null && googleUser != null) {
       return SocialNetworkModel(
         id: googleAuth.idToken ?? '',
-        nome: googleUser.displayName ?? '',
+        name: googleUser.displayName ?? '',
         email: googleUser.email,
         type: 'Google',
         avatar: googleUser.photoUrl,

@@ -41,7 +41,7 @@ abstract class AuthStoreBase with Store {
     });
   }
 
-  @action
+  // @action
   void logout() async {
     //usuário deslogado do app
     await _localStorage.clear();

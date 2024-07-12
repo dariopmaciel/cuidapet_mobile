@@ -35,14 +35,6 @@ mixin _$AuthStore on AuthStoreBase, Store {
     return _$loadUserLoggedAsyncAction.run(() => super.loadUserLogged());
   }
 
-  late final _$logoutAsyncAction =
-      AsyncAction('AuthStoreBase.logout', context: context);
-
-  // @override
-  // Future logout() {
-  //   return _$logoutAsyncAction.run(() => super.logout());
-  // }
-
   @override
   String toString() {
     return '''
