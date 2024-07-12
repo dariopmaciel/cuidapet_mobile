@@ -161,7 +161,7 @@ class UserServiceImpl implements UserService {
       await _getUserData();
     } on FirebaseAuthException catch (e, s) {
       _log.error("Erro ao realizar login com $socialLoginType", e, s);
-      
+
       throw Failure(message: "Erro ao realizar login");
     }
   }
