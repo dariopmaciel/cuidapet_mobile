@@ -12,7 +12,20 @@
           "package_name": "br.com.academiadoflutter.cuidapet_mobile"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1076121350190-pq7h0m1ivucisreg7rp2vsd40im3b2m4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.academiadoflutter.cuidapet_mobile",
+            "certificate_hash": "e18ffe1591de21c29adc78c8187ea7168956241d"
+          }
+        },
+        {
+          "client_id": "1076121350190-svhmapvpoeu04lsnk9ck07ouldhf27kb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDHYHpA1bICsV1e1GaBFgKUrARb_xkeglU"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076121350190-si0qgvuk4723gothr1seehbmsdobt66d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

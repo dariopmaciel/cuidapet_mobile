@@ -51,10 +51,10 @@ abstract class LoginControllerBase with Store {
     }
   }
 
-  Future<void> socialLogin(SocialLoginType socialLoginTyoe) async {
+  Future<void> socialLogin(SocialLoginType socialLoginType) async {
     try {
       Loader.show();
-      await _userService.socialLogin(socialLoginTyoe);
+      await _userService.socialLogin(socialLoginType);
       Loader.hide();
       Modular.to.navigate('/auth/');
     } on Failure catch (e, s) {
