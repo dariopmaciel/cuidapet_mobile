@@ -34,7 +34,8 @@ class SocialRepositoryImpl extends SocialRepository {
         avatar: googleUser.photoUrl,
         accessToken: googleAuth.accessToken ?? '',
       );
-    } else { //se algum deles for nulo retorna a msg abaixo
+    } else {
+      //se algum deles for nulo retorna a msg abaixo
       throw Failure(message: "Erro ao realizar login com o Google");
     }
   }

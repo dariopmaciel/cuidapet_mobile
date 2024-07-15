@@ -123,6 +123,7 @@ class UserServiceImpl implements UserService {
 
   @override
   Future<void> socialLogin(SocialLoginType socialLoginType) async {
+    
     try {
       final SocialNetworkModel socialModel;
       final AuthCredential authCredential;
@@ -131,7 +132,7 @@ class UserServiceImpl implements UserService {
       switch (socialLoginType) {
         case SocialLoginType.facebook:
           throw Failure(message: "Facebook não implementado");
-        //break;
+        // break;
         case SocialLoginType.google:
           socialModel = await _socialRepository.googleLogin();
           authCredential = GoogleAuthProvider.credential(
@@ -152,6 +153,7 @@ class UserServiceImpl implements UserService {
             message:
                 "Login não poder ser feito por $methodCheck, por favor utilize outro método!");
       }
+      //erro?
       await firebaseAuth.signInWithCredential(authCredential);
 
       final accessToken = await _userRepository.loginSocial(socialModel);
