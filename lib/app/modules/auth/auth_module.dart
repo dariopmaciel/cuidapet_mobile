@@ -12,13 +12,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 class AuthModule extends Module {
   @override
   void binds(i) {
-    i.addLazySingleton<SocialRepository>(() => SocialRepositoryImpl());
-    //ou assim tb da certo
-    // i.addLazySingleton<SocialRepository>(SocialRepositoryImpl.new);
-    i.addLazySingleton<UserRepository>(() => UserRepositoryImpl(
-          restClient: Modular.get(), //CoreModule
-          log: Modular.get(), //CoreModule
-        ));
+    i.addLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(
+        restClient: Modular.get(), //CoreModule
+        log: Modular.get(), //CoreModule
+      ),
+    );
     i.addLazySingleton<UserService>(
       () => UserServiceImpl(
         log: Modular.get(), //CoreModule
@@ -28,6 +27,7 @@ class AuthModule extends Module {
         socialRepository: Modular.get(),
       ),
     );
+    i.addLazySingleton<SocialRepository>(SocialRepositoryImpl.new);
   }
 
   @override

@@ -131,7 +131,7 @@ class UserServiceImpl implements UserService {
       switch (socialLoginType) {
         case SocialLoginType.facebook:
           throw Failure(message: "Facebook não implementado");
-        //!----------------------------------------------------
+//!----------------------------------------------------
         // break;
         case SocialLoginType.google:
           socialModel = await _socialRepository.googleLogin();
@@ -141,11 +141,15 @@ class UserServiceImpl implements UserService {
           );
         // break;
       }
-      final loginMethods = await firebaseAuth.fetchSignInMethodsForEmail(socialModel.email);
-
+      final loginMethods =
+          await firebaseAuth.fetchSignInMethodsForEmail(socialModel.email);
       final methodCheck = _getMethodSocialLoginType(socialLoginType);
+
+      // if (loginMethods.isNotEmpty && !loginMethods.contains('google.com')) {
       if (loginMethods.isNotEmpty && !loginMethods.contains(methodCheck)) {
-        throw Failure(message:"Login não poder ser feito por $methodCheck, por favor utilize outro método!");
+        throw Failure(
+            message:
+                "Login não poder ser feito por $methodCheck, por favor utilize outro método!");
       }
 
       await firebaseAuth.signInWithCredential(authCredential);
@@ -160,7 +164,7 @@ class UserServiceImpl implements UserService {
     }
   }
 
-  String? _getMethodSocialLoginType(SocialLoginType socialLoginType) {
+  String _getMethodSocialLoginType(SocialLoginType socialLoginType) {
     switch (socialLoginType) {
       case SocialLoginType.facebook:
         return 'facebook.com';
