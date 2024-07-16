@@ -23,5 +23,5 @@ void main() async {
 
 
 //PROXIMO ITEM:
-//-->Login com rede social (Facebook) configuração
+//-->Alterando backend para atender o desenvolvimento do refresh token
 
