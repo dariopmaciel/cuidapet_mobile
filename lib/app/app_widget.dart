@@ -9,7 +9,7 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Modular.setInitialRoute('/auth');
+    Modular.setInitialRoute('/auth/');
     //*OBSERVAÇÃO-> ADD conforme DOCUMENTAÇÃO. Passando um array com os Obervadores nas rotas, pois o mesmo não funciona facilmente com 'Modular'
     Modular.setObservers([Asuka.asukaHeroController]);
     //*-----------------------------------------

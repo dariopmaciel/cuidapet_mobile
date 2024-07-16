@@ -13,25 +13,24 @@ import 'package:flutter_modular/flutter_modular.dart';
 class CoreModule extends Module {
   @override
   void binds(Injector i) {
-    i.addLazySingleton(AuthStore.new);
+    i.addSingleton(AuthStore.new);
     i.addLazySingleton<AppLogger>(LoggerAppLoggerImpl.new);
     i.addLazySingleton<LocalStorage>(SharedPreferencesLocalStorageImpl.new);
     i.addLazySingleton<LocalSecureStorage>(
         FlutterSecureStorageLocalStorageImpl.new);
     i.addLazySingleton<RestClient>(DioRestClient.new);
     i.addLazySingleton<SocialRepository>(SocialRepositoryImpl.new);
-    
-    //ou este
-    // i.addLazySingleton<SocialRepository>(()=>SocialRepositoryImpl());
   }
 
-  @override
-  void exportedBinds(Injector i) {
-    AuthStore(localStorage: i());
-    DioRestClient(localStorage: i(), log: i(), authStore: i());
-    LoggerAppLoggerImpl();
-    SharedPreferencesLocalStorageImpl();
-    FlutterSecureStorageLocalStorageImpl();
-    SocialRepositoryImpl();
-  }
+  // @override
+  // void exportedBinds(Injector i) {
+  //   ESTES 4 ITENS AQUI "The injector(tag: CoreModule_Imported) is not committed."
+  //   AuthStore(localStorage: i());
+  //   DioRestClient(localStorage: i(), log: i(), authStore: i());
+  //   ATE AQUI
+  //   LoggerAppLoggerImpl();
+  //   SharedPreferencesLocalStorageImpl();
+  //   FlutterSecureStorageLocalStorageImpl();
+  //   SocialRepositoryImpl();
+  // }
 }

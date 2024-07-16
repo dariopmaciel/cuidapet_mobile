@@ -1,10 +1,8 @@
 import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mobx/mobx.dart';
-
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/models/user_model.dart';
-
 part 'auth_store.g.dart';
 
 class AuthStore = AuthStoreBase with _$AuthStore;
