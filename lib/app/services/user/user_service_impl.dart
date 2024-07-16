@@ -130,16 +130,18 @@ class UserServiceImpl implements UserService {
 
       switch (socialLoginType) {
         case SocialLoginType.facebook:
-          throw Failure(message: "Facebook não implementado");
+          socialModel = await _socialRepository.facebookLogin();
+          authCredential =
+              FacebookAuthProvider.credential(socialModel.accessToken);
+          break;
 //!----------------------------------------------------
-        // break;
         case SocialLoginType.google:
           socialModel = await _socialRepository.googleLogin();
           authCredential = GoogleAuthProvider.credential(
             accessToken: socialModel.accessToken,
             idToken: socialModel.id,
           );
-        // break;
+          break;
       }
       final loginMethods =
           await firebaseAuth.fetchSignInMethodsForEmail(socialModel.email);
