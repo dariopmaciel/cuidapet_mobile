@@ -35,14 +35,15 @@ class AuthRefreshTokenInterceptor extends Interceptor {
 
       if (responseStatusCode == 403 || responseStatusCode == 401) {
         if (requestPath != '/auth/refresh') {
-          //
           final authRequired = err.requestOptions
                   .extra[Constants.REST_CLIENT_AUTH_REQUIRED_KEY] ??
               false;
           if (authRequired) {
-            _log.append('################# Refresh Token #################');
+            _log.info('################# Refresh Token #################');
             await _refreshToken(err);
             await _retryRequest(err, handler);
+            _log.info(
+                '################# Refresh Token Sucesso #################');
           } else {
             throw err;
           }
@@ -84,7 +85,8 @@ class AuthRefreshTokenInterceptor extends Interceptor {
 
   Future<void> _retryRequest(
       DioException err, ErrorInterceptorHandler handler) async {
-    _log.append('################# Retry Request #################');
+    _log.info(
+        '########### Retry Request (${err.requestOptions.path}) ############');
     final requestOptions = err.requestOptions;
     final result = await _restClient.request(
       requestOptions.path,
@@ -101,7 +103,5 @@ class AuthRefreshTokenInterceptor extends Interceptor {
         statusMessage: result.statusMessage,
       ),
     );
-
-    _log.closeAppend();
   }
 }

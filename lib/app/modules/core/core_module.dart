@@ -24,10 +24,10 @@ class CoreModule extends Module {
 
   // @override
   // void exportedBinds(Injector i) {
-  //   ESTES 4 ITENS AQUI "The injector(tag: CoreModule_Imported) is not committed."
+  //   //! ESTES 4 ITENS AQUI "The injector(tag: CoreModule_Imported) is not committed."
   //   AuthStore(localStorage: i());
-  //   DioRestClient(localStorage: i(), log: i(), authStore: i());
-  //   ATE AQUI
+  //   DioRestClient(localStorage: i(), log: i(), authStore: i(), localSecureStorage: i());
+  //   //! ATE AQUI
   //   LoggerAppLoggerImpl();
   //   SharedPreferencesLocalStorageImpl();
   //   FlutterSecureStorageLocalStorageImpl();
