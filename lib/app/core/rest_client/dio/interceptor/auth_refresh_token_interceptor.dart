@@ -71,5 +71,10 @@ class AuthRefreshTokenInterceptor extends Interceptor {
     final resultRefresh = await _restClient.auth().put('auth/refresh', data: {
       'refresh_token': refreshToken,
     });
+    await _localStorage.write<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY,
+        resultRefresh.data['access_token']);
+
+    await _localSecureStorage.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY,
+        resultRefresh.data['refresh_token']);
   }
 }
