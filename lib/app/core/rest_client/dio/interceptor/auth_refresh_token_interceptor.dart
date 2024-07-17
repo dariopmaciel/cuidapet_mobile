@@ -3,6 +3,7 @@ import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
+import 'package:cuidapet_mobile/app/core/rest_client/rest_clienteException.dart';
 import 'package:cuidapet_mobile/app/modules/core/auth/auth_store.dart';
 import 'package:dio/dio.dart';
 
@@ -39,9 +40,9 @@ class AuthRefreshTokenInterceptor extends Interceptor {
                   .extra[Constants.REST_CLIENT_AUTH_REQUIRED_KEY] ??
               false;
           if (authRequired) {
-            _log.append(
-                '####################### Refresh Token #######################');
+            _log.append('################# Refresh Token #################');
             await _refreshToken(err);
+            await _retryRequest(err, handler);
           } else {
             throw err;
           }
@@ -56,6 +57,9 @@ class AuthRefreshTokenInterceptor extends Interceptor {
       handler.next(err);
     } on DioException catch (e) {
       handler.next(e);
+    } catch (e, s) {
+      _log.error('Erro rest cliente', e, s);
+      handler.next(err);
     } finally {
       _log.closeAppend();
     }
@@ -76,5 +80,28 @@ class AuthRefreshTokenInterceptor extends Interceptor {
 
     await _localSecureStorage.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY,
         resultRefresh.data['refresh_token']);
+  }
+
+  Future<void> _retryRequest(
+      DioException err, ErrorInterceptorHandler handler) async {
+    _log.append('################# Retry Request #################');
+    final requestOptions = err.requestOptions;
+    final result = await _restClient.request(
+      requestOptions.path,
+      method: requestOptions.method,
+      data: requestOptions.data,
+      headers: requestOptions.headers,
+      queryParameters: requestOptions.queryParameters,
+    );
+    handler.resolve(
+      Response(
+        requestOptions: requestOptions,
+        data: result.data,
+        statusCode: result.statusCode,
+        statusMessage: result.statusMessage,
+      ),
+    );
+
+    _log.closeAppend();
   }
 }
