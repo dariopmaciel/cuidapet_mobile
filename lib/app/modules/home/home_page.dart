@@ -1,7 +1,5 @@
-import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
