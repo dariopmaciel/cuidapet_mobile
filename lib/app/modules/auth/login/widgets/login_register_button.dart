@@ -41,7 +41,7 @@ class _LoginRegisterButton extends StatelessWidget {
             Navigator.pushNamed(context, '/auth/register');
           },
           width: .42.sw,
-          color: context.primaryDark,
+          color: context.primaryColorDark,
           label: 'Cadastre-se',
           icon: CuidapetIcons.mail,
         ),
