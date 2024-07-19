@@ -38,6 +38,7 @@ class UserServiceImpl implements UserService {
       // throw Failure(message: 'teste de erro');
       //
       final firebaseAuth = FirebaseAuth.instance;
+      // ignore: deprecated_member_use
       final userMethods = await firebaseAuth.fetchSignInMethodsForEmail(email);
       //se não for vazio
       if (userMethods.isNotEmpty) {
@@ -60,27 +61,28 @@ class UserServiceImpl implements UserService {
   Future<void> login(String email, String password) async {
     try {
       final firebaseAuth = FirebaseAuth.instance;
+      // ignore: deprecated_member_use
       final loginMethods = await firebaseAuth.fetchSignInMethodsForEmail(email);
       //se não é vazio
-      print("Verifica se a String é valida $loginMethods");
+      // print("Verifica se a String é valida $loginMethods");
       if (loginMethods.isEmpty) {
         throw UserNotExistsException();
       }
 
-      print("Achou o login por password");
+      // print("Achou o login por password");
       if (loginMethods.contains('password')) {
-        final UserCredential = await firebaseAuth.signInWithEmailAndPassword(
+        final userCredential = await firebaseAuth.signInWithEmailAndPassword(
             email: email, password: password);
 
         //VERIFICA SE EMAIL FOI CONFIRMADO E CASO NÃO ENVIA NOVO EMAIL
-        final userVerified = UserCredential.user?.emailVerified ?? false;
+        final userVerified = userCredential.user?.emailVerified ?? false;
         if (!userVerified) {
-          UserCredential.user?.sendEmailVerification();
+          userCredential.user?.sendEmailVerification();
           throw Failure(
               message: "Email não confirmado, verifique sua caixa de SPAM");
         }
 
-        print("Email verificado = OK");
+        // print("Email verificado = OK");
 
         final accessToken = await _userRepository.login(email, password);
         await _saveAccessToken(accessToken);
@@ -144,6 +146,7 @@ class UserServiceImpl implements UserService {
           break;
       }
       final loginMethods =
+          // ignore: deprecated_member_use
           await firebaseAuth.fetchSignInMethodsForEmail(socialModel.email);
       final methodCheck = _getMethodSocialLoginType(socialLoginType);
 

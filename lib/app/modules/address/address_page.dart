@@ -1,6 +1,6 @@
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:flutter/material.dart';
-part 'widgets/Address_item.dart';
+part 'widgets/address_item.dart';
 
 class AddressPage extends StatefulWidget {
   const AddressPage({super.key});
@@ -62,18 +62,17 @@ class _AddressPageState extends State<AddressPage> {
               const SizedBox(height: 20),
               const Column(
                 children: [
-                  _AddressItem(),
-                  _AddressItem(),
-                  _AddressItem(),
-                  _AddressItem(),
-                  _AddressItem(),
-                  _AddressItem(),
-                  _AddressItem(),
-                  _AddressItem(),
-                  _AddressItem(),
-                  _AddressItem(),
-                  _AddressItem(),
-                  _AddressItem(),
+                  AddressItem(),
+                  AddressItem(),
+                  AddressItem(),  AddressItem(),
+                  AddressItem(),
+                  AddressItem(),
+                  AddressItem(),
+                  AddressItem(),
+                  AddressItem(),
+                  AddressItem(),
+                  AddressItem(),
+                  AddressItem(),
                 ],
               ),
             ],

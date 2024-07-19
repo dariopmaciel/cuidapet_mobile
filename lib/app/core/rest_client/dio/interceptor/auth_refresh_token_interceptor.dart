@@ -3,7 +3,7 @@ import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
-import 'package:cuidapet_mobile/app/core/rest_client/rest_clienteException.dart';
+
 import 'package:cuidapet_mobile/app/modules/core/auth/auth_store.dart';
 import 'package:dio/dio.dart';
 

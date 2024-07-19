@@ -16,7 +16,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
   @override
   Future<void> onReady() async {
-    print("onReady chamada");
+    // print("onReady chamada");
     await _hasRegisteredAddress();
   }
 

@@ -60,7 +60,7 @@ abstract class LoginControllerBase with Store {
     } on Failure catch (e, s) {
       Loader.hide();
       _log.error("Erro ao realizar login", e, s);
-      Messages.alert(e.message ?? "Erro ao realizar login");
+      Messages.alert(e.message);
     }
   }
 }

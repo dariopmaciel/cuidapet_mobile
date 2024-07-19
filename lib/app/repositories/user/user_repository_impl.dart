@@ -4,7 +4,7 @@ import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
 import 'package:cuidapet_mobile/app/core/exceptions/user_exists_exception.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
-import 'package:cuidapet_mobile/app/core/rest_client/rest_clienteException.dart';
+import 'package:cuidapet_mobile/app/core/rest_client/rest_cliente_exception.dart';
 import 'package:cuidapet_mobile/app/models/confirm_login_model.dart';
 import 'package:cuidapet_mobile/app/models/social_network_model.dart';
 import 'package:cuidapet_mobile/app/models/user_model.dart';

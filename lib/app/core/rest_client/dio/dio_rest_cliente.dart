@@ -4,7 +4,7 @@ import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/dio/interceptor/auth_interceptor.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/dio/interceptor/auth_refresh_token_interceptor.dart';
-import 'package:cuidapet_mobile/app/core/rest_client/rest_clienteException.dart';
+import 'package:cuidapet_mobile/app/core/rest_client/rest_cliente_exception.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client_response.dart';
 import 'package:cuidapet_mobile/app/modules/core/auth/auth_store.dart';

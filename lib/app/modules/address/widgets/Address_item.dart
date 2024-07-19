@@ -1,15 +1,14 @@
-// import 'package:flutter/material.dart';
+// ignore: file_names
 
 part of '../address_page.dart';
 
-class _AddressItem extends StatelessWidget {
-  const _AddressItem({super.key});
-
+class AddressItem extends StatelessWidget {
+const AddressItem({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
       // color: Colors.green,
-      margin: const EdgeInsets.fromLTRB(0,0,10,0),
+      margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
       child: const ListTile(
         leading: CircleAvatar(
           backgroundColor: Colors.white,

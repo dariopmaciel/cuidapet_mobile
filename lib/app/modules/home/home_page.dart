@@ -1,7 +1,9 @@
 import 'package:cuidapet_mobile/app/core/life_cycle/page_life_cycle_state.dart';
+// import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_modular/flutter_modular.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,11 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
-
   @override
-  // TODO: implement params
-  Map<String, dynamic>? get params => {'Teste':'Teste life cycle'};
-
+  Map<String, dynamic>? get params => {'Teste': 'Teste life cycle'};
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +34,9 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
             ),
             TextButton(
               onPressed: () async {
-                // print('Teste Refresh Token');
-                // final categoriesResponse =
-                //     await Modular.get<RestClient>().auth().get('/categories/');
-                // print(categoriesResponse.data);
+                debugPrint('Teste Refresh Token');
+                // final categoriesResponse =await Modular.get<RestClient>().auth().get('/categories/');
+                // debugPrint(categoriesResponse.data);
                 Navigator.pushNamed(context, '/address/');
               },
               child: const Text('Endereço de entrega'),

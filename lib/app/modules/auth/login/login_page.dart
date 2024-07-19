@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class _OrSeparator extends StatelessWidget {
-  const _OrSeparator({super.key});
+  const _OrSeparator();
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,6 @@ import './social_repository.dart';
 class SocialRepositoryImpl extends SocialRepository {
   @override
   Future<SocialNetworkModel> facebookLogin() async {
-    // TODO: implement facebookLogin
     // final facebookAuth = FacebookAuth.i;
     // final facebookAuth = FacebookAuth.getInstance();
     final facebookAuth = FacebookAuth.instance;

@@ -3,7 +3,7 @@ part of '../login_page.dart';
 class _LoginRegisterButton extends StatelessWidget {
   final controller = Modular.get<LoginController>();
 
-  _LoginRegisterButton({super.key});
+  _LoginRegisterButton();
 
   IconData? get icon => null;
 

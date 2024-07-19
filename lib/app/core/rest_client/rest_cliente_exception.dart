@@ -1,7 +1,3 @@
-
-
-
-
 import 'rest_client_response.dart';
 
 class RestClientException implements Exception {
