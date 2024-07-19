@@ -1,6 +1,11 @@
+import 'dart:async';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
+import 'package:cuidapet_mobile/app/models/place_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+
 part 'widgets/address_item.dart';
+part 'widgets/address_search_widget.dart';
 
 class AddressPage extends StatefulWidget {
   const AddressPage({super.key});
@@ -14,40 +19,49 @@ class _AddressPageState extends State<AddressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // title: const Text(
+        //   'Adicione ou escolha um endereço:',
+        //   style: TextStyle(
+        //     color: Colors.black,
+        //     fontSize: 18,
+        //   ),
+        // ),
         iconTheme: IconThemeData(color: context.primaryColorDark),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
+          padding: EdgeInsets.fromLTRB(14, 0, 14, 0),
           child: Column(
             children: [
-              Text(
-                'Adicione ou escolha um endereço:',
-                style: context.textTheme.headlineLarge?.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20),
+              // Text(
+              //   'Adicione ou escolha um endereço:',
+              //   style: context.textTheme.headlineLarge?.copyWith(
+              //     color: Colors.black,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
+              // SizedBox(height: 20),
               //!---------------------------
-              Material(
-                elevation: 10,
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
+              _AddressSearchWidget(),
               //!---------------------------
-              const SizedBox(height: 20),
-              const ListTile(
+              // Material(
+              //   elevation: 10,
+              //   borderRadius: BorderRadius.circular(0),
+              //   color: Colors.white,
+              //   child: TextFormField(
+              //     decoration: InputDecoration(
+              //       border: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(10),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              //!---------------------------
+              SizedBox(height: 20),
+              ListTile(
                 leading: CircleAvatar(
                   backgroundColor: Colors.red,
                   radius: 30,
@@ -62,8 +76,8 @@ class _AddressPageState extends State<AddressPage> {
                 ),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
-              const SizedBox(height: 20),
-              const Column(
+              SizedBox(height: 20),
+              Column(
                 children: [
                   AddressItem(),
                   AddressItem(),
