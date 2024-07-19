@@ -32,17 +32,20 @@ class _AddressPageState extends State<AddressPage> {
                 ),
               ),
               const SizedBox(height: 20),
+              //!---------------------------
               Material(
                 elevation: 10,
                 borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
                 child: TextFormField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
               ),
+              //!---------------------------
               const SizedBox(height: 20),
               const ListTile(
                 leading: CircleAvatar(
@@ -64,7 +67,8 @@ class _AddressPageState extends State<AddressPage> {
                 children: [
                   AddressItem(),
                   AddressItem(),
-                  AddressItem(),  AddressItem(),
+                  AddressItem(),
+                  AddressItem(),
                   AddressItem(),
                   AddressItem(),
                   AddressItem(),

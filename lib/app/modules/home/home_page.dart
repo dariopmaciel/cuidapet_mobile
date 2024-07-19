@@ -37,7 +37,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                 debugPrint('Teste Refresh Token');
                 // final categoriesResponse =await Modular.get<RestClient>().auth().get('/categories/');
                 // debugPrint(categoriesResponse.data);
-                Navigator.pushNamed(context, '/address/');
+                Navigator.pushNamed(context,'/address/');
               },
               child: const Text('Endereço de entrega'),
             ),
