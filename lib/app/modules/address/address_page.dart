@@ -19,15 +19,16 @@ class _AddressPageState extends State<AddressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: const Text(
-        //   'Adicione ou escolha um endereço:',
-        //   style: TextStyle(
-        //     color: Colors.black,
-        //     fontSize: 18,
-        //   ),
-        // ),
+        title: const Text(
+          'Defina endereço atual:',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+          ),
+        ),
         iconTheme: IconThemeData(color: context.primaryColorDark),
         backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
         elevation: 0,
       ),
       backgroundColor: Colors.white,

@@ -9,6 +9,7 @@ class _AddressSearchWidget extends StatefulWidget {
 
 class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
   @override
+//!-------------------------------------------
   Widget build(BuildContext context) {
     return TypeAheadField<PlaceModel>(
       builder: _decoration,
@@ -18,29 +19,37 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
     );
   }
 
-//-------------------------------------------
+//!-------------------------------------------
   Widget _decoration(context, controller, focusNode) {
     final border = OutlineInputBorder(
       borderSide: const BorderSide(color: Colors.black),
       borderRadius: BorderRadius.circular(20),
     );
-    return TextField(
-      controller: controller,
-      focusNode: focusNode,
-      decoration: InputDecoration(
-        border: border,
-        disabledBorder: border,
-        enabledBorder: border,
-        hintText: 'Insira endereço:',
+    return Material(
+      elevation: 10,
+      borderRadius: BorderRadius.circular(20),
+      child: TextField(
+        controller: controller,
+        focusNode: focusNode,
+        decoration: InputDecoration(
+          focusedBorder: border,
+          border: border,
+          disabledBorder: border,
+          enabledBorder: border,
+          errorBorder: border,
+          hintText: 'Insira endereço:',
+        ),
       ),
     );
   }
 
   Widget _onItemBuilder(_, item) {
     print('$item');
-    return _ItemTile(
-      address: item.address,
+    return ListTile(
+      leading: const Icon(Icons.location_on),
+      title: Text(item.address),
     );
+    // _ItemTile(address: item.address);
   }
 
   FutureOr<List<PlaceModel>?> _onSuggestionCallback(String pattern) {
