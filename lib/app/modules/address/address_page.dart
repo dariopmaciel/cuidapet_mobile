@@ -35,9 +35,9 @@ class _AddressPageState extends State<AddressPage> {
         elevation: 0,
       ),
       backgroundColor: Colors.white,
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(14, 0, 14, 0),
+          padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
           child: Column(
             children: [
               // Text(
@@ -49,7 +49,9 @@ class _AddressPageState extends State<AddressPage> {
               // ),
               // SizedBox(height: 20),
               //!---------------------------
-              _AddressSearchWidget(),
+              _AddressSearchWidget(addressSelectedCallBack: (place) {
+                print(place);
+              }),
               //!---------------------------
               // Material(
               //   elevation: 10,

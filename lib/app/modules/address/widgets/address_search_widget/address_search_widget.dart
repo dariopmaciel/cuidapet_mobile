@@ -1,7 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of '../../address_page.dart';
 
+typedef AddressSelectedCallBack = void Function(PlaceModel);
+
 class _AddressSearchWidget extends StatefulWidget {
-  const _AddressSearchWidget({super.key});
+  final AddressSelectedCallBack addressSelectedCallBack;
+
+  const _AddressSearchWidget({required this.addressSelectedCallBack});
+
+  // const _AddressSearchWidget({required this.searchResultCallBack});
 
   @override
   State<_AddressSearchWidget> createState() => _AddressSearchWidgetState();
@@ -72,7 +79,8 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
   }
 
   void _onSuggestionSelected(PlaceModel sugestion) {
-    // print("Endreço selecionado: $sugestion");
+    searchTextEC.text = sugestion.address;
+    widget.addressSelectedCallBack(sugestion);
   }
 }
 
