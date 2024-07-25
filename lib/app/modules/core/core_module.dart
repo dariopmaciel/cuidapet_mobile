@@ -5,6 +5,7 @@ import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/logger/logger_app_logger_impl.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/dio/dio_rest_cliente.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
+import 'package:cuidapet_mobile/app/modules/address/widgets/address_search_widget/address_search_controller.dart';
 import 'package:cuidapet_mobile/app/modules/core/auth/auth_store.dart';
 import 'package:cuidapet_mobile/app/repositories/address/address_repository.dart';
 import 'package:cuidapet_mobile/app/repositories/address/address_repository_impl.dart';
@@ -24,9 +25,13 @@ class CoreModule extends Module {
         FlutterSecureStorageLocalStorageImpl.new);
     i.addLazySingleton<RestClient>(DioRestClient.new);
     i.addLazySingleton<SocialRepository>(SocialRepositoryImpl.new);
+//!-------------------------
+
     i.addLazySingleton<AddressRepository>(AddressRepositoryImpl.new);
     i.addLazySingleton<AddressService>(AddressServiceImpl.new);
-    // i.addLazySingleton<AddressService>((i)=>AddressServiceImpl(addressRepository: i()));
+    // i.addLazySingleton<AddressService>((i)=>AddressServiceImpl(addressRepository: Modular.get()));
+    //
+    // i.addLazySingleton(AddressSearchController.new);
   }
 
   @override
@@ -39,7 +44,8 @@ class CoreModule extends Module {
     //   SharedPreferencesLocalStorageImpl();
     //   FlutterSecureStorageLocalStorageImpl();
     //   SocialRepositoryImpl();
-    //   AddressRepositoryImpl();
-    //   AddressServiceImpl(addressRepository: i());
+    //!-------------------------
+    // AddressRepositoryImpl();
+    // AddressServiceImpl(addressRepository: i());
   }
 }

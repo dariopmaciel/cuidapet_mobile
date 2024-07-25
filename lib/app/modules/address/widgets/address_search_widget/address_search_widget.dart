@@ -8,8 +8,20 @@ class _AddressSearchWidget extends StatefulWidget {
 }
 
 class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
+  final controller = Modular.get<AddressSearchController>();
+
+  final searchTextEC = TextEditingController();
+  final searchTextFN = FocusNode();
+
   @override
+  void dispose() {
+    searchTextEC.dispose();
+    searchTextFN.dispose();
+    super.dispose();
+  }
+
 //!-------------------------------------------
+  @override
   Widget build(BuildContext context) {
     return TypeAheadField<PlaceModel>(
       builder: _decoration,
@@ -28,7 +40,7 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
     return Material(
       elevation: 10,
       borderRadius: BorderRadius.circular(20),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         focusNode: focusNode,
         decoration: InputDecoration(
@@ -52,17 +64,15 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
     // _ItemTile(address: item.address);
   }
 
-  FutureOr<List<PlaceModel>?> _onSuggestionCallback(String pattern) {
-    print("Endereço digitado: $pattern");
-    return [
-      PlaceModel(address: 'Av Paulista, 200', lat: 123.0, lng: 456.0),
-      PlaceModel(address: 'Av Paulista, 500', lat: 123.0, lng: 456.0),
-      PlaceModel(address: 'Av Paulista, 1200', lat: 123.0, lng: 456.0),
-    ];
+  Future<List<PlaceModel>> _onSuggestionCallback(String pattern) async {
+    if (pattern.isNotEmpty) {
+      return controller.searchAddress(pattern);
+    }
+    return <PlaceModel>[];
   }
 
   void _onSuggestionSelected(PlaceModel sugestion) {
-    print(sugestion);
+    // print("Endreço selecionado: $sugestion");
   }
 }
 

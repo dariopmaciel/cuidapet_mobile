@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/models/place_model.dart';
+import 'package:cuidapet_mobile/app/modules/address/widgets/address_search_widget/address_search_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 part 'widgets/address_item.dart';
