@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 part 'widgets/address_item.dart';
-part 'widgets/address_search_widget.dart';
+part 'widgets/address_search_widget/address_search_widget.dart';
 
 class AddressPage extends StatefulWidget {
   const AddressPage({super.key});
