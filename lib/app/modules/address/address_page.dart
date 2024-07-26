@@ -11,7 +11,7 @@ part 'widgets/address_item.dart';
 part 'widgets/address_search_widget/address_search_widget.dart';
 
 class AddressPage extends StatefulWidget {
-  const AddressPage({super.key});
+  const AddressPage({super.key, required place});
 
   @override
   State<AddressPage> createState() => _AddressPageState();
@@ -23,7 +23,7 @@ class _AddressPageState extends State<AddressPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Defina endereço atual:',
+          'Defina endereço:',
           style: TextStyle(
             color: Colors.black,
             fontSize: 18,
