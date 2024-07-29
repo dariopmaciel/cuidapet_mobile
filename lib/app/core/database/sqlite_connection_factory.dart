@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:synchronized/synchronized.dart';
@@ -34,5 +36,17 @@ class SqliteConnectionFactory {
       });
     }
     return _db!;
+  }
+
+  FutureOr<void> _onConfigure(Database db) {
+    //
+  }
+
+  FutureOr<void> _onCreate(Database db, int version) {
+    //
+  }
+
+  FutureOr<void> _onUpgrade(Database db, int oldVersion, int newVersion) {
+    //
   }
 }
