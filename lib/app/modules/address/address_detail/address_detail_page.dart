@@ -1,5 +1,8 @@
+import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
+import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_default_button.dart';
 import 'package:cuidapet_mobile/app/models/place_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -17,20 +20,20 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: const Text('Detalhe do endereço:'),
-        backgroundColor: Colors.white,
+        title: const Text(
+          'Confirme seu Endereço:',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+          ),
+        ),
         iconTheme: IconThemeData(color: context.primaryColorDark),
+        backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         elevation: 0,
       ),
-      // Center(child: Text(widget.place.address)),
       body: Column(
         children: [
-          Text(
-            'Confirme seu endereço:',
-            style: context.textTheme.headlineLarge
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ),
           Expanded(
             child: GoogleMap(
               initialCameraPosition: CameraPosition(
@@ -38,9 +41,50 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
                   widget.place.lat,
                   widget.place.lng,
                 ),
+                zoom: 16.0,
+              ),
+              markers: {
+                Marker(
+                    markerId: const MarkerId("AddressID"),
+                    position: LatLng(
+                      widget.place.lat,
+                      widget.place.lng,
+                    ),
+                    infoWindow: InfoWindow(title: widget.place.address)),
+              },
+            ),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              initialValue: widget.place.address,
+              readOnly: true,
+              decoration: const InputDecoration(
+                labelText: 'Endereço:',
+                suffixIcon: Icon(Icons.edit),
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              readOnly: false,
+              decoration: const InputDecoration(
+                labelText: 'Complemento:',
+                suffixIcon: Icon(Icons.edit),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 0.9.sw,
+            height: 60.h,
+            child: CuidapetDefaultButton(
+              onPressed: () {},
+              label: 'Salvar',
+            ),
+          ),
+          const SizedBox(height: 20),
         ],
       ),
     );

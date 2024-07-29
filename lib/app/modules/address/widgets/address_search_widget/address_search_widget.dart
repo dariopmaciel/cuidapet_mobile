@@ -63,7 +63,7 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
   }
 
   Widget _onItemBuilder(_, item) {
-    print('$item');
+    // print('$item');
     return ListTile(
       leading: const Icon(Icons.location_on),
       title: Text(item.address),
@@ -84,6 +84,7 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
   }
 }
 
+// ignore: unused_element
 class _ItemTile extends StatelessWidget {
   final String address;
 

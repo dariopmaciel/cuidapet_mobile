@@ -22,8 +22,7 @@ class _AddressPageState extends State<AddressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-                title: const Text(
-          'ADICIONE OU ESCOLHA ENDEREÇO',
+                title: const Text('ADICIONE OU ESCOLHA ENDEREÇO',
           style: TextStyle(
             color: Colors.black,
             // color: Colors.white,

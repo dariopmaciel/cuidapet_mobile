@@ -19,6 +19,7 @@ class AppWidget extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, __) => MaterialApp.router(
         title: UiConfig.title,
+        
         //This line is needed for the Hero widget to work
         // Alterado para que funcione
         // navigatorObservers: [Asuka.asukaHeroController],
