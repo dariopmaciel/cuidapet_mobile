@@ -1,6 +1,6 @@
 import 'package:cuidapet_mobile/app/modules/address/address_module.dart';
 import 'package:cuidapet_mobile/app/modules/auth/auth_module.dart';
-// import 'package:cuidapet_mobile/app/modules/auth/register/register_module.dart';
+
 import 'package:cuidapet_mobile/app/modules/core/core_module.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_module.dart';
 
@@ -23,6 +23,6 @@ class AppModule extends Module {
     r.module('/auth/', module: AuthModule());
     r.module('/home/', module: HomeModule());
     r.module('/address/', module: AddressModule());
-    // r.module('/auth/register/', module: RegisterModule());
+    
   }
 }

@@ -22,15 +22,17 @@ class _AddressPageState extends State<AddressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Defina endereço:',
+                title: const Text(
+          'ADICIONE OU ESCOLHA ENDEREÇO',
           style: TextStyle(
             color: Colors.black,
+            // color: Colors.white,
             fontSize: 18,
           ),
         ),
         iconTheme: IconThemeData(color: context.primaryColorDark),
         backgroundColor: Colors.white,
+        // backgroundColor: context.primaryColor,
         surfaceTintColor: Colors.white,
         elevation: 0,
       ),
@@ -47,10 +49,10 @@ class _AddressPageState extends State<AddressPage> {
               //     fontWeight: FontWeight.bold,
               //   ),
               // ),
-              // SizedBox(height: 20),
+              const SizedBox(height: 5),
               //!---------------------------
               _AddressSearchWidget(addressSelectedCallBack: (place) {
-                print(place);
+                Modular.to.pushNamed('/address/detail/', arguments: place);
               }),
               //!---------------------------
               // Material(
@@ -66,8 +68,8 @@ class _AddressPageState extends State<AddressPage> {
               //   ),
               // ),
               //!---------------------------
-              SizedBox(height: 20),
-              ListTile(
+              const SizedBox(height: 20),
+              const ListTile(
                 leading: CircleAvatar(
                   backgroundColor: Colors.red,
                   radius: 30,
@@ -82,17 +84,9 @@ class _AddressPageState extends State<AddressPage> {
                 ),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
-              SizedBox(height: 20),
-              Column(
+              const SizedBox(height: 20),
+              const Column(
                 children: [
-                  AddressItem(),
-                  AddressItem(),
-                  AddressItem(),
-                  AddressItem(),
-                  AddressItem(),
-                  AddressItem(),
-                  AddressItem(),
-                  AddressItem(),
                   AddressItem(),
                   AddressItem(),
                   AddressItem(),

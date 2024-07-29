@@ -1,3 +1,4 @@
+import 'package:cuidapet_mobile/app/modules/address/address_detail/address_detail_module.dart';
 import 'package:cuidapet_mobile/app/modules/address/address_page.dart';
 import 'package:cuidapet_mobile/app/modules/address/widgets/address_search_widget/address_search_controller.dart';
 import 'package:cuidapet_mobile/app/repositories/address/address_repository.dart';
@@ -18,18 +19,11 @@ class AddressModule extends Module {
   }
 
   @override
-  void exportedBinds(Injector i) {
-    // AddressSearchController;
-    super.exportedBinds(i);
-  }
-
-
-  @override
   void routes(RouteManager r) {
-    r.child(
-      Modular.initialRoute,
-      child: (context) =>  AddressPage(place: r.args.data,),
-    );
+    r.child(Modular.initialRoute,
+        child: (context) => AddressPage(place: r.args.data));
+    r.module('/detail/', module: AddressDetailModule());
+
     super.routes(r);
   }
 }
