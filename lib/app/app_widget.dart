@@ -13,11 +13,18 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
-//Observador ADM de conexão
+  //Observador ADM de conexão
+  final sqliteAdmConnection = SqliteAdmConnection();
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(SqliteAdmConnection());
+    WidgetsBinding.instance.addObserver(sqliteAdmConnection);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(sqliteAdmConnection);
+    super.dispose();
   }
 
   @override
