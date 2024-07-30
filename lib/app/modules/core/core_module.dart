@@ -1,3 +1,4 @@
+import 'package:cuidapet_mobile/app/core/database/sqlite_connection_factory.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage/flutter_secure_storage_local_storage_impl.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/shared_preferences/shared_preferences_local_storage_impl.dart';
@@ -26,6 +27,8 @@ class CoreModule extends Module {
     // i.addLazySingleton<AddressService>((i)=>AddressServiceImpl(addressRepository: Modular.get()));
     //
     // i.addLazySingleton(AddressSearchController.new);
+    //!-------------------------
+    i.addLazySingleton(SqliteConnectionFactory.new);
   }
 
   @override
