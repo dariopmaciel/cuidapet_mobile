@@ -61,6 +61,13 @@ class AddressRepositoryImpl extends AddressRepository {
   @override
   Future<int> saveAddress(AddressEntity entity) async {
     final sqliteConn = await _sqliteConnectionFactory.openConnection();
-    return await sqliteConn.rawInsert('insert into address values(?,?,?,?,?)');
+    return await sqliteConn.rawInsert('insert into address values(?,?,?,?,?)', [
+      null,
+      entity.address,
+      entity.lat,
+      entity.lng,
+      entity.aditional,
+    ]);
   }
 }
+//passada na ordem de criação da tabela.....
