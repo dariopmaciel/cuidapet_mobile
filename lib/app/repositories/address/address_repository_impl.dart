@@ -37,8 +37,8 @@ class AddressRepositoryImpl extends AddressRepository {
         final address = searchResult.formattedAddress;
         return PlaceModel(
           address: address ?? '',
-          lat: location?.lat ?? 0,
-          lng: location?.lng ?? 0,
+          lat: location?.lat ?? 0.0,
+          lng: location?.lng ?? 0.0,
         );
       }).toList();
     }
@@ -66,7 +66,7 @@ class AddressRepositoryImpl extends AddressRepository {
       entity.address,
       entity.lat,
       entity.lng,
-      entity.aditional,
+      entity.additional,
     ]);
   }
 }

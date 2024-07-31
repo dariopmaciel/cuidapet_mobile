@@ -1,3 +1,4 @@
+import 'package:cuidapet_mobile/app/core/database/sqlite_connection_factory.dart';
 import 'package:cuidapet_mobile/app/modules/address/address_detail/address_detail_module.dart';
 import 'package:cuidapet_mobile/app/modules/address/address_page.dart';
 import 'package:cuidapet_mobile/app/modules/address/widgets/address_search_widget/address_search_controller.dart';
@@ -16,6 +17,7 @@ class AddressModule extends Module {
     // i.addLazySingleton((i)=>AddressSearchController(addressService: Modular.get())); // não funciona
     // i.addLazySingleton((i) => AddressSearchController(addressService: i())); // não funciona
     i.addLazySingleton(AddressSearchController.new);
+    i.addLazySingleton(SqliteConnectionFactory.new);
   }
 
   @override

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // diferença entre entidade e modelo
@@ -10,15 +10,14 @@ class AddressEntity {
   final int? id;
   final String address;
   final double lat;
-  final String lng;
-  final String aditional;
-
+  final double lng;
+  final String additional;
   AddressEntity({
     this.id,
     required this.address,
     required this.lat,
     required this.lng,
-    required this.aditional,
+    required this.additional,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,7 +26,7 @@ class AddressEntity {
       'address': address,
       'lat': lat,
       'lng': lng,
-      'aditional': aditional,
+      'additional': additional,
     };
   }
 
@@ -36,8 +35,8 @@ class AddressEntity {
       id: map['id'] != null ? map['id'] as int : null,
       address: (map['address'] ?? '') as String,
       lat: (map['lat'] ?? 0.0) as double,
-      lng: (map['lng'] ?? '') as String,
-      aditional: (map['aditional'] ?? '') as String,
+      lng: (map['lng'] ?? '') as double,
+      additional: (map['additional'] ?? '') as String,
     );
   }
 
@@ -46,19 +45,21 @@ class AddressEntity {
   factory AddressEntity.fromJson(String source) =>
       AddressEntity.fromMap(json.decode(source) as Map<String, dynamic>);
 
+  
+
   AddressEntity copyWith({
-    ValueGetter<int?>? id,
+    int? id,
     String? address,
     double? lat,
-    String? lng,
-    String? aditional,
+    double? lng,
+    String? additional,
   }) {
     return AddressEntity(
-      id: id != null ? id() : this.id,
+      id: id ?? this.id,
       address: address ?? this.address,
       lat: lat ?? this.lat,
       lng: lng ?? this.lng,
-      aditional: aditional ?? this.aditional,
+      additional: additional ?? this.additional,
     );
   }
 }
