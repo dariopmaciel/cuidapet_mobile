@@ -16,6 +16,14 @@ class AddressDetailPage extends StatefulWidget {
 }
 
 class _AddressDetailPageState extends State<AddressDetailPage> {
+  final _additionalEC = TextEditingController();
+
+  @override
+  void dispose() {
+    _additionalEC.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +77,7 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              controller: _additionalEC,
               readOnly: false,
               decoration: const InputDecoration(
                 labelText: 'Complemento:',
