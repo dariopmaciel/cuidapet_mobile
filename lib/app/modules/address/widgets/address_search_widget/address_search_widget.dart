@@ -8,15 +8,12 @@ class _AddressSearchWidget extends StatefulWidget {
 
   const _AddressSearchWidget({required this.addressSelectedCallBack});
 
-  // const _AddressSearchWidget({required this.searchResultCallBack});
-
   @override
   State<_AddressSearchWidget> createState() => _AddressSearchWidgetState();
 }
 
 class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
   final controller = Modular.get<AddressSearchController>();
-
   final searchTextEC = TextEditingController();
   final searchTextFN = FocusNode();
 
