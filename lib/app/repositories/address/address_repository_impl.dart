@@ -61,6 +61,6 @@ class AddressRepositoryImpl extends AddressRepository {
   @override
   Future<int> saveAddress(AddressEntity entity) async {
     final sqliteConn = await _sqliteConnectionFactory.openConnection();
-    return await sqliteConn.rawInsert('insert into address values(?,?,)');
+    return await sqliteConn.rawInsert('insert into address values(?,?,?,?,?)');
   }
 }
