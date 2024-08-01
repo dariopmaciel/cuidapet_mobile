@@ -20,6 +20,8 @@ class AddressModule extends Module {
     i.addLazySingleton(AddressSearchController.new);
     i.addLazySingleton(SqliteConnectionFactory.new);
     i.addLazySingleton(AddressController.new);
+    //ou assim
+    // i.addLazySingleton(()=> AddressController());
   }
 
   @override
