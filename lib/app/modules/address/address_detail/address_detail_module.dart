@@ -6,9 +6,11 @@ class AddressDetailModule extends Module {
   @override
   void binds(Injector i) {
     //funciona
+    //Para trab com navegação sem contexto
     i.addLazySingleton(
-      //PAra trab com navegação sem contexto
         () => AddressDetailController(addressService: Modular.get()));
+    // Funciona, mas com navegação com contexto
+    // i.addLazySingleton(AddressDetailController.new);
   }
 
   @override

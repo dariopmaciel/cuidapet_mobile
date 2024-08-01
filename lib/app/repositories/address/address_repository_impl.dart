@@ -10,7 +10,7 @@ import 'package:cuidapet_mobile/app/models/place_model.dart';
 import './address_repository.dart';
 
 class AddressRepositoryImpl extends AddressRepository {
-  SqliteConnectionFactory _sqliteConnectionFactory;
+  final SqliteConnectionFactory _sqliteConnectionFactory;
 
   AddressRepositoryImpl(
       {required SqliteConnectionFactory sqliteConnectionFactory})
