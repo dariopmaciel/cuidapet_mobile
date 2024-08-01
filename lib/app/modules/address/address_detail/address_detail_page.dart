@@ -31,7 +31,7 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
     super.initState();
     addressEntityDisposer =
         reaction((_) => controller.addressEntity, (addressEntity) {
-      if (AddressEntity != null) {
+      if (addressEntity != null) {
         Navigator.pop(context, addressEntity);
       }
     });
@@ -40,6 +40,7 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
   @override
   void dispose() {
     _additionalEC.dispose();
+    addressEntityDisposer();
     super.dispose();
   }
 
