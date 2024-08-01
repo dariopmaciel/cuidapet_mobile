@@ -1,7 +1,10 @@
 import 'dart:async';
 // import 'package:cuidapet_mobile/app/core/database/sqlite_connection_factory.dart';
+// import 'package:cuidapet_mobile/app/core/life_cycle/controller_life_cycle.dart';
+import 'package:cuidapet_mobile/app/core/life_cycle/page_life_cycle_state.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/models/place_model.dart';
+import 'package:cuidapet_mobile/app/modules/address/address_controller.dart';
 import 'package:cuidapet_mobile/app/modules/address/widgets/address_search_widget/address_search_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -18,7 +21,9 @@ class AddressPage extends StatefulWidget {
   State<AddressPage> createState() => _AddressPageState();
 }
 
-class _AddressPageState extends State<AddressPage> {
+// class _AddressPageState extends State<AddressPage> {
+class _AddressPageState extends PageLifeCycleState<AddressController, AddressPage> {
+// class _AddressPageState extends PageLifeCycleState<ControllerLifeCycle, AddressPage> { // não feito assim pois se extendeu mixin no AddressController
   @override
   Widget build(BuildContext context) {
     //!teste de BD em AndroidStudio => AppInspector > > CUIDAPE_LOCAL_API > address

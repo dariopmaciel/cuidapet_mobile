@@ -19,6 +19,8 @@ class AddressModule extends Module {
     // i.addLazySingleton((i) => AddressSearchController(addressService: i())); // não funciona
     i.addLazySingleton(AddressSearchController.new);
     i.addLazySingleton(SqliteConnectionFactory.new);
+    //!--------------------------------------------------------
+    //talvez seja necessário Modular.get()
     i.addLazySingleton(AddressController.new);
     //ou assim
     // i.addLazySingleton(()=> AddressController());
