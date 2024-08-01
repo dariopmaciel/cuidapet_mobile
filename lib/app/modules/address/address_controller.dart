@@ -11,7 +11,7 @@ abstract class AddressControllerBase with Store, ControllerLifeCycle {
   final AddressService _addressService;
 
   @readonly
-  List<AddressEntity> _addressEntity = [];
+  List<AddressEntity> _address = [];
 
   AddressControllerBase({
     required AddressService addressService,
@@ -25,7 +25,7 @@ abstract class AddressControllerBase with Store, ControllerLifeCycle {
   @action
   Future<void> getAddresses() async {
     Loader.show();
-    _addressEntity = await _addressService.getAddress();
+    _address = await _addressService.getAddress();
     Loader.hide();
   }
 }

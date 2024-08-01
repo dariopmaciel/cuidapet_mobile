@@ -94,13 +94,8 @@ class _AddressPageState extends PageLifeCycleState<AddressController, AddressPag
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
               const SizedBox(height: 20),
-              const Column(
-                children: [
-                  AddressItem(),
-                  AddressItem(),
-                  AddressItem(),
-                  AddressItem(),
-                ],
+               Column(
+                children: controller.address.map((a) =>_ItemTile(address: a.address)).toList(),
               ),
             ],
           ),
