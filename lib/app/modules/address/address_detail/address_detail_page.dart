@@ -1,7 +1,7 @@
 import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/cuidapet_default_button.dart';
-import 'package:cuidapet_mobile/app/entities/address_entity.dart';
+
 import 'package:cuidapet_mobile/app/models/place_model.dart';
 import 'package:cuidapet_mobile/app/modules/address/address_detail/address_detail_controller.dart';
 
@@ -109,7 +109,9 @@ class _AddressDetailPageState extends State<AddressDetailPage> {
             width: 0.9.sw,
             height: 60.h,
             child: CuidapetDefaultButton(
-              onPressed: () {},
+              onPressed: () {
+                controller.saveAddress(widget.place, _additionalEC.text);
+              },
               label: 'Salvar',
             ),
           ),
