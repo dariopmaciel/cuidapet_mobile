@@ -8,8 +8,8 @@ import 'package:cuidapet_mobile/app/modules/address/address_controller.dart';
 import 'package:cuidapet_mobile/app/modules/address/widgets/address_search_widget/address_search_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 part 'widgets/address_item.dart';
 part 'widgets/address_search_widget/address_search_widget.dart';
@@ -22,7 +22,8 @@ class AddressPage extends StatefulWidget {
 }
 
 // class _AddressPageState extends State<AddressPage> {
-class _AddressPageState extends PageLifeCycleState<AddressController, AddressPage> {
+class _AddressPageState
+    extends PageLifeCycleState<AddressController, AddressPage> {
 // class _AddressPageState extends PageLifeCycleState<ControllerLifeCycle, AddressPage> { // não feito assim pois se extendeu mixin no AddressController
   @override
   Widget build(BuildContext context) {
@@ -94,9 +95,15 @@ class _AddressPageState extends PageLifeCycleState<AddressController, AddressPag
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
               const SizedBox(height: 20),
-               Column(
-                children: controller.address.map((a) =>_ItemTile(address: a.address)).toList(),
-              ),
+              Observer(
+                builder: (_) {
+                  return Column(
+                    children: controller.address
+                        .map((a) => _ItemTile(address: a.address))
+                        .toList(),
+                  );
+                },
+              )
             ],
           ),
         ),
