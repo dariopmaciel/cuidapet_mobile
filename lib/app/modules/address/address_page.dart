@@ -36,9 +36,11 @@ class _AddressPageState
   void initState() {
     super.initState();
     final reactionService =
-        reaction<Observable<bool>>((_) => controller.locationServiceInavailable,
+        // reaction<Observable<bool>>((_) => controller.locationServiceInavailable,
+        reaction<bool>((_) => controller.locationServiceInavailable,
             (locationServiceUnavailable) {
-      if (locationServiceUnavailable.value) {
+      // if (locationServiceUnavailable.value) {
+      if (locationServiceUnavailable) {
         showDialogLocationServiceUnavailable();
       }
     });

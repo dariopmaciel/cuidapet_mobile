@@ -22,7 +22,8 @@ abstract class AddressControllerBase with Store, ControllerLifeCycle {
   @readonly
   // bool _locationServiceInavailable = false;
   //não pode ser bool por causa do mobx não funciona, por isto usar var + obs()
-  var _locationServiceInavailable = false.obs();
+  // var _locationServiceInavailable = false.obs();
+  var _locationServiceInavailable = false;
 
   @readonly
   LocationPermission? _locationPermition;
@@ -46,6 +47,7 @@ abstract class AddressControllerBase with Store, ControllerLifeCycle {
   @action
   Future<void> myLocation() async {
     _locationPermition = null;
+    _locationServiceInavailable = false;
 
     //perguntar ao packegeo se temos permissão para fazer busca de localização
     final serviceEnable = await Geolocator.isLocationServiceEnabled();
@@ -53,7 +55,8 @@ abstract class AddressControllerBase with Store, ControllerLifeCycle {
     if (!serviceEnable) {
       // _locationServiceInavailable = true;
       // por causa do MOBX precisa add .obs()
-      _locationServiceInavailable = true.obs();
+      // _locationServiceInavailable = true.obs();
+      _locationServiceInavailable = true;
       return; //forma d eparar execução
     }
     //checar quais permissões temos para o app
