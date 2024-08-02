@@ -33,19 +33,20 @@ class _AddressPageState
   @override
   void initState() {
     super.initState();
-    final reactionService = reaction<Observable<bool>>(
-        (_) => controller.locationServiceInavailable,
-        (locationServiceInavailable) {
-          if (locationServiceInavailable.value) {
-            showDialogLocationServiceUnavailable();
-          }
-        });
+    final reactionService =
+        reaction<Observable<bool>>((_) => controller.locationServiceInavailable,
+            (locationServiceInavailable) {
+      if (locationServiceInavailable.value) {
+        showDialogLocationServiceUnavailable();
+      }
+    });
 
     final reactionLocationPermission = reaction<LocationPermission?>(
         (_) => controller.locationPermition, (localpermission) {});
 
     reactonDisposers.addAll({reactionService, reactionLocationPermission});
   }
+
   @override
   void dispose() {
     for (var reaction in reactonDisposers) {
@@ -54,7 +55,34 @@ class _AddressPageState
     super.dispose();
   }
 
-  void showDialogLocationServiceUnavailable() {}
+  void showDialogLocationServiceUnavailable() {
+    showDialog(
+      context: context,
+      builder: (contextDialog) {
+        return AlertDialog(
+          title: const Text('Precisamos da sua localização'),
+          content: const Text(
+              'Pare realizar a busca da sua localização, ative o GPS.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(contextDialog);
+              },
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(contextDialog);
+                Geolocator.openLocationSettings();
+              },
+              child: const Text('Configurações'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void showDialogLocationDenied() {}
   void showDialogLocationDeniedForever() {}
 
