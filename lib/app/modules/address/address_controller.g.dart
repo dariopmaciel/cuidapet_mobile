@@ -31,16 +31,17 @@ mixin _$AddressController on AddressControllerBase, Store {
       name: 'AddressControllerBase._locationServiceInavailable',
       context: context);
 
-  bool get locationServiceInavailable {
+  Observable<bool> get locationServiceInavailable {
     _$_locationServiceInavailableAtom.reportRead();
     return super._locationServiceInavailable;
   }
 
   @override
-  bool get _locationServiceInavailable => locationServiceInavailable;
+  Observable<bool> get _locationServiceInavailable =>
+      locationServiceInavailable;
 
   @override
-  set _locationServiceInavailable(bool value) {
+  set _locationServiceInavailable(Observable<bool> value) {
     _$_locationServiceInavailableAtom
         .reportWrite(value, super._locationServiceInavailable, () {
       super._locationServiceInavailable = value;

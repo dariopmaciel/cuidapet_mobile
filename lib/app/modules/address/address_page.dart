@@ -94,7 +94,7 @@ class _AddressPageState
                   "Localização atual",
                   style: TextStyle(fontSize: 18),
                 ),
-                trailing: const Icon(Icons.arrow_forward_ios),
+                // trailing: const Icon(Icons.arrow_forward_ios),
               ),
               const SizedBox(height: 20),
               Observer(
