@@ -2,6 +2,7 @@ import 'dart:async';
 // import 'package:cuidapet_mobile/app/core/database/sqlite_connection_factory.dart';
 // import 'package:cuidapet_mobile/app/core/life_cycle/controller_life_cycle.dart';
 import 'package:cuidapet_mobile/app/core/life_cycle/page_life_cycle_state.dart';
+import 'package:cuidapet_mobile/app/core/mixins/location_mixin.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/models/place_model.dart';
 import 'package:cuidapet_mobile/app/modules/address/address_controller.dart';
@@ -25,7 +26,8 @@ class AddressPage extends StatefulWidget {
 
 // class _AddressPageState extends State<AddressPage> {
 class _AddressPageState
-    extends PageLifeCycleState<AddressController, AddressPage> {
+    extends PageLifeCycleState<AddressController, AddressPage>
+    with LocationMixin {
 // class _AddressPageState extends PageLifeCycleState<ControllerLifeCycle, AddressPage> { // não feito assim pois se extendeu mixin no AddressController
 
   final reactonDisposers = <ReactionDisposer>[];
@@ -35,14 +37,24 @@ class _AddressPageState
     super.initState();
     final reactionService =
         reaction<Observable<bool>>((_) => controller.locationServiceInavailable,
-            (locationServiceInavailable) {
-      if (locationServiceInavailable.value) {
+            (locationServiceUnavailable) {
+      if (locationServiceUnavailable.value) {
         showDialogLocationServiceUnavailable();
       }
     });
 
     final reactionLocationPermission = reaction<LocationPermission?>(
-        (_) => controller.locationPermition, (localpermission) {});
+        (_) => controller.locationPermition, (locationPermission) {
+      if (locationPermission != null &&
+          locationPermission == LocationPermission.denied) {
+        showDialogLocationDenied(
+          tryAgain: () => controller.myLocation(),
+        );
+      }else if(locationPermission != null &&
+          locationPermission == LocationPermission.denied){
+            showDialogLocationDeniedForever();
+          }
+    });
 
     reactonDisposers.addAll({reactionService, reactionLocationPermission});
   }
@@ -54,37 +66,6 @@ class _AddressPageState
     }
     super.dispose();
   }
-
-  void showDialogLocationServiceUnavailable() {
-    showDialog(
-      context: context,
-      builder: (contextDialog) {
-        return AlertDialog(
-          title: const Text('Precisamos da sua localização'),
-          content: const Text(
-              'Pare realizar a busca da sua localização, ative o GPS.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(contextDialog);
-              },
-              child: const Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(contextDialog);
-                Geolocator.openLocationSettings();
-              },
-              child: const Text('Configurações'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void showDialogLocationDenied() {}
-  void showDialogLocationDeniedForever() {}
 
   @override
   Widget build(BuildContext context) {
