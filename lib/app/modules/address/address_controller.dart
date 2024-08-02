@@ -15,10 +15,15 @@ abstract class AddressControllerBase with Store, ControllerLifeCycle {
   final AddressService _addressService;
 
   @readonly
-  List<AddressEntity> _address = [];
+  // List<AddressEntity> _address = [];
+  //não pode ser List por causa do mobx não funciona, por isto precisa alterar
+  var _address = <AddressEntity>[];
 
   @readonly
-  bool _locationServiceInavailable = false;
+  // bool _locationServiceInavailable = false;
+  //não pode ser bool por causa do mobx não funciona, por isto usar var + obs()
+  var _locationServiceInavailable = false.obs();
+
   @readonly
   LocationPermission? _locationPermition;
 
@@ -40,19 +45,23 @@ abstract class AddressControllerBase with Store, ControllerLifeCycle {
 
   @action
   Future<void> myLocation() async {
+    _locationPermition = null;
+
     //perguntar ao packegeo se temos permissão para fazer busca de localização
     final serviceEnable = await Geolocator.isLocationServiceEnabled();
     //se não tiver ativo
     if (!serviceEnable) {
-      _locationServiceInavailable = true;
+      // _locationServiceInavailable = true;
+      // por causa do MOBX precisa add .obs()
+      _locationServiceInavailable = true.obs();
       return; //forma d eparar execução
     }
     //checar quais permissões temos para o app
     final locationPermission = await Geolocator.checkPermission();
     switch (locationPermission) {
       case LocationPermission.denied:
-        //se for negado
         final permission = await Geolocator.requestPermission();
+        //se for negado
         if (permission == LocationPermission.denied ||
             permission == LocationPermission.deniedForever) {
           _locationPermition = permission;
