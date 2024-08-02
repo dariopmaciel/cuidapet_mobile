@@ -1,7 +1,10 @@
 import 'package:cuidapet_mobile/app/core/life_cycle/controller_life_cycle.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:cuidapet_mobile/app/entities/address_entity.dart';
+import 'package:cuidapet_mobile/app/models/place_model.dart';
 import 'package:cuidapet_mobile/app/services/address/address_service.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 part 'address_controller.g.dart';
@@ -65,5 +68,27 @@ abstract class AddressControllerBase with Store, ControllerLifeCycle {
       case LocationPermission.unableToDetermine:
         break;
     }
+    //buscar localização
+
+    Loader.show();
+    //dependendo da posição/local onde se está, se define o 'desiredAccuracy'
+    //Longitude e latitude
+    final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    final placemark =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    final place = placemark.first;
+    //montar endereço com interpolação
+    final address = '${place.thoroughfare} ${place.subThoroughfare}';
+    final placeModel = PlaceModel(
+        address: address, lat: position.latitude, lng: position.longitude);
+
+    Loader.hide();
+    goToAddressDetail(placeModel);
+  }
+
+  void goToAddressDetail(PlaceModel place) {
+    Modular.to.pushNamed('/address/detail/', arguments: place);
   }
 }

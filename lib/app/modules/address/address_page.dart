@@ -62,7 +62,8 @@ class _AddressPageState
               const SizedBox(height: 5),
               //!---------------------------
               _AddressSearchWidget(addressSelectedCallBack: (place) {
-                Modular.to.pushNamed('/address/detail/', arguments: place);
+                // Modular.to.pushNamed('/address/detail/', arguments: place);
+                controller.goToAddressDetail(place);
               }),
               //!---------------------------
               // Material(
@@ -79,7 +80,7 @@ class _AddressPageState
               // ),
               //!---------------------------
               const SizedBox(height: 20),
-               ListTile(
+              ListTile(
                 onTap: () => controller.myLocation(),
                 leading: const CircleAvatar(
                   backgroundColor: Colors.red,
