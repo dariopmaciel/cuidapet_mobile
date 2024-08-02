@@ -28,18 +28,30 @@ class _AddressPageState
     extends PageLifeCycleState<AddressController, AddressPage> {
 // class _AddressPageState extends PageLifeCycleState<ControllerLifeCycle, AddressPage> { // não feito assim pois se extendeu mixin no AddressController
 
-  final reactorDisposers = <ReactionDisposer>[];
+  final reactonDisposers = <ReactionDisposer>[];
 
   @override
   void initState() {
     super.initState();
     final reactionService = reaction<Observable<bool>>(
         (_) => controller.locationServiceInavailable,
-        (locationServiceInavailable) {});
-    final reactionLocationPermission = reaction<LocationPermission?>(
-        (_) => controller.locationPermition, (LocationPermission) {});
+        (locationServiceInavailable) {
+          if (locationServiceInavailable.value) {
+            showDialogLocationServiceUnavailable();
+          }
+        });
 
-    reactorDisposers.addAll({reactionService, reactionLocationPermission});
+    final reactionLocationPermission = reaction<LocationPermission?>(
+        (_) => controller.locationPermition, (localpermission) {});
+
+    reactonDisposers.addAll({reactionService, reactionLocationPermission});
+  }
+  @override
+  void dispose() {
+    for (var reaction in reactonDisposers) {
+      reaction();
+    }
+    super.dispose();
   }
 
   void showDialogLocationServiceUnavailable() {}
