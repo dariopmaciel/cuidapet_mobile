@@ -25,11 +25,15 @@ class AddressPage extends StatefulWidget {
 class _AddressPageState
     extends PageLifeCycleState<AddressController, AddressPage> {
 // class _AddressPageState extends PageLifeCycleState<ControllerLifeCycle, AddressPage> { // não feito assim pois se extendeu mixin no AddressController
+
+  void showDialogLocationServiceUnavailable() {}
+  void showDialogLocationDenied() {}
+  void showDialogLocationDeniedForever() {}
+
   @override
   Widget build(BuildContext context) {
     //!teste de BD em AndroidStudio => AppInspector > > CUIDAPE_LOCAL_API > address
     //! Modular.get<SqliteConnectionFactory>().openConnection();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
