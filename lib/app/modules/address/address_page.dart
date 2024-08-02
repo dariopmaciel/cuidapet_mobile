@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:mobx/mobx.dart';
 
 part 'widgets/address_item.dart';
 part 'widgets/address_search_widget/address_search_widget.dart';
@@ -25,6 +27,20 @@ class AddressPage extends StatefulWidget {
 class _AddressPageState
     extends PageLifeCycleState<AddressController, AddressPage> {
 // class _AddressPageState extends PageLifeCycleState<ControllerLifeCycle, AddressPage> { // não feito assim pois se extendeu mixin no AddressController
+
+  final reactorDisposers = <ReactionDisposer>[];
+
+  @override
+  void initState() {
+    super.initState();
+    final reactionService = reaction<Observable<bool>>(
+        (_) => controller.locationServiceInavailable,
+        (locationServiceInavailable) {});
+    final reactionLocationPermission = reaction<LocationPermission?>(
+        (_) => controller.locationPermition, (LocationPermission) {});
+
+    reactorDisposers.addAll({reactionService, reactionLocationPermission});
+  }
 
   void showDialogLocationServiceUnavailable() {}
   void showDialogLocationDenied() {}
