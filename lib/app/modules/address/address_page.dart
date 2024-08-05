@@ -52,10 +52,10 @@ class _AddressPageState
         showDialogLocationDenied(
           tryAgain: () => controller.myLocation(),
         );
-      }else if(locationPermission != null &&
-          locationPermission == LocationPermission.denied){
-            showDialogLocationDeniedForever();
-          }
+      } else if (locationPermission != null &&
+          locationPermission == LocationPermission.denied) {
+        showDialogLocationDeniedForever();
+      }
     });
 
     reactonDisposers.addAll({reactionService, reactionLocationPermission});
@@ -104,10 +104,18 @@ class _AddressPageState
               // ),
               const SizedBox(height: 5),
               //!---------------------------
-              _AddressSearchWidget(addressSelectedCallBack: (place) {
-                // Modular.to.pushNamed('/address/detail/', arguments: place);
-                controller.goToAddressDetail(place);
-              }),
+              Observer(
+                builder: (_) {
+                  //precisa recontruir novamente o widget, mas não chama o initstate
+                  return _AddressSearchWidget(
+                    addressSelectedCallBack: (place) {
+                      // Modular.to.pushNamed('/address/detail/', arguments: place);
+                      controller.goToAddressDetail(place);
+                    },
+                    place: controller.placemodel,
+                  );
+                },
+              ),
               //!---------------------------
               // Material(
               //   elevation: 10,

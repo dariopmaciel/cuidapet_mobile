@@ -5,8 +5,11 @@ typedef AddressSelectedCallBack = void Function(PlaceModel);
 
 class _AddressSearchWidget extends StatefulWidget {
   final AddressSelectedCallBack addressSelectedCallBack;
+  // para adicionar retoro
+  final PlaceModel? place;
 
-  const _AddressSearchWidget({required this.addressSelectedCallBack});
+  const _AddressSearchWidget(
+      {required this.addressSelectedCallBack, required this.place});
 
   @override
   State<_AddressSearchWidget> createState() => _AddressSearchWidgetState();
@@ -16,6 +19,16 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
   final controller = Modular.get<AddressSearchController>();
   final searchTextEC = TextEditingController();
   final searchTextFN = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    print("Verificação de criação do INITSTATE");
+    if (widget.place != null) {
+      searchTextEC.text = widget.place?.address ?? '';
+      searchTextFN.requestFocus();
+    }
+  }
 
   @override
   void dispose() {
@@ -37,6 +50,13 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
 
 //!-------------------------------------------
   Widget _decoration(context, controller, focusNode) {
+    print("Verificação de criação do BUILDER");
+    //movido para dentro do builder para ser carregado quando retornar a tela d endereço
+    if (widget.place != null) {
+      searchTextEC.text = widget.place?.address ?? '';
+      searchTextFN.requestFocus();
+    }
+
     final border = OutlineInputBorder(
       borderSide: const BorderSide(color: Colors.black),
       borderRadius: BorderRadius.circular(20),
@@ -45,8 +65,8 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
       elevation: 10,
       borderRadius: BorderRadius.circular(20),
       child: TextFormField(
-        controller: controller,
-        focusNode: focusNode,
+        controller: searchTextEC,
+        focusNode: searchTextFN,
         decoration: InputDecoration(
           focusedBorder: border,
           border: border,
