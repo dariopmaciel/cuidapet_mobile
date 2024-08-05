@@ -1,4 +1,5 @@
 import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
+import 'package:cuidapet_mobile/app/services/address/address_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mobx/mobx.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
@@ -9,6 +10,8 @@ class AuthStore = AuthStoreBase with _$AuthStore;
 
 abstract class AuthStoreBase with Store {
   final LocalStorage _localStorage;
+  final LocalSecureStorage _localSecureStorage;
+  final AddressService _addressService;
 
   //readonly cria automaticamente os metodos getters e setters
   @readonly
@@ -16,7 +19,11 @@ abstract class AuthStoreBase with Store {
 
   AuthStoreBase({
     required LocalStorage localStorage,
-  }) : _localStorage = localStorage;
+    required LocalSecureStorage localSecureStorage,
+    required AddressService addressService,
+  })  : _localStorage = localStorage,
+        _localSecureStorage = localSecureStorage,
+        _addressService = addressService;
 
   @action
   Future<void> loadUserLogged() async {
@@ -43,6 +50,8 @@ abstract class AuthStoreBase with Store {
   void logout() async {
     //usuário deslogado do app
     await _localStorage.clear();
+    await _localSecureStorage.clear();
+    await _addressService.deleteAll();
     _userLogged = UserModel.empty();
   }
 }
