@@ -40,9 +40,10 @@ class AddressServiceImpl implements AddressService {
   }
 
   @override
-  Future<AddressEntity?> getAddressSelected() {
-    // TODO: implement getAddressSelected
-    throw UnimplementedError();
+  Future<AddressEntity?> getAddressSelected() async {
+    //extrair dados do local Storage
+    final addressJson = await _localStorage
+        .read<String>(Constants.LOCAL_STORAGE_DEFAULT_ADDRESS_DATA_KEY);
   }
 
   @override
@@ -50,7 +51,7 @@ class AddressServiceImpl implements AddressService {
     //salvar os dados no localStorage
     await _localStorage.write<String>(
         Constants.LOCAL_STORAGE_DEFAULT_ADDRESS_DATA_KEY,
-        //MUDANÇA NA ENTIDADE TOJSON para receber string 
+        //MUDANÇA NA ENTIDADE TOJSON para receber string
         addressEntity.toJson());
   }
 }
