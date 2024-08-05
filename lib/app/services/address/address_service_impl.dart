@@ -1,3 +1,5 @@
+import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
+import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/entities/address_entity.dart';
 import 'package:cuidapet_mobile/app/models/place_model.dart';
 import 'package:cuidapet_mobile/app/repositories/address/address_repository.dart';
@@ -6,9 +8,13 @@ import './address_service.dart';
 
 class AddressServiceImpl implements AddressService {
   final AddressRepository _addressRepository;
+  final LocalStorage _localStorage;
 
-  AddressServiceImpl({required AddressRepository addressRepository})
-      : _addressRepository = addressRepository;
+  AddressServiceImpl({
+    required AddressRepository addressRepository,
+    required LocalStorage localStorage,
+  })  : _addressRepository = addressRepository,
+        _localStorage = localStorage;
 
   @override
   Future<List<PlaceModel>> findAddressByGooglePlaces(String addressPattern) =>
@@ -31,5 +37,20 @@ class AddressServiceImpl implements AddressService {
     );
     var addresdId = await _addressRepository.saveAddress(addressEntity);
     return addressEntity.copyWith(id: addresdId);
+  }
+
+  @override
+  Future<AddressEntity?> getAddressSelected() {
+    // TODO: implement getAddressSelected
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> selectAdress(AddressEntity addressEntity) async {
+    //salvar os dados no localStorage
+    await _localStorage.write<String>(
+        Constants.LOCAL_STORAGE_DEFAULT_ADDRESS_DATA_KEY,
+        //MUDANÇA NA ENTIDADE TOJSON para receber string 
+        addressEntity.toJson());
   }
 }
