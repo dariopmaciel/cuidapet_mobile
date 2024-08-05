@@ -157,8 +157,9 @@ class _AddressPageState
                   return Column(
                     children: controller.address.reversed
                         .map(
-                          (a) => _ItemTile(
+                          (a) => _AddressItem(
                             address: a.address,
+                            additional: a.additional,
                             onTap: () {
                               controller.selectAddress(a);
                             },
