@@ -44,6 +44,10 @@ class AddressServiceImpl implements AddressService {
     //extrair dados do local Storage
     final addressJson = await _localStorage
         .read<String>(Constants.LOCAL_STORAGE_DEFAULT_ADDRESS_DATA_KEY);
+    if (addressJson != null) {
+      return AddressEntity.fromJson(addressJson);
+    }
+    return null;
   }
 
   @override
