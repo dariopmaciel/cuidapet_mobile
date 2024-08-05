@@ -19,8 +19,7 @@ class CoreModule extends Module {
     i.addSingleton(AuthStore.new);
     i.addLazySingleton<AppLogger>(LoggerAppLoggerImpl.new);
     i.addLazySingleton<LocalStorage>(SharedPreferencesLocalStorageImpl.new);
-    i.addLazySingleton<LocalSecureStorage>(
-        FlutterSecureStorageLocalStorageImpl.new);
+    i.addLazySingleton<LocalSecureStorage>(FlutterSecureStorageLocalStorageImpl.new);
     i.addLazySingleton<RestClient>(DioRestClient.new);
     i.addLazySingleton<SocialRepository>(SocialRepositoryImpl.new);
     //!-------------------------

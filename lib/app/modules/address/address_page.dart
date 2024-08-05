@@ -7,7 +7,9 @@ import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/models/place_model.dart';
 import 'package:cuidapet_mobile/app/modules/address/address_controller.dart';
 import 'package:cuidapet_mobile/app/modules/address/widgets/address_search_widget/address_search_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -153,8 +155,15 @@ class _AddressPageState
               Observer(
                 builder: (_) {
                   return Column(
-                    children: controller.address
-                        .map((a) => _ItemTile(address: a.address))
+                    children: controller.address.reversed
+                        .map(
+                          (a) => _ItemTile(
+                            address: a.address,
+                            onTap: () {
+                              controller.selectAddress(a);
+                            },
+                          ),
+                        )
                         .toList(),
                   );
                 },

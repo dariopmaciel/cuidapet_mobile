@@ -22,6 +22,6 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
 //Verifica se o usuário tem endereço cadastrado
   Future <void>_hasRegisteredAddress() async {
-    await Modular.to.pushNamed('/address/');
+    // await Modular.to.pushNamed('/address/');
   }
 }

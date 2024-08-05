@@ -1,19 +1,21 @@
 import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_page.dart';
+import 'package:cuidapet_mobile/app/services/address/address_service.dart';
+import 'package:cuidapet_mobile/app/services/address/address_service_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class HomeModule extends Module {
-
-   @override
+  @override
   void binds(i) {
     i.addSingleton(HomeController.new);
+    i.addLazySingleton<AddressService>(() => AddressServiceImpl(
+        addressRepository: Modular.get(), localStorage: Modular.get()));
   }
 
   @override
   void routes(r) {
     r.child(Modular.initialRoute, child: (_) => const HomePage());
   }
-
 }
 
 

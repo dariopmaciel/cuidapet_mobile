@@ -13,7 +13,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 class AddressModule extends Module {
   @override
   void binds(Injector i) {
-    i.addLazySingleton<AddressService>(AddressServiceImpl.new);
+    i.addLazySingleton<AddressService>(() => AddressServiceImpl(
+        addressRepository: Modular.get(), localStorage: Modular.get()));
     i.addLazySingleton<AddressRepository>(AddressRepositoryImpl.new);
     // i.addLazySingleton((i)=>AddressSearchController(addressService: Modular.get())); // não funciona
     // i.addLazySingleton((i) => AddressSearchController(addressService: i())); // não funciona
