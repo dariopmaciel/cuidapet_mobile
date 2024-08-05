@@ -8,8 +8,11 @@ class _AddressSearchWidget extends StatefulWidget {
   // para adicionar retoro
   final PlaceModel? place;
 
-  const _AddressSearchWidget(
-      {required this.addressSelectedCallBack, required this.place});
+  const _AddressSearchWidget({
+    super.key,
+    required this.addressSelectedCallBack,
+    required this.place,
+  });
 
   @override
   State<_AddressSearchWidget> createState() => _AddressSearchWidgetState();
@@ -52,10 +55,10 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
   Widget _decoration(context, controller, focusNode) {
     print("Verificação de criação do BUILDER");
     //movido para dentro do builder para ser carregado quando retornar a tela d endereço
-    if (widget.place != null) {
-      searchTextEC.text = widget.place?.address ?? '';
-      searchTextFN.requestFocus();
-    }
+    // if (widget.place != null) {
+    //   searchTextEC.text = widget.place?.address ?? '';
+    //   searchTextFN.requestFocus();
+    // }
 
     final border = OutlineInputBorder(
       borderSide: const BorderSide(color: Colors.black),
@@ -65,8 +68,8 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
       elevation: 10,
       borderRadius: BorderRadius.circular(20),
       child: TextFormField(
-        controller: searchTextEC,
-        focusNode: searchTextFN,
+        controller: controller,
+        focusNode: focusNode,
         decoration: InputDecoration(
           focusedBorder: border,
           border: border,
