@@ -108,7 +108,7 @@ class _AddressPageState
                 builder: (_) {
                   //precisa recontruir novamente o widget, mas não chama o initstate
                   return _AddressSearchWidget(
-                    //quando add 'key' ao componente (super.key) cria-se a possibilidade de se ter uma 'key: UniqueKey()' onde habilita a necessidade de sempre se buildar a tela quando invocado
+                    //quando add 'key' ao componente (super.key) cria-se a possibilidade de se ter uma 'key: UniqueKey()' onde habilita a necessidade de sempre se reconstroi objeto a tela quando invocado
                     key: UniqueKey(),
                     addressSelectedCallBack: (place) {
                       // Modular.to.pushNamed('/address/detail/', arguments: place);
