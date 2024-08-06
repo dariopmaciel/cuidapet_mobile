@@ -1,4 +1,5 @@
 import 'package:cuidapet_mobile/app/core/life_cycle/page_life_cycle_state.dart';
+import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/entities/address_entity.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
 import 'package:cuidapet_mobile/app/modules/home/widgets/home_app_bar.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 part 'widgets/home_address_widget.dart';
+part 'widgets/home_categories_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -31,8 +33,12 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           //item sem scroll vertical, rolagem pequena
           return <Widget>[
-             HomeAppBar(controller),
-              SliverToBoxAdapter(child: _HomeAddressWidget(controller: controller,)),
+            HomeAppBar(controller),
+            SliverToBoxAdapter(
+                child: _HomeAddressWidget(controller: controller)),
+            const SliverToBoxAdapter(
+              child: _HomeCategoriesWidget(),
+            )
           ];
         },
         body: Container(),
