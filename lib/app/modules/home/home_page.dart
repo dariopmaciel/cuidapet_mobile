@@ -6,6 +6,7 @@ import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
 import 'package:cuidapet_mobile/app/services/address/address_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 // import 'package:flutter_modular/flutter_modular.dart';
 
@@ -51,7 +52,8 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
             //!----------
             TextButton(
               onPressed: () async {
-                await Modular.to.pushNamed('/address/');
+                // await Modular.to.pushNamed('/address/');
+                controller.goToAddressPage();
               },
               child: const Text('Ir para endereço'),
             ),
@@ -65,8 +67,16 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
               },
               child: const Text('Buscar endereço'),
             ),
-            Text(addressEntity?.address ?? "Nenhum Endereço Selecionado"),
-            Text(addressEntity?.additional ?? "Nenhum Complemento Selecionado"),
+            Observer(
+                builder: (_) {
+                    return Text(controller.addressEntity?.address ?? "Nenhum Endereço Selecionado");
+                },
+            ),
+            Observer(
+                builder: (_) {
+                    return Text(controller.addressEntity?.additional ?? "Nenhum Complemento Selecionado");
+                },
+            )
           ],
         ),
       ),

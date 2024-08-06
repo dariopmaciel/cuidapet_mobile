@@ -7,7 +7,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 class HomeModule extends Module {
   @override
   void binds(i) {
-    i.addSingleton(HomeController.new);
+    // i.addLazySingleton(HomeController.new);
+    i.addLazySingleton(() => HomeController(addressService: Modular.get()));
     i.addLazySingleton<AddressService>(() => AddressServiceImpl(
         addressRepository: Modular.get(), localStorage: Modular.get()));
   }
