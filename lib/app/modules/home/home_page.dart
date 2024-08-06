@@ -1,5 +1,5 @@
 import 'package:cuidapet_mobile/app/core/life_cycle/page_life_cycle_state.dart';
-import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
+
 import 'package:cuidapet_mobile/app/entities/address_entity.dart';
 // import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
