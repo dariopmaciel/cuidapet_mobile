@@ -1,3 +1,4 @@
+import 'package:cuidapet_mobile/app/modules/core/supplier/supplier_core_module.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_page.dart';
 import 'package:cuidapet_mobile/app/services/address/address_service.dart';
@@ -12,6 +13,11 @@ class HomeModule extends Module {
     i.addLazySingleton<AddressService>(() => AddressServiceImpl(
         addressRepository: Modular.get(), localStorage: Modular.get()));
   }
+
+  @override
+  List<Module> get imports => [
+        SupplierCoreModule(),
+      ];
 
   @override
   void routes(r) {
