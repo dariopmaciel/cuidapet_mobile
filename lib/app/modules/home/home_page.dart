@@ -31,7 +31,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           //item sem scroll vertical, rolagem pequena
           return <Widget>[
-             const HomeAppBar(),
+             HomeAppBar(controller),
               SliverToBoxAdapter(child: _HomeAddressWidget(controller: controller,)),
           ];
         },
