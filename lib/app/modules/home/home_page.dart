@@ -3,6 +3,9 @@ import 'package:cuidapet_mobile/app/entities/address_entity.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
 import 'package:cuidapet_mobile/app/modules/home/widgets/home_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+
+part 'widgets/home_address_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,6 +32,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
           //item sem scroll vertical, rolagem pequena
           return <Widget>[
              const HomeAppBar(),
+              SliverToBoxAdapter(child: _HomeAddressWidget(controller: controller,)),
           ];
         },
         body: Container(),

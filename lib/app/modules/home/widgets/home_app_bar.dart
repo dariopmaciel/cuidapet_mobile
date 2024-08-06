@@ -26,8 +26,8 @@ class _CuidapetAppBar extends StatelessWidget {
     );
 
     return AppBar(
-      // iconTheme: const IconThemeData(color: Colors.black),
-      iconTheme: const IconThemeData(),
+      // iconTheme: const IconThemeData(),
+      iconTheme: const IconThemeData(color: Colors.black),
       backgroundColor: Colors.grey[100],
       centerTitle: true,
       title: const Padding(
