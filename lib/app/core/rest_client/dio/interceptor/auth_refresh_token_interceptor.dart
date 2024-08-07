@@ -73,7 +73,7 @@ class AuthRefreshTokenInterceptor extends Interceptor {
     if (refreshToken == null) {
       throw ExpiredTokenException();
     }
-    final resultRefresh = await _restClient.auth().put('auth/refresh', data: {
+    final resultRefresh = await _restClient.auth().put('/auth/refresh', data: {
       'refresh_token': refreshToken,
     });
     await _localStorage.write<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY,

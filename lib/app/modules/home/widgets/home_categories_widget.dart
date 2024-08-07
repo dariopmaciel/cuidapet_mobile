@@ -46,8 +46,9 @@ class _CategoryItem extends StatelessWidget {
           CircleAvatar(
             backgroundColor: context.primaryColorLight,
             radius: 30,
-            child: Icon(
+            child:  Icon(
               categoriesIcons[_categoryModel.type],
+              // Icons.pets,
               size: 30,
               color: Colors.black,
             ),
