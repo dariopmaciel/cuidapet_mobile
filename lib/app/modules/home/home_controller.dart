@@ -1,6 +1,7 @@
 //fu-mobx-store para criar o .g
 import 'package:cuidapet_mobile/app/core/life_cycle/controller_life_cycle.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
+import 'package:cuidapet_mobile/app/core/ui/widgets/messages.dart';
 import 'package:cuidapet_mobile/app/entities/address_entity.dart';
 import 'package:cuidapet_mobile/app/models/supplier_category_model.dart';
 import 'package:cuidapet_mobile/app/services/address/address_service.dart';
@@ -35,15 +36,17 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
   @override
   Future<void> onReady() async {
-    // print("onReady chamada");
-    // await _hasRegisteredAddress();
-    Loader.show();
-    //1-identificar se o usuário tem algum endereço selecionado
-    //2-se tiver-recuperar ele
-    await _getAddressSelected();
-    await _getCategories();
-
-    Loader.hide();
+    try {
+      // print("onReady chamada");
+      // await _hasRegisteredAddress();
+      Loader.show();
+      //1-identificar se o usuário tem algum endereço selecionado
+      //2-se tiver-recuperar ele
+      await _getAddressSelected();
+      await _getCategories();
+    } finally {// o finally sempre executa;;; neste caso esconde o show.hide
+      Loader.hide();
+    }
   }
 
 //Verifica se o usuário tem endereço cadastrado
@@ -72,7 +75,12 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   }
 
   Future<void> _getCategories() async {
-    final categories = await _supplierService.getCategories();
-    _listCategories = [...categories];
+    try {
+      final categories = await _supplierService.getCategories();
+      _listCategories = [...categories];
+    } catch (e) {
+      Messages.alert("Erro ao buscar as categorias");
+      throw Exception();
+    }
   }
 }
