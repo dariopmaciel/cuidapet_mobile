@@ -7,24 +7,34 @@ class _HomeCategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 130,
-        child: Observer(
-          builder: (_) {
-            return ListView.builder(
+      height: 130,
+      child: Observer(
+        builder: (_) {
+          return Center(
+            child: ListView.builder(
+              shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: _controller.listCategories.length,
               itemBuilder: (context, index) {
                 final category = _controller.listCategories[index];
-                return  _CategoryItem(category);
+                return _CategoryItem(category);
               },
-            );
-          },
-        ));
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
 class _CategoryItem extends StatelessWidget {
   final SupplierCategoryModel _categoryModel;
+  static const categoriesIcons = {
+    "P": Icons.pets,
+    "V": Icons.local_hospital,
+    "C": Icons.store_mall_directory,
+  };
+
   const _CategoryItem(this._categoryModel);
 
   @override
@@ -36,13 +46,14 @@ class _CategoryItem extends StatelessWidget {
           CircleAvatar(
             backgroundColor: context.primaryColorLight,
             radius: 30,
-            child: const Icon(
-              Icons.pets,
+            child: Icon(
+              categoriesIcons[_categoryModel.type],
               size: 30,
               color: Colors.black,
             ),
           ),
-           Text(_categoryModel.name),
+          const SizedBox(height: 10),
+          Text(_categoryModel.name),
         ],
       ),
     );
