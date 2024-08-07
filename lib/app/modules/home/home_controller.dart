@@ -2,7 +2,9 @@
 import 'package:cuidapet_mobile/app/core/life_cycle/controller_life_cycle.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:cuidapet_mobile/app/entities/address_entity.dart';
+import 'package:cuidapet_mobile/app/models/supplier_category_model.dart';
 import 'package:cuidapet_mobile/app/services/address/address_service.dart';
+import 'package:cuidapet_mobile/app/services/supplier/supplier_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 part 'home_controller.g.dart';
@@ -16,13 +18,20 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   // print(params);
   //   super.onInit(params);
   // }
+
+  final AddressService _addressService;
+  final SupplierService _supplierService;
+
   @readonly
   AddressEntity? _addressEntity;
-  final AddressService _addressService;
+  @readonly
+  var _listCategories = <SupplierCategoryModel>[];
 
-  HomeControllerBase({
-    required AddressService addressService,
-  }) : _addressService = addressService;
+  HomeControllerBase(
+      {required AddressService addressService,
+      required SupplierService supplierService})
+      : _addressService = addressService,
+        _supplierService = supplierService;
 
   @override
   Future<void> onReady() async {
@@ -32,6 +41,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
     //1-identificar se o usuário tem algum endereço selecionado
     //2-se tiver-recuperar ele
     await _getAddressSelected();
+    await _getCategories();
 
     Loader.hide();
   }
@@ -56,9 +66,12 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   @action
   Future<void> goToAddressPage() async {
     final address = await Modular.to.pushNamed<AddressEntity>('/address/');
-    if(address!=null){
+    if (address != null) {
       _addressEntity = address;
     }
-    
+  }
+
+  Future<void> _getCategories() async {
+    final categories = await _supplierService.getCategories();
   }
 }

@@ -9,7 +9,8 @@ class HomeModule extends Module {
   @override
   void binds(i) {
     // i.addLazySingleton(HomeController.new);
-    i.addLazySingleton(() => HomeController(addressService: Modular.get()));
+    i.addLazySingleton(() => HomeController(
+        addressService: Modular.get(), supplierService: Modular.get()));
     i.addLazySingleton<AddressService>(() => AddressServiceImpl(
         addressRepository: Modular.get(), localStorage: Modular.get()));
   }
