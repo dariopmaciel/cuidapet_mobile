@@ -73,5 +73,6 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
   Future<void> _getCategories() async {
     final categories = await _supplierService.getCategories();
+    _listCategories = [...categories];
   }
 }
