@@ -1,25 +1,31 @@
 part of '../home_page.dart';
 
 class _HomeCategoriesWidget extends StatelessWidget {
-  const _HomeCategoriesWidget();
+  final HomeController _controller;
+  const _HomeCategoriesWidget(this._controller);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 130,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 15,
-        itemBuilder: (context, index) {
-          return _CategoryItem();
-        },
-      ),
-    );
+        height: 130,
+        child: Observer(
+          builder: (_) {
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _controller.listCategories.length,
+              itemBuilder: (context, index) {
+                final category = _controller.listCategories[index];
+                return  _CategoryItem(category);
+              },
+            );
+          },
+        ));
   }
 }
 
 class _CategoryItem extends StatelessWidget {
-  const _CategoryItem();
+  final SupplierCategoryModel _categoryModel;
+  const _CategoryItem(this._categoryModel);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,7 @@ class _CategoryItem extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          const Text("PetShop"),
+           Text(_categoryModel.name),
         ],
       ),
     );

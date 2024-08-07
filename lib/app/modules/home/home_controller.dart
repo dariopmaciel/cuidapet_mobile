@@ -13,13 +13,6 @@ part 'home_controller.g.dart';
 class HomeController = HomeControllerBase with _$HomeController;
 
 abstract class HomeControllerBase with Store, ControllerLifeCycle {
-  // @override
-  // void onInit([Map<String, dynamic>? params]) {
-  //   print("onInit chamada");
-  // print(params);
-  //   super.onInit(params);
-  // }
-
   final AddressService _addressService;
   final SupplierService _supplierService;
 
@@ -28,10 +21,10 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   @readonly
   var _listCategories = <SupplierCategoryModel>[];
 
-  HomeControllerBase(
-      {required AddressService addressService,
-      required SupplierService supplierService})
-      : _addressService = addressService,
+  HomeControllerBase({
+    required AddressService addressService,
+    required SupplierService supplierService,
+  })  : _addressService = addressService,
         _supplierService = supplierService;
 
   @override
@@ -44,7 +37,8 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       //2-se tiver-recuperar ele
       await _getAddressSelected();
       await _getCategories();
-    } finally {// o finally sempre executa;;; neste caso esconde o show.hide
+    } finally {
+      // o finally sempre executa;;; neste caso esconde o show.hide
       Loader.hide();
     }
   }

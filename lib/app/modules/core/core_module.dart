@@ -8,6 +8,8 @@ import 'package:cuidapet_mobile/app/core/rest_client/dio/dio_rest_cliente.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 // import 'package:cuidapet_mobile/app/modules/address/address_detail/address_detail_controller.dart';
 import 'package:cuidapet_mobile/app/modules/core/auth/auth_store.dart';
+import 'package:cuidapet_mobile/app/modules/core/supplier/supplier_core_module.dart';
+import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
 import 'package:cuidapet_mobile/app/repositories/address/address_repository.dart';
 import 'package:cuidapet_mobile/app/repositories/address/address_repository_impl.dart';
 import 'package:cuidapet_mobile/app/repositories/social/social_repository.dart';
@@ -38,34 +40,29 @@ class CoreModule extends Module {
         sqliteConnectionFactory: Modular.get(),
       ),
     );
-    i.addLazySingleton<AppLogger>(LoggerAppLoggerImpl.new);
-    i.addLazySingleton<LocalStorage>(SharedPreferencesLocalStorageImpl.new);
+    i.addLazySingleton<AppLogger>(
+      LoggerAppLoggerImpl.new,
+    );
+    i.addLazySingleton<LocalStorage>(
+      SharedPreferencesLocalStorageImpl.new,
+    );
     i.addLazySingleton<LocalSecureStorage>(
-        FlutterSecureStorageLocalStorageImpl.new);
-    i.addLazySingleton<RestClient>(DioRestClient.new);
-    i.addLazySingleton<SocialRepository>(SocialRepositoryImpl.new);
+      FlutterSecureStorageLocalStorageImpl.new,
+    );
+    i.addLazySingleton<RestClient>(
+      DioRestClient.new,
+    );
+    i.addLazySingleton<SocialRepository>(
+      SocialRepositoryImpl.new,
+    );
     //!-------------------------
-    // i.addLazySingleton<AddressRepository>(AddressRepositoryImpl.new);
-    // i.addLazySingleton<AddressService>(AddressServiceImpl.new);
-    // i.addLazySingleton<AddressService>((i)=>AddressServiceImpl(addressRepository: Modular.get()));
-    //
-    // i.addLazySingleton(AddressSearchController.new);
+
     //!-------------------------
     i.addLazySingleton(SqliteConnectionFactory.new);
   }
 
   @override
   void exportedBinds(Injector i) {
-    //   //! ESTES 4 ITENS AQUI "The injector(tag: CoreModule_Imported) is not committed."
-    //   AuthStore(localStorage: i());
-    //   DioRestClient(localStorage: i(), log: i(), authStore: i(), localSecureStorage: i());
-    //   //! ATE AQUI
-    //   LoggerAppLoggerImpl();
-    //   SharedPreferencesLocalStorageImpl();
-    //   FlutterSecureStorageLocalStorageImpl();
-    //   SocialRepositoryImpl();
-    //!-------------------------
     i.addLazySingleton(AddressRepositoryImpl.new);
-    // AddressServiceImpl(addressRepository: i());
   }
 }
