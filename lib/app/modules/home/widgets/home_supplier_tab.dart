@@ -17,7 +17,7 @@ class _HomeSupplierTab extends StatelessWidget {
         Observer(
           builder: (_) {
             return AnimatedSwitcher(
-              duration: const Duration(milliseconds: 400),
+              duration: const Duration(milliseconds: 1000),
               child: homeController.supplierPageTypeSelected ==
                       SupplierPageType.list
                   ? const _HomeSuppplierList()
@@ -46,12 +46,32 @@ class _HomeTabHeader extends StatelessWidget {
           InkWell(
               onTap: () =>
                   homeController.changeTabSupplier(SupplierPageType.list),
-              child: const Icon(Icons.view_headline)),
+              child: Observer(
+                builder: (_) {
+                  return Icon(
+                    Icons.view_headline,
+                    color: homeController.supplierPageTypeSelected ==
+                            SupplierPageType.list
+                        ? Colors.black
+                        : Colors.grey,
+                  );
+                },
+              )),
           const SizedBox(width: 10),
           InkWell(
               onTap: () =>
                   homeController.changeTabSupplier(SupplierPageType.grid),
-              child: const Icon(Icons.view_comfy_alt)),
+              child: Observer(
+                builder: (_) {
+                  return Icon(
+                    Icons.view_comfy_alt,
+                    color: homeController.supplierPageTypeSelected ==
+                            SupplierPageType.grid
+                        ? Colors.black
+                        : Colors.grey,
+                  );
+                },
+              )),
         ],
       ),
     );
