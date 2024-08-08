@@ -20,7 +20,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
   @readonly
   AddressEntity? _addressEntity;
-  
+
   @readonly
   var _listCategories = <SupplierCategoryModel>[];
 
@@ -43,6 +43,9 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       //2-se tiver-recuperar ele
       await _getAddressSelected();
       await _getCategories();
+      if (_addressEntity != null) {
+        _supplierService.findNearBy(_addressEntity!);
+      }
     } finally {
       // o finally sempre executa;;; neste caso esconde o show.hide
       Loader.hide();
