@@ -44,7 +44,7 @@ class SupplierRepositoryImpl extends SupplierRepository {
         'lng': address.lng,
       });
       return result.data
-          ?.map((supplierResponse) =>
+          ?.map<SupplierNearbyMeModel>((supplierResponse) =>
               SupplierNearbyMeModel.fromMap(supplierResponse))
           .toList();
     } on RestClientException catch (e, s) {
