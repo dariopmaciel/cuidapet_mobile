@@ -14,8 +14,17 @@ class _HomeSupplierTab extends StatelessWidget {
     return Column(
       children: [
         _HomeTabHeader(homeController: homeController),
-        const AnimatedSwitcher(
-            duration: Duration(milliseconds: 400), child: _HomeSuppplierList()),
+        Observer(
+          builder: (_) {
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 400),
+              child: homeController.supplierPageTypeSelected ==
+                      SupplierPageType.list
+                  ? const _HomeSuppplierList()
+                  : const _HomeSupplierGrid(),
+            );
+          },
+        )
       ],
     );
   }
@@ -38,6 +47,7 @@ class _HomeTabHeader extends StatelessWidget {
               onTap: () =>
                   homeController.changeTabSupplier(SupplierPageType.list),
               child: const Icon(Icons.view_headline)),
+          const SizedBox(width: 10),
           InkWell(
               onTap: () =>
                   homeController.changeTabSupplier(SupplierPageType.grid),
