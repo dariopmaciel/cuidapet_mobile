@@ -26,7 +26,7 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
   @override
   void initState() {
     super.initState();
-    print("Verificação de criação do INITSTATE");
+    // print("Verificação de criação do INITSTATE");
     if (widget.place != null) {
       searchTextEC.text = widget.place?.address ?? '';
       searchTextFN.requestFocus();
@@ -53,7 +53,7 @@ class _AddressSearchWidgetState extends State<_AddressSearchWidget> {
 
 //!-------------------------------------------
   Widget _decoration(context, controller, focusNode) {
-    print("Verificação de criação do BUILDER");
+    // print("Verificação de criação do BUILDER");
     //movido para dentro do builder para ser carregado quando retornar a tela d endereço
     // if (widget.place != null) {
     //   searchTextEC.text = widget.place?.address ?? '';
@@ -114,7 +114,6 @@ class _ItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      
       leading: const Icon(Icons.location_on),
       title: Text(address),
     );
