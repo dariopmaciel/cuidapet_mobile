@@ -60,7 +60,7 @@ class _CuidapetAppBar extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: SizedBox(
-              width: .8.sw,
+              width: .9.sw,
               child: Material(
                 elevation: 4,
                 borderRadius: BorderRadius.circular(30),

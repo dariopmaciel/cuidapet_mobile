@@ -38,12 +38,12 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
             HomeAppBar(controller),
             SliverToBoxAdapter(
                 child: _HomeAddressWidget(controller: controller)),
-             SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: _HomeCategoriesWidget(controller),
-            )
+            ),
           ];
         },
-        body: Container(),
+        body: _HomeSupplierTab(controller, homeController: controller),
       ),
     );
   }
