@@ -9,7 +9,7 @@ class SupplierCoreModule extends Module {
   void binds(Injector i) {
     // i.addLazySingleton<SupplierRepository>(SupplierRepositoryImpl.new);
     i.addLazySingleton<SupplierRepository>(() => SupplierRepositoryImpl(
-        restClient: Modular.get(), logger: Modular.get()));
+        restClient: Modular.get(), log: Modular.get()));
     // i.addLazySingleton<SupplierService>(SupplierServiceImpl.new);
     i.addLazySingleton<SupplierService>(
         () => SupplierServiceImpl(supplierRepository: Modular.get()));

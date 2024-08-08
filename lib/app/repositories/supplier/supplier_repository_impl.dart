@@ -2,19 +2,21 @@ import 'package:cuidapet_mobile/app/core/exceptions/failure.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_cliente_exception.dart';
+import 'package:cuidapet_mobile/app/entities/address_entity.dart';
 import 'package:cuidapet_mobile/app/models/supplier_category_model.dart';
+import 'package:cuidapet_mobile/app/models/supplier_nearby_me_model.dart';
 
 import './supplier_repository.dart';
 
 class SupplierRepositoryImpl extends SupplierRepository {
   final RestClient _restClient;
-  final AppLogger _logger;
+  final AppLogger _log;
 
   SupplierRepositoryImpl({
     required RestClient restClient,
-    required AppLogger logger,
+    required AppLogger log,
   })  : _restClient = restClient,
-        _logger = logger;
+        _log = log;
 
   @override
   Future<List<SupplierCategoryModel>> getCategories() async {
@@ -28,7 +30,26 @@ class SupplierRepositoryImpl extends SupplierRepository {
           .toList();
     } on RestClientException catch (e, s) {
       const message = 'Erro ao buscar categorias dos fornecedores';
-      _logger.error(message, e, s);
+      _log.error(message, e, s);
+      throw Failure(message: message);
+    }
+  }
+
+  @override
+  Future<List<SupplierNearbyMeModel>> findNearBy(AddressEntity address) async {
+    try {
+      final result =
+          await _restClient.auth().get('/suppliers/', queryParameters: {
+        'lat': address.lat,
+        'lng': address.lng,
+      });
+      return result.data
+          ?.map((supplierResponse) =>
+              SupplierNearbyMeModel.fromMap(supplierResponse))
+          .toList();
+    } on RestClientException catch (e, s) {
+      const message = "Erro ao buscar fornecedores perto de mim!";
+      _log.error(message, e, s);
       throw Failure(message: message);
     }
   }
