@@ -21,7 +21,7 @@ class _HomeSupplierTab extends StatelessWidget {
                 duration: const Duration(milliseconds: 400),
                 child: homeController.supplierPageTypeSelected ==
                         SupplierPageType.list
-                    ? const _HomeSuppplierList()
+                    ? _HomeSuppplierList(homeController)
                     : const _HomeSupplierGrid(),
               );
             },
@@ -81,26 +81,37 @@ class _HomeTabHeader extends StatelessWidget {
 }
 
 class _HomeSuppplierList extends StatelessWidget {
-  const _HomeSuppplierList({super.key});
+  final HomeController _homeController;
+
+  const _HomeSuppplierList(this._homeController);
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverList(
-            delegate: SliverChildBuilderDelegate(
-          childCount: 10,
-          (context, index) {
-            return const _HomeSuppplierListItemWidget();
+        Observer(
+          builder: (_) {
+            return SliverList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: _homeController.listSuppliersByAddress.length,
+                (context, index) {
+                  final supplier =
+                      _homeController.listSuppliersByAddress[index];
+                  return _HomeSuppplierListItemWidget(
+                    supplier: supplier,
+                  );
+                },
+              ),
+            );
           },
-        ))
+        )
       ],
     );
   }
 }
 
 class _HomeSupplierGrid extends StatelessWidget {
-  const _HomeSupplierGrid({super.key});
+  const _HomeSupplierGrid();
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +120,9 @@ class _HomeSupplierGrid extends StatelessWidget {
 }
 
 class _HomeSuppplierListItemWidget extends StatelessWidget {
-  const _HomeSuppplierListItemWidget({super.key});
+  final SupplierNearbyMeModel supplier;
+
+  const _HomeSuppplierListItemWidget({required this.supplier});
 
   @override
   Widget build(BuildContext context) {
@@ -136,18 +149,20 @@ class _HomeSuppplierListItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(left: 5),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
                           child: Text(
-                            "Clinica Central ABC",
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                              // "Clinica Central ABC",
+                              supplier.name,
+                              overflow: TextOverflow.ellipsis),
                         ),
                         const SizedBox(height: 10),
                         Row(
                           children: [
                             Icon(Icons.location_on, size: 25.r),
-                            const Text('1.34Km de distancia')
+                            // const Text('1.34Km de distancia')
+                            Text(
+                                '${supplier.distance.toStringAsFixed(2)} km de distancia.'),
                           ],
                         )
                       ],
@@ -191,11 +206,12 @@ class _HomeSuppplierListItemWidget extends StatelessWidget {
                 color: Colors.white,
                 // color: Colors.pink,
                 borderRadius: BorderRadius.circular(100),
-                image: const DecorationImage(
-                  // image: AssetImage('assets/images/logo.png'),
-                  image: NetworkImage('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS_ovn1hkTKcT5UdQE6QCuSNKJAfQKhpx23bYpcz9v-axoOCNg7'),
-                  fit: BoxFit.contain
-                ),
+                image:  DecorationImage(
+                    // image: AssetImage('assets/images/logo.png'),
+                    // image: NetworkImage(
+                    //     'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS_ovn1hkTKcT5UdQE6QCuSNKJAfQKhpx23bYpcz9v-axoOCNg7'),
+                    image: NetworkImage(supplier.logo),
+                    fit: BoxFit.contain),
               ),
             ),
           ),

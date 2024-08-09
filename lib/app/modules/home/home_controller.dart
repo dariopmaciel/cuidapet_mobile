@@ -4,6 +4,7 @@ import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/messages.dart';
 import 'package:cuidapet_mobile/app/entities/address_entity.dart';
 import 'package:cuidapet_mobile/app/models/supplier_category_model.dart';
+import 'package:cuidapet_mobile/app/models/supplier_nearby_me_model.dart';
 import 'package:cuidapet_mobile/app/services/address/address_service.dart';
 import 'package:cuidapet_mobile/app/services/supplier/supplier_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -27,11 +28,29 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   @readonly
   var _supplierPageTypeSelected = SupplierPageType.list;
 
+  @readonly
+  var _listSuppliersByAddress = <SupplierNearbyMeModel>[];
+
+  late ReactionDisposer findSuppliesReactionDisposer;
+
   HomeControllerBase({
     required AddressService addressService,
     required SupplierService supplierService,
   })  : _addressService = addressService,
         _supplierService = supplierService;
+
+//quando houver qualquer alteraçãona nossa variavel de end, automaticamente irá atualizar lista de fonecedores de end
+  @override
+  void onInit([Map<String, dynamic>? params]) {
+    findSuppliesReactionDisposer = reaction((_) => _addressEntity, (address) {
+      findSupplierByAddress();
+    });
+  }
+
+  @override
+  void dispose() {
+    findSuppliesReactionDisposer();
+  }
 
   @override
   Future<void> onReady() async {
@@ -43,9 +62,6 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       //2-se tiver-recuperar ele
       await _getAddressSelected();
       await _getCategories();
-      if (_addressEntity != null) {
-        _supplierService.findNearBy(_addressEntity!);
-      }
     } finally {
       // o finally sempre executa;;; neste caso esconde o show.hide
       Loader.hide();
@@ -91,5 +107,16 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   @action
   void changeTabSupplier(SupplierPageType supplierPageType) {
     _supplierPageTypeSelected = supplierPageType;
+  }
+
+  @action
+  Future<void> findSupplierByAddress() async {
+    if (_addressEntity != null) {
+      final suppliers = await _supplierService.findNearBy(_addressEntity!);
+      _listSuppliersByAddress = [...suppliers];
+    } else {
+      Messages.alert(
+          "Para realizar a busca de petshops, vc precisa selecionar um endereço");
+    }
   }
 }

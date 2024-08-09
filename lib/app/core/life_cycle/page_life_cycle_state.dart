@@ -16,4 +16,10 @@ abstract class PageLifeCycleState<C extends ControllerLifeCycle,
       (timeStamp) => controller.onReady(),
     );
   }
+
+  @override
+  void disposer() {
+    controller.dispose();
+    super.dispose();
+  }
 }
