@@ -8,6 +8,7 @@ import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
 import 'package:cuidapet_mobile/app/modules/home/widgets/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:path/path.dart';
 
 part 'widgets/home_address_widget.dart';
 part 'widgets/home_categories_widget.dart';

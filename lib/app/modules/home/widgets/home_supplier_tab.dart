@@ -22,7 +22,7 @@ class _HomeSupplierTab extends StatelessWidget {
                 child: homeController.supplierPageTypeSelected ==
                         SupplierPageType.list
                     ? _HomeSuppplierList(homeController)
-                    : const _HomeSupplierGrid(),
+                    : _HomeSupplierGrid(homeController),
               );
             },
           ),
@@ -107,15 +107,6 @@ class _HomeSuppplierList extends StatelessWidget {
         )
       ],
     );
-  }
-}
-
-class _HomeSupplierGrid extends StatelessWidget {
-  const _HomeSupplierGrid();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text("SupplierGrid");
   }
 }
 
@@ -206,17 +197,119 @@ class _HomeSuppplierListItemWidget extends StatelessWidget {
                 color: Colors.white,
                 // color: Colors.pink,
                 borderRadius: BorderRadius.circular(100),
-                image:  DecorationImage(
-                    // image: AssetImage('assets/images/logo.png'),
-                    // image: NetworkImage(
-                    //     'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS_ovn1hkTKcT5UdQE6QCuSNKJAfQKhpx23bYpcz9v-axoOCNg7'),
-                    image: NetworkImage(supplier.logo),
-                    fit: BoxFit.contain),
+                image: DecorationImage(
+                  // image: AssetImage('assets/images/logo.png'),
+                  // image: NetworkImage(
+                  //     'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS_ovn1hkTKcT5UdQE6QCuSNKJAfQKhpx23bYpcz9v-axoOCNg7'),
+                  image: NetworkImage(supplier.logo),
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _HomeSupplierGrid extends StatelessWidget {
+  final HomeController controller;
+
+  const _HomeSupplierGrid(this.controller);
+
+  @override
+  Widget build(BuildContext context) {
+    // return const Text("SupplierGrid");
+    return CustomScrollView(
+      slivers: [
+        Observer(
+          builder: (_) {
+            return SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                childCount: controller.listSuppliersByAddress.length,
+                (context, index) {
+                  final supplier = controller.listSuppliersByAddress[index];
+                  return _HomeSupplierCardItemWidget(supplier);
+                },
+              ),
+              gridDelegate: //QTD de COLUNAS
+                  const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1.1,
+                // crossAxisSpacing: 1,
+                // mainAxisSpacing: 1
+              ),
+            );
+          },
+        )
+      ],
+    );
+  }
+}
+
+class _HomeSupplierCardItemWidget extends StatelessWidget {
+  final SupplierNearbyMeModel supplier;
+
+  const _HomeSupplierCardItemWidget(this.supplier);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Card(
+          margin:
+              const EdgeInsets.only(top: 40, left: 10, right: 10, bottom: 10),
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          color: Colors.grey[200],
+          child: SizedBox.expand(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 40, left: 10, right: 10, bottom: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    // 'Clinica Central ABC',
+                    supplier.name,
+                    style: context.textTheme.bodySmall,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    // '1,34 Km de distância',
+                    '${supplier.distance.toStringAsFixed(2)} Km de distância',
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: CircleAvatar(
+            radius: 40,
+            backgroundColor: Colors.grey[100],
+          ),
+        ),
+        Positioned(
+          top: 4,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: CircleAvatar(
+              radius: 35,
+              backgroundImage: NetworkImage(
+                  // 'https://conteudo.imguol.com.br/c/entretenimento/eb/2022/03/23/cachorro-da-raca-lulu-da-pomeramia-1648065976007_v2_900x506.jpg',
+                  supplier.logo),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
