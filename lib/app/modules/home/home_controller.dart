@@ -119,6 +119,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       final suppliers = await _supplierService.findNearBy(_addressEntity!);
       _listSuppliersByAddress = [...suppliers];
       _listSuppliersByAddressCache = [...suppliers];
+      filterSupplier();
     } else {
       Messages.alert(
           "Para realizar a busca de petshops, vc precisa selecionar um endereço");
