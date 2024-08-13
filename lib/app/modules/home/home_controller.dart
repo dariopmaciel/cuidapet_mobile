@@ -32,6 +32,8 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   var _listSuppliersByAddress = <SupplierNearbyMeModel>[];
   var _listSuppliersByAddressCache = <SupplierNearbyMeModel>[];
 
+  var _nameSearcheTest = '';
+
   @readonly
   SupplierCategoryModel? _supplierCategoryFilterSelected;
 
@@ -138,6 +140,11 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
     filterSupplier();
   }
 
+  void filterSupplierByName(String name) {
+    _nameSearcheTest = name;
+    filterSupplier();
+  }
+
   @action
   void filterSupplier() {
     // filtro sobre a lista completa e não sobre a lista já filtrada
@@ -148,6 +155,11 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       suppliers = suppliers
           .where((supplier) =>
               supplier.category == _supplierCategoryFilterSelected?.id)
+          .toList();
+    }
+    if (_nameSearcheTest.isNotEmpty) {
+      suppliers = suppliers
+          .where((supplier) => supplier.name.contains(_nameSearcheTest))
           .toList();
     }
     _listSuppliersByAddress = [...suppliers];
