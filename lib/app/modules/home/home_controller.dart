@@ -128,7 +128,8 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
     // se ele estiver selecionado, ao se selecionar ele vai para nulo
     if (_supplierCategoryFilterSelected == category) {
       _supplierCategoryFilterSelected = null;
+    } else {
+      _supplierCategoryFilterSelected = category;
     }
-    _supplierCategoryFilterSelected = category;
   }
 }
