@@ -125,11 +125,20 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
   @action
   void filteSupplierCategory(SupplierCategoryModel category) {
+    //responsavel pela seleção
     // se ele estiver selecionado, ao se selecionar ele vai para nulo
     if (_supplierCategoryFilterSelected == category) {
       _supplierCategoryFilterSelected = null;
     } else {
       _supplierCategoryFilterSelected = category;
     }
+    filterSupplier();
+  }
+
+  @action
+  void filterSupplier() {
+    //responsavel pelo filtro
+    _listSuppliersByAddress.where(
+        (supplier) => supplier.category == _supplierCategoryFilterSelected?.id);
   }
 }
