@@ -84,6 +84,27 @@ mixin _$HomeController on HomeControllerBase, Store {
     });
   }
 
+  late final _$_supplierCategoryFilterSelectedAtom = Atom(
+      name: 'HomeControllerBase._supplierCategoryFilterSelected',
+      context: context);
+
+  SupplierCategoryModel? get supplierCategoryFilterSelected {
+    _$_supplierCategoryFilterSelectedAtom.reportRead();
+    return super._supplierCategoryFilterSelected;
+  }
+
+  @override
+  SupplierCategoryModel? get _supplierCategoryFilterSelected =>
+      supplierCategoryFilterSelected;
+
+  @override
+  set _supplierCategoryFilterSelected(SupplierCategoryModel? value) {
+    _$_supplierCategoryFilterSelectedAtom
+        .reportWrite(value, super._supplierCategoryFilterSelected, () {
+      super._supplierCategoryFilterSelected = value;
+    });
+  }
+
   late final _$_getAddressSelectedAsyncAction =
       AsyncAction('HomeControllerBase._getAddressSelected', context: context);
 
@@ -127,6 +148,17 @@ mixin _$HomeController on HomeControllerBase, Store {
         name: 'HomeControllerBase.changeTabSupplier');
     try {
       return super.changeTabSupplier(supplierPageType);
+    } finally {
+      _$HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void filteSupplierCategory(SupplierCategoryModel category) {
+    final _$actionInfo = _$HomeControllerBaseActionController.startAction(
+        name: 'HomeControllerBase.filteSupplierCategory');
+    try {
+      return super.filteSupplierCategory(category);
     } finally {
       _$HomeControllerBaseActionController.endAction(_$actionInfo);
     }

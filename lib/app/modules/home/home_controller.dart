@@ -31,6 +31,9 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   @readonly
   var _listSuppliersByAddress = <SupplierNearbyMeModel>[];
 
+  @readonly
+  SupplierCategoryModel? _supplierCategoryFilterSelected;
+
   late ReactionDisposer findSuppliesReactionDisposer;
 
   HomeControllerBase({
@@ -118,5 +121,14 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       Messages.alert(
           "Para realizar a busca de petshops, vc precisa selecionar um endereço");
     }
+  }
+
+  @action
+  void filteSupplierCategory(SupplierCategoryModel category) {
+    // se ele estiver selecionado, ao se selecionar ele vai para nulo
+    if (_supplierCategoryFilterSelected == category) {
+      _supplierCategoryFilterSelected = null;
+    }
+    _supplierCategoryFilterSelected = category;
   }
 }
