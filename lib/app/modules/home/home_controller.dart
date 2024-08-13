@@ -39,7 +39,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   })  : _addressService = addressService,
         _supplierService = supplierService;
 
-//quando houver qualquer alteraçãona nossa variavel de end, automaticamente irá atualizar lista de fonecedores de end
+//quando houver qualquer alteraçãona nossa variavel de end, automaticamente irá atualizar lista de fonecedores de endereços
   @override
   void onInit([Map<String, dynamic>? params]) {
     findSuppliesReactionDisposer = reaction((_) => _addressEntity, (address) {
