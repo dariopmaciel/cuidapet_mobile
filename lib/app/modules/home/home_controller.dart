@@ -138,6 +138,10 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   @action
   void filterSupplier() {
     //responsavel pelo filtro
-    _listSuppliersByAddress.where((supplier) => supplier.category == _supplierCategoryFilterSelected?.id).toList();
+    final supplier = _listSuppliersByAddress
+        .where((supplier) =>
+            supplier.category == _supplierCategoryFilterSelected?.id)
+        .toList();
+    _listSuppliersByAddress = [...supplier];
   }
 }
