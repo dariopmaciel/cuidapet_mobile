@@ -11,6 +11,16 @@ class SupplierPage extends StatefulWidget {
 }
 
 class _SupplierPageState extends State<SupplierPage> {
+  late ScrollController _scrollController;
+  bool sliverColapsed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +39,7 @@ class _SupplierPageState extends State<SupplierPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: CustomScrollView(
+        controller: _scrollController,
         slivers: [
           SliverAppBar(
             expandedHeight: 200,
