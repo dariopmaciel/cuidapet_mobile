@@ -21,8 +21,8 @@ class CuidapetDefaultButton extends StatelessWidget {
     required this.label,
     this.labelSize = 20,
     this.padding = 10,
-     this.widgt = double.infinity,
-     this.height = 66,
+    this.widgt = double.infinity,
+    this.height = 66,
   });
 
   @override
