@@ -72,9 +72,8 @@ class _CuidapetAppBar extends StatelessWidget {
                     //o 'onChange' faz busca a cada novo caractere, usar the DEBOUNCER
                     onChanged: (value) {
                       _debouncer.run(() {
-                        
-                      },);
-                      controller.filterSupplierByName(value);
+                        controller.filterSupplierByName(value);
+                      });
                     },
                     decoration: InputDecoration(
                       // fillColor: Colors.red,
