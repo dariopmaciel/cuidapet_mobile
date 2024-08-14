@@ -18,7 +18,19 @@ class _SupplierPageState extends State<SupplierPage> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _scrollController.addListener(() {});
+    _scrollController.addListener(() {
+      if (_scrollController.offset > 180 &&
+          !_scrollController.position.outOfRange) {
+        setState(() {
+          sliverColapsed = true;
+        });
+      } else if (_scrollController.offset <= 180 &&
+          !_scrollController.position.outOfRange) {
+        setState(() {
+          sliverColapsed = false;
+        });
+      }
+    });
   }
 
   @override
@@ -26,10 +38,14 @@ class _SupplierPageState extends State<SupplierPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         shape: const StadiumBorder(),
+        
         onPressed: () {},
         label: const Text(
           "Fazer Agendamento",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+          ),
         ),
         icon: const Icon(
           Icons.schedule,
@@ -44,12 +60,11 @@ class _SupplierPageState extends State<SupplierPage> {
           SliverAppBar(
             expandedHeight: 200,
             pinned: true,
-            title: const Text("Clinica Central ABC",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-                textAlign: TextAlign.center),
+            title: Visibility(
+              visible: sliverColapsed,
+              child: const Text("Clinica Central ABC",
+                  textAlign: TextAlign.center),
+            ),
             flexibleSpace: FlexibleSpaceBar(
               stretchModes: const [
                 StretchMode.zoomBackground,
