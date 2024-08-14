@@ -159,7 +159,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
     }
     if (_nameSearcheTest.isNotEmpty) {
       suppliers = suppliers
-          .where((supplier) => supplier.name.contains(_nameSearcheTest))
+          .where((supplier) => supplier.name.toLowerCase().contains(_nameSearcheTest.toLowerCase()))
           .toList();
     }
     _listSuppliersByAddress = [...suppliers];

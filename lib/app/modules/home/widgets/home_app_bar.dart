@@ -1,3 +1,4 @@
+import 'package:cuidapet_mobile/app/core/helpers/debouncer.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/size_screen_extension.dart';
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/modules/home/home_controller.dart';
@@ -17,9 +18,11 @@ class HomeAppBar extends SliverAppBar {
 }
 
 class _CuidapetAppBar extends StatelessWidget {
+  // final debouncer = Debouncer(milliseconds: 500);
+  final _debouncer = Debouncer(milliseconds: 500);
   final HomeController controller;
 
-  const _CuidapetAppBar(this.controller);
+  _CuidapetAppBar(this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +43,7 @@ class _CuidapetAppBar extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-              controller.goToAddressPage();
-
-
+            controller.goToAddressPage();
           },
           icon: const Icon(
             Icons.location_on,
@@ -68,7 +69,15 @@ class _CuidapetAppBar extends StatelessWidget {
                   elevation: 4,
                   borderRadius: BorderRadius.circular(30),
                   child: TextFormField(
+                    //o 'onChange' faz busca a cada novo caractere, usar the DEBOUNCER
+                    onChanged: (value) {
+                      _debouncer.run(() {
+                        
+                      },);
+                      controller.filterSupplierByName(value);
+                    },
                     decoration: InputDecoration(
+                      // fillColor: Colors.red,
                       fillColor: Colors.white,
                       filled: true,
                       suffixIcon: const Icon(
