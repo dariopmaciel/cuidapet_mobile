@@ -36,6 +36,14 @@ class _SupplierPageState extends State<SupplierPage> {
     });
   }
 
+@override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     // print("BUILLLLDDDD!!!!!!!!!!!!!!!!!!!!");
