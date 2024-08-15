@@ -77,9 +77,10 @@ class _AddressPageState
     //* Modular.get<SqliteConnectionFactory>().openConnection();
 
     return PopScope(
-      canPop: false ,
+      canPop: false,
       //  key:,
-      onPopInvoked: (_)=> controller.addressWasSelected(),
+      // onPopInvoked: (_)=> controller.addressWasSelected(),
+      onPopInvokedWithResult: (didPop, result) => controller.addressWasSelected(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
