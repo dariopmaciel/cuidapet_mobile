@@ -13,6 +13,7 @@ class SupplierPage extends StatefulWidget {
 class _SupplierPageState extends State<SupplierPage> {
   late ScrollController _scrollController;
   bool sliverColapsed = false;
+  final sliverColapsedVN = ValueNotifier(false);
 
   @override
   void initState() {
@@ -21,14 +22,16 @@ class _SupplierPageState extends State<SupplierPage> {
     _scrollController.addListener(() {
       if (_scrollController.offset > 180 &&
           !_scrollController.position.outOfRange) {
-        setState(() {
-          sliverColapsed = true;
-        });
+        sliverColapsedVN.value = true;
+        // setState(() {
+        //   sliverColapsed = true;
+        // });
       } else if (_scrollController.offset <= 180 &&
           !_scrollController.position.outOfRange) {
-        setState(() {
-          sliverColapsed = false;
-        });
+        sliverColapsedVN.value = false;
+        // setState(() {
+        //   sliverColapsed = false;
+        // });
       }
     });
   }
@@ -39,7 +42,6 @@ class _SupplierPageState extends State<SupplierPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         shape: const StadiumBorder(),
-        
         onPressed: () {},
         label: const Text(
           "Fazer Agendamento",
@@ -61,10 +63,15 @@ class _SupplierPageState extends State<SupplierPage> {
           SliverAppBar(
             expandedHeight: 200,
             pinned: true,
-            title: Visibility(
-              visible: sliverColapsed,
-              child: const Text("Clinica Central ABC",
-                  textAlign: TextAlign.center),
+            title: ValueListenableBuilder(
+              valueListenable: sliverColapsedVN,
+              builder: (_, sliverColapsedValue, child) {
+                return Visibility(
+                  visible: sliverColapsedValue,
+                  child: const Text("Clinica Central ABC",
+                      textAlign: TextAlign.center),
+                );
+              },
             ),
             flexibleSpace: FlexibleSpaceBar(
               stretchModes: const [
