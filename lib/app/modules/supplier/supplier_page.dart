@@ -63,7 +63,7 @@ class _SupplierPageState extends State<SupplierPage> {
           SliverAppBar(
             expandedHeight: 200,
             pinned: true,
-            title: ValueListenableBuilder(
+            title: ValueListenableBuilder<bool>(
               valueListenable: sliverColapsedVN,
               builder: (_, sliverColapsedValue, child) {
                 return Visibility(
