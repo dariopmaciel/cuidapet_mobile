@@ -66,6 +66,7 @@ class _SupplierPageState extends State<SupplierPage> {
             title: ValueListenableBuilder<bool>(
               valueListenable: sliverColapsedVN,
               builder: (_, sliverColapsedValue, child) {
+                print("BUILLLLDDOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!");
                 return Visibility(
                   visible: sliverColapsedValue,
                   child: const Text("Clinica Central ABC",
