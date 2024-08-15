@@ -35,6 +35,7 @@ class _SupplierPageState extends State<SupplierPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("BUILLLLDDDD!!!!!!!!!!!!!!!!!!!!");
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         shape: const StadiumBorder(),
