@@ -3,6 +3,7 @@ import 'package:cuidapet_mobile/app/core/helpers/constants.dart';
 import 'package:cuidapet_mobile/app/core/local_storage/local_storage.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
+import 'package:cuidapet_mobile/app/core/rest_client/rest_cliente_exception.dart';
 
 import 'package:cuidapet_mobile/app/modules/core/auth/auth_store.dart';
 import 'package:dio/dio.dart';
@@ -42,8 +43,7 @@ class AuthRefreshTokenInterceptor extends Interceptor {
             _log.info('################# Refresh Token #################');
             await _refreshToken(err);
             await _retryRequest(err, handler);
-            _log.info(
-                '################# Refresh Token Sucesso #################');
+            _log.info('############# Refresh Token Sucesso #############');
           } else {
             throw err;
           }
@@ -67,20 +67,25 @@ class AuthRefreshTokenInterceptor extends Interceptor {
   }
 
   Future<void> _refreshToken(DioException err) async {
-    final refreshToken = await _localSecureStorage
-        .read(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY);
-
-    if (refreshToken == null) {
-      throw ExpiredTokenException();
-    }
-    final resultRefresh = await _restClient.auth().put('/auth/refresh', data: {
-      'refresh_token': refreshToken,
-    });
-    await _localStorage.write<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY,
-        resultRefresh.data['access_token']);
-
-    await _localSecureStorage.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY,
-        resultRefresh.data['refresh_token']);
+    try {
+  final refreshToken = await _localSecureStorage
+      .read(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY);
+  
+  if (refreshToken == null) {
+    throw ExpiredTokenException();
+  }
+  final resultRefresh = await _restClient.auth().put('/auth/refresh', data: {
+    'refresh_token': refreshToken,
+  });
+  await _localStorage.write<String>(Constants.LOCAL_STORAGE_ACCESS_TOKEN_KEY,
+      resultRefresh.data['access_token']);
+  
+  await _localSecureStorage.write(Constants.LOCAL_STORAGE_REFRESH_TOKEN_KEY,
+      resultRefresh.data['refresh_token']);
+} on RestClientException catch (e, s) {
+  _log.error("Erro ao tentar fazer refresh_token", e, s);
+  throw ExpiredTokenException();
+}
   }
 
   Future<void> _retryRequest(
