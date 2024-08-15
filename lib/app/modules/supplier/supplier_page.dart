@@ -38,7 +38,7 @@ class _SupplierPageState extends State<SupplierPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("BUILLLLDDDD!!!!!!!!!!!!!!!!!!!!");
+    // print("BUILLLLDDDD!!!!!!!!!!!!!!!!!!!!");
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         shape: const StadiumBorder(),
@@ -66,7 +66,7 @@ class _SupplierPageState extends State<SupplierPage> {
             title: ValueListenableBuilder<bool>(
               valueListenable: sliverColapsedVN,
               builder: (_, sliverColapsedValue, child) {
-                print("BUILLLLDDOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!");
+                // print("BUILLLLDDOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!! $sliverColapsedValue");
                 return Visibility(
                   visible: sliverColapsedValue,
                   child: const Text("Clinica Central ABC",
