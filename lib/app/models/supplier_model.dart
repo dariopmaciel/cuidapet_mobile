@@ -32,17 +32,18 @@ class SupplierModel {
   final String logo;
   final String address;
   final String phone;
-  final double lat;
-  final double lng;
+  final double latitude;
+  final double longitude;
   final SupplierCategoryModel category;
+
   SupplierModel({
     required this.id,
     required this.name,
     required this.logo,
     required this.address,
     required this.phone,
-    required this.lat,
-    required this.lng,
+    required this.latitude,
+    required this.longitude,
     required this.category,
   });
 
@@ -53,8 +54,8 @@ class SupplierModel {
       'logo': logo,
       'address': address,
       'phone': phone,
-      'lat': lat,
-      'lng': lng,
+      'lat': latitude,
+      'lng': longitude,
       'category': category.toMap(),
     };
   }
@@ -66,8 +67,8 @@ class SupplierModel {
       logo: (map['logo'] ?? '') as String,
       address: (map['address'] ?? '') as String,
       phone: (map['phone'] ?? '') as String,
-      lat: (map['lat'] ?? 0.0) as double,
-      lng: (map['lng'] ?? 0.0) as double,
+      latitude: (map['lat'] ?? 0.0) as double,
+      longitude: (map['lng'] ?? 0.0) as double,
       category: SupplierCategoryModel.fromMap(
           map['category'] as Map<String, dynamic>),
     );
