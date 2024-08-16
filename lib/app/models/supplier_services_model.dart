@@ -6,7 +6,6 @@ class SupplierServicesModel {
   final int supplier_id;
   final String name;
   final double price;
-
   SupplierServicesModel({
     required this.id,
     required this.supplier_id,
@@ -14,10 +13,11 @@ class SupplierServicesModel {
     required this.price,
   });
 
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'supplierId': supplier_id,
+      'supplier_id': supplier_id,
       'name': name,
       'price': price,
     };
@@ -26,7 +26,7 @@ class SupplierServicesModel {
   factory SupplierServicesModel.fromMap(Map<String, dynamic> map) {
     return SupplierServicesModel(
       id: (map['id'] ?? 0) as int,
-      supplier_id: (map['supplierId'] ?? 0) as int,
+      supplier_id: (map['supplier_id'] ?? 0) as int,
       name: (map['name'] ?? '') as String,
       price: (map['price'] ?? 0.0) as double,
     );
@@ -34,7 +34,5 @@ class SupplierServicesModel {
 
   String toJson() => json.encode(toMap());
 
-  factory SupplierServicesModel.fromJson(String source) =>
-      SupplierServicesModel.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+  factory SupplierServicesModel.fromJson(String source) => SupplierServicesModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
