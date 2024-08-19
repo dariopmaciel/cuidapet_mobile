@@ -1,6 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cuidapet_mobile/app/core/life_cycle/controller_life_cycle.dart';
 import 'package:cuidapet_mobile/app/core/logger/app_logger.dart';
+import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
+import 'package:cuidapet_mobile/app/core/ui/widgets/messages.dart';
+import 'package:cuidapet_mobile/app/models/supplier_model.dart';
+import 'package:cuidapet_mobile/app/models/supplier_services_model.dart';
 
 import 'package:mobx/mobx.dart';
 
@@ -14,6 +18,11 @@ abstract class SupplierControllerBase with Store, ControllerLifeCycle {
   final SupplierService _supplierService;
   final AppLogger _log;
   int _supplierId = 0;
+
+  @readonly
+  SupplierModel? _supplierModel;
+  @readonly
+  var _supplierServices = <SupplierServicesModel>[];
 
   SupplierControllerBase({
     required SupplierService supplierService,
@@ -37,5 +46,39 @@ abstract class SupplierControllerBase with Store, ControllerLifeCycle {
 
 // implementear metodo para quando a pagina for compilada (está pronta)
   @override
-  void onReady() {}
+  Future<void> onReady() async {
+    //interação com usuário//buscar os dados
+    try {
+      Loader.show();
+      //!O FUTURE.WAIT PERMITE QUE AMBAS FUNCIONEM AO MESMO TEMPO!!!!
+      await Future.wait([
+        //buscar detalhes do fornecedor em paralelo com a próxima
+        _findSupplierById(),
+        //buscar serviços do fornecedor em paralelo com a anterior
+        _findSupplierServices(),
+      ]);
+    } finally {
+      Loader.hide();
+    }
+  }
+
+  @action
+  Future<void> _findSupplierById() async {
+    try {
+      _supplierModel = await _supplierService.findById(_supplierId);
+    } catch (e, s) {
+      _log.error("Erro ao buscar DADOS do fornecedor", e, s);
+      Messages.alert("Erro ao buscar DADOS do fornecedor");
+    }
+  }
+
+  @action
+  Future<void> _findSupplierServices() async {
+    try {
+      _supplierServices = await _supplierService.findServices(_supplierId);
+    } catch (e, s) {
+      _log.error("Erro ao buscar SERVIÇOS do fornecedor", e, s);
+      Messages.alert("Erro ao buscar SERVIÇOS do fornecedor");
+    }
+  }
 }
