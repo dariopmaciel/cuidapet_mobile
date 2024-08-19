@@ -26,11 +26,13 @@ abstract class SupplierControllerBase with Store, ControllerLifeCycle {
   void onInit([Map<String, dynamic>? params]) {
     //TESTE
     // print( 'PASSANDO: $params');
-
+//--------------------F
     //uma vez que está s epassadno o parametro de id para prox pagina, se guarda ele
-    if(params!=null){
-      _supplierId = params['supplierId'];
-    }
+    // if (params != null) {
+    //   _supplierId = params['supplierId'];
+    // }
+    //ou isto
+    _supplierId = params?['supplierId'] ?? 0;
   }
 
 // implementear metodo para quando a pagina for compilada (está pronta)
