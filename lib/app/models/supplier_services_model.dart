@@ -3,12 +3,12 @@ import 'dart:convert';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class SupplierServicesModel {
   final int id;
-  final int supplier_id;
+  final int supplierId;
   final String name;
   final double price;
   SupplierServicesModel({
     required this.id,
-    required this.supplier_id,
+    required this.supplierId,
     required this.name,
     required this.price,
   });
@@ -17,7 +17,7 @@ class SupplierServicesModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'supplier_id': supplier_id,
+      'supplier_id': supplierId,
       'name': name,
       'price': price,
     };
@@ -26,7 +26,7 @@ class SupplierServicesModel {
   factory SupplierServicesModel.fromMap(Map<String, dynamic> map) {
     return SupplierServicesModel(
       id: (map['id'] ?? 0) as int,
-      supplier_id: (map['supplier_id'] ?? 0) as int,
+      supplierId: (map['supplier_id'] ?? 0) as int,
       name: (map['name'] ?? '') as String,
       price: (map['price'] ?? 0.0) as double,
     );

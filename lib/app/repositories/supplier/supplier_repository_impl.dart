@@ -4,7 +4,9 @@ import 'package:cuidapet_mobile/app/core/rest_client/rest_client.dart';
 import 'package:cuidapet_mobile/app/core/rest_client/rest_cliente_exception.dart';
 import 'package:cuidapet_mobile/app/entities/address_entity.dart';
 import 'package:cuidapet_mobile/app/models/supplier_category_model.dart';
+import 'package:cuidapet_mobile/app/models/supplier_model.dart';
 import 'package:cuidapet_mobile/app/models/supplier_nearby_me_model.dart';
+import 'package:cuidapet_mobile/app/models/supplier_services_model.dart';
 
 import './supplier_repository.dart';
 
@@ -52,5 +54,17 @@ class SupplierRepositoryImpl extends SupplierRepository {
       _log.error(message, e, s);
       throw Failure(message: message);
     }
+  }
+
+  @override
+  Future<SupplierModel> findById(int id) {
+    // TODO: implement findById
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<SupplierServicesModel>> findServices(int supllierId) {
+    // TODO: implement findServices
+    throw UnimplementedError();
   }
 }
