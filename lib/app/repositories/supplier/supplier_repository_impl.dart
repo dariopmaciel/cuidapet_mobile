@@ -57,14 +57,34 @@ class SupplierRepositoryImpl extends SupplierRepository {
   }
 
   @override
-  Future<SupplierModel> findById(int id) {
-    // TODO: implement findById
-    throw UnimplementedError();
+  Future<SupplierModel> findById(int id) async {
+    try {
+      final result = await _restClient.auth().get('//suppliers/$id');
+      return SupplierModel.fromMap(result.data);
+    } on RestClientException catch (e, s) {
+      _log.error("Erro ao buscar dados do fornecedor or ID", e, s);
+      throw Failure(message: "Erro ao buscar dados do dornecedor por ID");
+    }
   }
 
   @override
-  Future<List<SupplierServicesModel>> findServices(int supllierId) {
-    // TODO: implement findServices
-    throw UnimplementedError();
+  Future<List<SupplierServicesModel>> findServices(int supplierId) async {
+    try {
+      final result =
+          await _restClient.auth().get('/suppliers/$supplierId/services');
+
+      // final servicesList = result.data?.map<SupplierServicesModel>((jService)=>SupplierServicesModel.fromMap(jService)).toList() ?? <SupplierServicesModel>[];
+      
+      // return servicesList;
+      // ou igual ao de baixo
+      return result.data
+              ?.map<SupplierServicesModel>(
+                  (jService) => SupplierServicesModel.fromMap(jService))
+              .toList() ??
+          <SupplierServicesModel>[];
+    } on RestClientException catch (e, s) {
+      _log.error("Erro ao buscar serviços do fornecedor", e, s);
+      throw Failure(message: "Erro ao buscar serviços do fornecedor");
+    }
   }
 }

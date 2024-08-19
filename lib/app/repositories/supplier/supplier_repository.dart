@@ -11,5 +11,5 @@ abstract class SupplierRepository {
 
   Future<SupplierModel> findById(int id);
 
-  Future<List<SupplierServicesModel>> findServices(int supllierId);
+  Future<List<SupplierServicesModel>> findServices(int supplierId);
 }

@@ -20,11 +20,8 @@ class CoreModule extends Module {
   void binds(Injector i) {
     i.addSingleton(
       () => AuthStore(
-        localStorage: Modular.get(),
-        localSecureStorage: Modular.get(),
-        addressService: Modular.get(),
-      ),
-    );
+          localStorage: Modular.get(), localSecureStorage: Modular.get(), addressService: Modular.get()));
+          // localStorage: i(), localSecureStorage: i(), addressService: i()));
     i.addLazySingleton<AddressService>(
       () => AddressServiceImpl(
         addressRepository: Modular.get(),
