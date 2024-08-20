@@ -5,7 +5,9 @@ import 'package:cuidapet_mobile/app/core/ui/widgets/loader.dart';
 import 'package:cuidapet_mobile/app/core/ui/widgets/messages.dart';
 import 'package:cuidapet_mobile/app/models/supplier_model.dart';
 import 'package:cuidapet_mobile/app/models/supplier_services_model.dart';
+import 'package:cuidapet_mobile/app/modules/schedules/model/schedules_view_model.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:mobx/mobx.dart';
@@ -122,8 +124,19 @@ abstract class SupplierControllerBase with Store, ControllerLifeCycle {
     if (await canLaunchUrlString(geoUrl)) {
       await launchUrlString(geoUrl);
     } else {
-      await Clipboard.setData(ClipboardData(text: _supplierModel?.address ?? ''));
+      await Clipboard.setData(
+          ClipboardData(text: _supplierModel?.address ?? ''));
       Messages.info("Localização Copiada!");
     }
+  }
+
+  void goToSchedule() {
+    Modular.to.pushNamed(
+      '/schedules/',
+      arguments: SchedulesViewModel(
+        supplierId: _supplierId,
+        services: _servicesSelected.toList(),
+      ),
+    );
   }
 }
