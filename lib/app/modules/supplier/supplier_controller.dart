@@ -86,4 +86,14 @@ abstract class SupplierControllerBase with Store, ControllerLifeCycle {
     }
   }
 
+  @action
+  void addOrRemoveServices(SupplierServicesModel supplierServicesModel) {
+    if (_servicesSelected.contains(supplierServicesModel)) {
+      // se existir remove da lista
+      _servicesSelected.remove(supplierServicesModel);
+    } else {
+      //se não existir add na lista
+      _servicesSelected.add(supplierServicesModel);
+    }
+  }
 }

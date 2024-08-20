@@ -82,6 +82,20 @@ mixin _$SupplierController on SupplierControllerBase, Store {
         .run(() => super._findSupplierServices());
   }
 
+  late final _$SupplierControllerBaseActionController =
+      ActionController(name: 'SupplierControllerBase', context: context);
+
+  @override
+  void addOrRemoveServices(SupplierServicesModel supplierServicesModel) {
+    final _$actionInfo = _$SupplierControllerBaseActionController.startAction(
+        name: 'SupplierControllerBase.addOrRemoveServices');
+    try {
+      return super.addOrRemoveServices(supplierServicesModel);
+    } finally {
+      _$SupplierControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
