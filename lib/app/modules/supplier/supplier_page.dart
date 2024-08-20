@@ -65,7 +65,7 @@ class _SupplierPageState
               opacity: controller.totalServicesSelected > 0 ? 1 : 0,
               child: FloatingActionButton.extended(
                 shape: const StadiumBorder(),
-                onPressed: () {},
+                onPressed: controller.goToSchedule,
                 label: const Text(
                   "Fazer Agendamento",
                   style: TextStyle(
