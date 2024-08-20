@@ -122,7 +122,7 @@ abstract class SupplierControllerBase with Store, ControllerLifeCycle {
     if (await canLaunchUrlString(geoUrl)) {
       await launchUrlString(geoUrl);
     } else {
-      await Clipboard.setData(ClipboardData(text: _supplierModel?.phone ?? ''));
+      await Clipboard.setData(ClipboardData(text: _supplierModel?.address ?? ''));
       Messages.info("Localização Copiada!");
     }
   }
