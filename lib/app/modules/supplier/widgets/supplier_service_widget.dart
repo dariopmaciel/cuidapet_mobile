@@ -3,6 +3,7 @@ import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/models/supplier_services_model.dart';
 import 'package:cuidapet_mobile/app/modules/supplier/supplier_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class SupplierServiceWidget extends StatelessWidget {
   final SupplierServicesModel service;
@@ -30,16 +31,26 @@ class SupplierServiceWidget extends StatelessWidget {
       ),
       // trailing: Icon(Icons.add_circle, color: context.primaryColor, size: 30),
       // trailing: const Icon(Icons.remove_circle, color: Colors.red, size:30),
-      trailing: IconButton(
-        onPressed: () {
-          supplierController.addOrRemoveServices(service);
-        },
-        icon: supplierController.isServiceSelected(service) ? 
-        Icon(Icons.add_circle, color: context.primaryColor, size: 30)
-        : 
-        const Icon(Icons.remove_circle, color: Colors.red, size:30)
-        ,
-      ),
+      trailing: Observer(
+          builder: (_) {
+              return IconButton(
+              onPressed: () {
+                supplierController.addOrRemoveServices(service);
+              },
+              icon: supplierController.isServiceSelected(service)
+                  ? const Icon(
+                      Icons.remove_circle,
+                      color: Colors.red,
+                      size: 30,
+                    )
+                  : Icon(
+                      Icons.add_circle,
+                      color: context.primaryColor,
+                      size: 30,
+                    ),
+            );
+          },
+      )
     );
   }
 }

@@ -119,13 +119,14 @@ class _SupplierPageState
                 SliverToBoxAdapter(
                   child: SupplierDetail(supplier: supplier),
                 ),
-                const SliverToBoxAdapter(
+                SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Serviços (0 selecionados)",
+                      // "Serviços (0 selecionados)",
+                      "Serviços (${controller.totalServicesSelected} selecionado${controller.totalServicesSelected > 1? 's' : ''})",
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
