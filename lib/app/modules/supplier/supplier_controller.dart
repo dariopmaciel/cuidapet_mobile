@@ -96,4 +96,11 @@ abstract class SupplierControllerBase with Store, ControllerLifeCycle {
       _servicesSelected.add(supplierServicesModel);
     }
   }
+
+
+
+  bool isServiceSelected(SupplierServicesModel servicesModel) => _servicesSelected.contains(servicesModel);
+      
+    
+  
 }
