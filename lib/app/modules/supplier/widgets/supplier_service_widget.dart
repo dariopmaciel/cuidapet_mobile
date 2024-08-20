@@ -34,7 +34,11 @@ class SupplierServiceWidget extends StatelessWidget {
         onPressed: () {
           supplierController.addOrRemoveServices(service);
         },
-        icon: ,
+        icon: supplierController.isServiceSelected(service) ? 
+        Icon(Icons.add_circle, color: context.primaryColor, size: 30)
+        : 
+        const Icon(Icons.remove_circle, color: Colors.red, size:30)
+        ,
       ),
     );
   }
