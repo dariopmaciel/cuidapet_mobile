@@ -58,21 +58,29 @@ class _SupplierPageState
   Widget build(BuildContext context) {
     // print("BUILLLLDDDD!!!!!!!!!!!!!!!!!!!!");
     return Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          shape: const StadiumBorder(),
-          onPressed: () {},
-          label: const Text(
-            "Fazer Agendamento",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-            ),
-          ),
-          icon: const Icon(
-            Icons.schedule,
-            color: Colors.white,
-          ),
-          backgroundColor: context.primaryColor,
+        floatingActionButton: Observer(
+          builder: (_) {
+            return AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: controller.totalServicesSelected > 0 ? 1 : 0,
+              child: FloatingActionButton.extended(
+                shape: const StadiumBorder(),
+                onPressed: () {},
+                label: const Text(
+                  "Fazer Agendamento",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                icon: const Icon(
+                  Icons.schedule,
+                  color: Colors.white,
+                ),
+                backgroundColor: context.primaryColor,
+              ),
+            );
+          },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Observer(
@@ -124,9 +132,9 @@ class _SupplierPageState
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       // "Serviços (0 selecionados)",
-                      "Serviços (${controller.totalServicesSelected} selecionado${controller.totalServicesSelected > 1? 's' : ''})",
-                      style:
-                          const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      "Serviços (${controller.totalServicesSelected} selecionado${controller.totalServicesSelected > 1 ? 's' : ''})",
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
