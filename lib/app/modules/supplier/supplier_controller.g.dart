@@ -45,6 +45,25 @@ mixin _$SupplierController on SupplierControllerBase, Store {
     });
   }
 
+  late final _$_servicesSelectedAtom =
+      Atom(name: 'SupplierControllerBase._servicesSelected', context: context);
+
+  ObservableList<SupplierServicesModel> get servicesSelected {
+    _$_servicesSelectedAtom.reportRead();
+    return super._servicesSelected;
+  }
+
+  @override
+  ObservableList<SupplierServicesModel> get _servicesSelected =>
+      servicesSelected;
+
+  @override
+  set _servicesSelected(ObservableList<SupplierServicesModel> value) {
+    _$_servicesSelectedAtom.reportWrite(value, super._servicesSelected, () {
+      super._servicesSelected = value;
+    });
+  }
+
   late final _$_findSupplierByIdAsyncAction =
       AsyncAction('SupplierControllerBase._findSupplierById', context: context);
 

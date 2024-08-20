@@ -24,6 +24,10 @@ abstract class SupplierControllerBase with Store, ControllerLifeCycle {
   @readonly
   var _supplierServices = <SupplierServicesModel>[];
 
+  @readonly
+  var _servicesSelected = <SupplierServicesModel>[]
+      .asObservable(); //transforma em uma lista observavel
+
   SupplierControllerBase({
     required SupplierService supplierService,
     required AppLogger log,
@@ -81,4 +85,5 @@ abstract class SupplierControllerBase with Store, ControllerLifeCycle {
       Messages.alert("Erro ao buscar SERVIÇOS do fornecedor");
     }
   }
+
 }
