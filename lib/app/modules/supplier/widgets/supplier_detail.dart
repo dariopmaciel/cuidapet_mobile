@@ -1,12 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+
 import 'package:cuidapet_mobile/app/core/ui/extensions/theme_extension.dart';
 import 'package:cuidapet_mobile/app/models/supplier_model.dart';
-
-import 'package:flutter/material.dart';
+import 'package:cuidapet_mobile/app/modules/supplier/supplier_controller.dart';
 
 class SupplierDetail extends StatelessWidget {
   final SupplierModel supplier;
 
-  const SupplierDetail({super.key, required this.supplier});
+final SupplierController controller;
+
+
+  const SupplierDetail({
+    Key? key,
+    required this.supplier,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +45,16 @@ class SupplierDetail extends StatelessWidget {
           // title: Text("Avenida Paulista, 2000"),
           title: Text(supplier.address),
         ),
-        InkWell(
-          onTap: () {},
-          child:  ListTile(
-            leading: const InkWell(
-              child: Icon(
-                Icons.local_phone,
-                color: Colors.black,
-              ),
+        ListTile(
+          onTap: () => controller.goToPhoneOrCopyPhoneToClipart(),
+          leading: const InkWell(
+            child: Icon(
+              Icons.local_phone,
+              color: Colors.black,
             ),
-            // title: Text("(11)98199-6400"),
-            title: Text(supplier.phone),
           ),
+          // title: Text("(11)98199-6400"),
+          title: Text(supplier.phone),
         ),
         Divider(thickness: 1, color: context.primaryColor),
       ],

@@ -125,7 +125,10 @@ class _SupplierPageState
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: SupplierDetail(supplier: supplier),
+                  child: SupplierDetail(
+                    supplier: supplier,
+                  controller: controller,
+                  ),
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
