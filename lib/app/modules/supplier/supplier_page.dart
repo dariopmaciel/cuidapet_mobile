@@ -12,7 +12,7 @@ class SupplierPage extends StatefulWidget {
   const SupplierPage({
     super.key,
     required int supplierId,
-  })  : _supplierId = supplierId;
+  }) : _supplierId = supplierId;
 
   @override
   State<SupplierPage> createState() => _SupplierPageState();
@@ -134,7 +134,10 @@ class _SupplierPageState
                   childCount: controller.supplierServices.length,
                   (context, index) {
                     final service = controller.supplierServices[index];
-                    return SupplierServiceWidget(service: service);
+                    return SupplierServiceWidget(
+                      service: service,
+                      supplierController: controller,
+                    );
                   },
                 )),
               ],
