@@ -41,6 +41,7 @@ final SupplierController controller;
               textAlign: TextAlign.center),
         ),
         ListTile(
+          onTap: () => controller.goToGeoOrCopyAddressToClipart(),
           leading: const Icon(Icons.location_city, color: Colors.black),
           // title: Text("Avenida Paulista, 2000"),
           title: Text(supplier.address),
