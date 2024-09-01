@@ -8,14 +8,13 @@ import 'package:cuidapet_mobile/app/modules/supplier/supplier_controller.dart';
 class SupplierDetail extends StatelessWidget {
   final SupplierModel supplier;
 
-final SupplierController controller;
-
+  final SupplierController controller;
 
   const SupplierDetail({
-    Key? key,
+    super.key,
     required this.supplier,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

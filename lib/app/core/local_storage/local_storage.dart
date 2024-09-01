@@ -6,6 +6,7 @@ abstract interface class LocalStorage {
   Future<void> remove(String key);
 }
 
+
 abstract interface class LocalSecureStorage {
   Future<String?> read(String key);
   Future<void> write(String key, String valor);

@@ -32,8 +32,7 @@ class AuthModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child(Modular.initialRoute,
-        child: (_) => AuthHomePage(authStore: Modular.get()));
+    r.child(Modular.initialRoute, child: (_) => AuthHomePage(authStore: Modular.get()));
     r.module('/login/', module: LoginModule());
     r.module('/register/', module: RegisterModule());
   }

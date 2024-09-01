@@ -8,7 +8,7 @@ import 'package:cuidapet_mobile/app/models/supplier_services_model.dart';
 import 'package:cuidapet_mobile/app/modules/schedules/model/schedules_view_model.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 import 'package:mobx/mobx.dart';
 
